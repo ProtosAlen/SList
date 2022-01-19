@@ -1,0 +1,55 @@
+<h1 i18n="@@ITEM">ITEM</h1>
+
+<ul class="proj">
+
+  <h1>{{list.id}} - {{list.name}}</h1>
+
+  <button (click)="goBack()" i18n="@@back">BACK</button>
+  <button (click)="save()" i18n="@@save">SAVE</button>
+
+  <li *ngIf="list">
+
+
+
+    <div class="head">
+
+      <a class="title">
+        <input [(ngModel)]="list.name" placeholder="Name" />
+      </a>
+
+    </div>
+
+    <div class="body">
+      <div class="desc">
+        <input [(ngModel)]="list.description" placeholder="Description" />
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="region">
+        <i style="margin-right: 0.3em;" class="fas fa-layer-group"></i>
+        <input [(ngModel)]="list.category_id" placeholder="cat_id" />
+        <br>
+        1 = Hrana /
+        2 = Oblačila
+      </div>
+      <div class="region">
+        <i style="margin-right: 0.3em;" class="fas fa-layer-group"></i>
+        <input [(ngModel)]="list.user_id" placeholder="user_id" />
+        <br>
+        1 = Ata /
+        2 = Mama /
+        3 = Alen
+      </div>
+      <div class="region">
+        <i style="margin-right: 0.3em;" class="fas fa-layer-group"></i>
+        <input [(ngModel)]="list.done" placeholder="done" />
+        <br>
+        0 = Nakup potreben /
+        1 = V zalogi
+      </div>
+    </div>
+
+  </li>
+
+</ul>

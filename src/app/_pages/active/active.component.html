@@ -1,0 +1,51 @@
+<ul class="project">
+
+  <li *ngFor="let p of list">
+    <hr>
+    <div class="banner" routerLink="/project/{{p.id}}">
+      <img class="bannerImg" src="https://itc.infofix.eu/img/if/projects/{{p.image}}">
+    </div>
+
+    <div class="head">
+
+      <a routerLink="/project/{{p.id}}" class="title">{{p.name}}</a>
+      <div class="vl"></div>
+
+      <a routerLink="/team/{{p.user_id}}" class="team">{{p.user_name}}</a>
+      <div class="vl"></div>
+      <span class="status">Nabava potrebna</span>
+
+      <!--<div class="date">{{p.created}}</div>-->
+
+    </div>
+
+    <div class="body" routerLink="/project/{{p.id}}">
+      <div class="desc">{{p.description}} <a>Show more…</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="tags">
+        <!--<fa-icon [icon]="faTag"></fa-icon>-->
+        {{p.category_name}}
+      </div>
+    </div>
+
+    <hr>
+
+  </li>
+
+</ul>
+
+
+<!--
+<div class="form-group">
+  <button type="button" (click)="getProjs()">Fetch Projects</button>
+</div>
+-->
+
+<div *ngIf="loading">.   .   .</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">
+  <strong>Warning!</strong> {{errorMessage | json}}
+</div>

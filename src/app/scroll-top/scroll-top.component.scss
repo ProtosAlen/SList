@@ -1,0 +1,40 @@
+.scroll-to-top {
+  z-index: 99 !important;
+  background:linear-gradient(#30589E, #5929e7);
+  color: white;
+  border-radius:1em;
+	display:inline-block;
+	cursor:pointer;
+	font-size:26px;
+	font-weight:bold;
+  padding: 0.4em;
+  height: 1em;
+  width: 1em;
+
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s linear;
+}
+
+ .show-scrollTop {
+  z-index: 10 !important;
+  opacity: 1;
+  transition: all .2s ease-in-out;
+
+  box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.6);
+ }
+
+ .show-scrollTop i {
+  font-size: 26px;
+  color: white;
+  padding: 0;
+  margin: 0;
+ }
+
+
+.scroll-to-top:hover {
+	background:linear-gradient(#5929e7, #30589E);
+}
+
