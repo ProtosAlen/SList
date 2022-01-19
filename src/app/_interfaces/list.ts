@@ -1,7 +1,7 @@
 export interface List {
     id: number;
     name: string;
-    image: string;
+    img: string;
     description: string;
     category_id: string;
     category_name: string;

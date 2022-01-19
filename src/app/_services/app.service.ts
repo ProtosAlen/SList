@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppService {
 
-  user = '2';
+  user = '1';
 
   setUser(id: string) {
     this.user = id;

@@ -5,7 +5,8 @@ import { ArchiveComponent } from './_pages/archive/archive.component';
 import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', component: ActiveComponent },
+  { path: '', redirectTo: '/l', pathMatch: 'full' },
+  { path: 'l', component: ActiveComponent },
   { path: 'zaloge', component: ArchiveComponent },
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
