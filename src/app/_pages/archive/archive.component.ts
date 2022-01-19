@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
-import { AppService } from 'src/app/app.service';
 import { List } from 'src/app/_interfaces/list';
+import { AppService } from 'src/app/_services/app.service';
 import { ListService } from 'src/app/_services/list.service';
 
 @Component({

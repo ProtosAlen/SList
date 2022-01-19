@@ -2,16 +2,16 @@
 
   <li *ngFor="let p of list">
     <hr>
-    <div class="banner" routerLink="/project/{{p.id}}">
-      <img class="bannerImg" src="https://itc.infofix.eu/img/if/projects/{{p.image}}">
+    <div class="banner" routerLink="">
+      <img class="bannerImg" src="https://itc.infofix.eu/img/slist/items/{{p.image}}">
     </div>
 
     <div class="head">
 
-      <a routerLink="/project/{{p.id}}" class="title">{{p.name}}</a>
+      <a routerLink="" class="title">{{p.name}}</a>
       <div class="vl"></div>
 
-      <a routerLink="/team/{{p.user_id}}" class="team">{{p.user_name}}</a>
+      <a routerLink="" class="team">{{p.user_name}}</a>
       <div class="vl"></div>
       <span class="status">Nabava potrebna</span>
 
@@ -19,7 +19,7 @@
 
     </div>
 
-    <div class="body" routerLink="/project/{{p.id}}">
+    <div class="body" routerLink="">
       <div class="desc">{{p.description}} <a>Show more…</a>
       </div>
     </div>
@@ -47,5 +47,5 @@
 <div *ngIf="loading">.   .   .</div>
 
 <div *ngIf="errorMessage" class="alert alert-warning">
-  <strong>Warning!</strong> {{errorMessage | json}}
+  <strong>Warning!</strong> {{errorMessage}}
 </div>
