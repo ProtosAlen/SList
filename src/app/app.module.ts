@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion'; 
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,13 +20,16 @@ import { HomeComponent } from './_pages/home/home.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+import { NewComponent } from './_pages/new/new.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ActiveComponent,
     ArchiveComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    NewComponent
   ],
   imports: [
     AppRoutingModule,
@@ -34,6 +38,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    MatExpansionModule,
     MatToolbarModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
