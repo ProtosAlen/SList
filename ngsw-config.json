@@ -25,6 +25,14 @@
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
       }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+          "urls": ["https://itc.infofix.eu/img/slist/**", "https://api.infofix.eu/list/**"]
+      }
     }
   ]
 }
