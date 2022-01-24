@@ -16,6 +16,8 @@ export class ActiveComponent implements OnInit {
   loading = false;
   errorMessage!: string;
 
+  uID: string = this.appService.getUser();
+
   constructor(private listService: ListService, private appService: AppService) {}
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class ActiveComponent implements OnInit {
           const doneFilter = this.list.filter(p => p.done === '0');
           this.list = doneFilter;
 
-          const userFilter = this.list.filter(p => p.user_id === this.appService.getUser());
+          const userFilter = this.list.filter(p => p.user_id === this.uID);
           this.list = userFilter;
         },
         (error) => {                              // error() callback

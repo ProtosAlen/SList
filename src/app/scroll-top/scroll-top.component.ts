@@ -7,7 +7,7 @@ import {DOCUMENT} from '@angular/common';
     styleUrls: ['./scroll-top.component.scss']
 })
 export class ScrollTopComponent implements OnInit {
-    windowScrolled: boolean;
+    windowScrolled: boolean | undefined;
     constructor(@Inject(DOCUMENT) private document: Document) {}
     @HostListener('window:scroll', [])
     onWindowScroll() {

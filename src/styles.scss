@@ -36,4 +36,51 @@ $S-List-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: black;
+  text-align: center;
+  background-color: white;
+}
+::selection {
+  color: white;
+  background: #311b92;
+}
+
+
+p {
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-size: 17px;
+  line-height: 1.6em;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 0;
+  line-height: 26px;
+  text-transform: uppercase;
+
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-size: 19px;
+  line-height: 1.6em;
+}
+
+

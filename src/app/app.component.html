@@ -1,18 +1,14 @@
 <!-- Toolbar -->
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div class="logo">
+<mat-toolbar>
+  <mat-toolbar-row class="head">
+    <div class="logo" routerLink="/l">
       <img class="logo-img"
       alt="ITC List Logo"
-      src="assets\icon-256x256.png"/>
-    </div>
-
-    <div class="title">
-      <span>ITC List</span>
+      src="assets\icon-72x72.png"/>
     </div>
 
     <div>
-      <button mat-button class="toolbarBtn" routerLink="/l">Za nabaviti</button>
+      <button mat-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
     </div>
 
     <div>
@@ -20,7 +16,7 @@
     </div>
 
     <div class="selectUser">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" >
         <mat-label>Uporabnik {{selectedUser}}</mat-label>
         <mat-select  [(value)]="selectedUser">
           <mat-option [value]='1' (click)="setUser('1')">

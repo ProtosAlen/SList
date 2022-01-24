@@ -15,13 +15,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ActiveComponent } from './_pages/active/active.component';
 import { ArchiveComponent } from './_pages/archive/archive.component';
 import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.component';
+import { HomeComponent } from './_pages/home/home.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActiveComponent,
     ArchiveComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,
@@ -31,7 +35,13 @@ import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.co
     BrowserAnimationsModule,
     MatSelectModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
