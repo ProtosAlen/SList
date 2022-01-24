@@ -8,15 +8,19 @@
     </div>
 
     <div>
-      <button mat-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
+      <button mat-stroked-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
     </div>
+
+    <span class="vl">|</span>
+    
+    <div>
+      <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
+    </div>
+
+    <hr>
 
     <div>
-      <button mat-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
-    </div>
-
-    <div class="selectUser">
-      <mat-form-field appearance="outline" >
+      <mat-form-field appearance="outline" class="selectUser">
         <mat-label>Uporabnik {{selectedUser}}</mat-label>
         <mat-select  [(value)]="selectedUser">
           <mat-option [value]='1' (click)="setUser('1')">

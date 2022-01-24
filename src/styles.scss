@@ -38,9 +38,11 @@ $S-List-theme: mat.define-light-theme((
 html, body { height: 100%; }
 
 body {
+
+  min-height: 1000px;
   margin: 0;
 
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Verdana";
   color: black;
   text-align: center;
   background-color: white;
@@ -67,17 +69,16 @@ h1 {
 }
 
 h2 {
-  font-size: 26px;
-  font-weight: 300;
-  line-height: 0;
-  line-height: 26px;
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 28px;
   text-transform: uppercase;
 
   margin-bottom: 1em;
 }
 
 h3 {
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: 0.05em;
   font-size: 19px;
   line-height: 1.6em;

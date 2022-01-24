@@ -4,16 +4,14 @@
 
   <li *ngFor="let p of list">
     <hr>
-    <div class="banner" routerLink="">
-      <img class="bannerImg" src="https://itc.infofix.eu/img/slist/items/SList-Placeholder-Food-Banner.png">
-    </div>
+
 
     <div class="head">
 
-      <a routerLink="" class="title">{{p.name}}</a>
+      <a class="title">{{p.name}}</a>
       <div class="vl"></div>
 
-      <a routerLink="" class="team">{{p.user_name}}</a>
+      <a class="team">{{p.user_name}}</a>
       <div class="vl"></div>
       <span class="status">Za nabavo</span>
 
@@ -21,13 +19,17 @@
 
     </div>
 
-    <div class="body" routerLink="">
+    <div class="banner">
+      <img class="bannerImg" src="https://itc.infofix.eu/img/slist/items/{{p.img}}">
+    </div>
+
+    <div class="body">
       <div class="desc">{{p.description}}
       </div>
     </div>
 
     <div class="footer">
-      <div class="tags">
+      <div class="footer-item fr">
         <!--<fa-icon [icon]="faTag"></fa-icon>-->
         {{p.category_name}}
       </div>

@@ -3,31 +3,13 @@
 .head { 
   background-color: #311b92;
 }
-
-
-.toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    background-color: #5929e7;
-    color: white;
-    font-weight: 600;
-  }
   
-  .toolbar img {
-    margin: 0 16px;
-  }
-  
-  .body {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0.4em;
-    margin-top: 5em;
-  }
+.body {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0.4em;
+  margin-top: 5em;
+}
   
 
   
@@ -48,19 +30,27 @@
     }
   }
   
+  .vl {
+    color: gray;
+    font-size: 18px;
+  }
+
   .toolbarBtn {
     margin: 0.2em;
     color: white;
   }
   
   .selectUser {
+    margin-top: 1.5em;
+    font-size: 13px;
     color: white;
+    width: 120px;
   }
   
   .logo {
     height: 48px;
     width: auto;
-
+    margin-left: -0.5em;
   }
   .logo-img {
     width: 48px;

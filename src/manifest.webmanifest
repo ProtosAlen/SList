@@ -1,7 +1,7 @@
 {
-  "name": "S-List",
-  "short_name": "S-List",
-  "theme_color": "#1976d2",
+  "name": "S_List",
+  "short_name": "S_List",
+  "theme_color": "#311b92",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

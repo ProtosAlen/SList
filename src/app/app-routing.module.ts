@@ -6,7 +6,7 @@ import { ArchiveComponent } from './_pages/archive/archive.component';
 import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'h', pathMatch: 'full' },
+  { path: '', redirectTo: 'l', pathMatch: 'full' },
   { path: 'h', redirectTo: 'l', pathMatch: 'full' },
   { path: 'l', component: ActiveComponent },
   { path: 'zaloge', component: ArchiveComponent },
