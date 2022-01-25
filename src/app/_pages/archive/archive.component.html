@@ -2,8 +2,14 @@
 
   <h2 class="green">V zalogi</h2>
 
-  <li *ngFor="let p of list">
-    <hr>
+
+  <div *ngIf="list.length === 0 && !loading">
+    <h3>Seznam zalog prazen</h3> 
+    
+    <button mat-stroked-button class="toolbarBtn" routerLink="/l">< Seznam za nabavo</button>
+  </div>
+
+  <li *ngFor="let p of list; let i = index">
 
     <div class="head">
 
@@ -33,6 +39,12 @@
         <!--<fa-icon [icon]="faTag"></fa-icon>-->
         {{p.category_name}}
       </div>
+
+      <div class="footer-item ri" (click)="save(i)">
+        <!--<fa-icon [icon]="faTag"></fa-icon>-->
+        < Za nabavo
+      </div>
+
     </div>
 
     <hr>

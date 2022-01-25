@@ -10,16 +10,28 @@ import { ListService } from 'src/app/_services/list.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  list!: List[];
+  list: List[] = [];
 
   loading = false;
   errorMessage = "";
+
+  selItem!: List;
 
   constructor(private listService: ListService, private appService: AppService) {}
 
 
 
   ngOnInit() {
+    this.getList();
+  }
+
+  save(i: number): void {
+    this.selItem = this.list[i];
+    this.selItem.done = "0";
+
+    this.listService.updateProj(this.selItem)
+      .subscribe();
+
     this.getList();
   }
 

@@ -13,11 +13,13 @@ import { List } from '../_interfaces/list';
 export class ListService {
 
   private readOneUrl = 'https://api.infofix.eu/list/projects/read-one.php';  // URL to web api /read-one.php
+  
   private readUrl = 'https://api.infofix.eu/list/projects/read.php';  // URL to web api /read.php
-  private createUrl = 'https://api.infofix.eu/if/projects/create.php';  // URL to web api /read.php
-  private deleteUrl = 'https://api.infofix.eu/if/projects/delete.php';  // URL to web api /read.php
-  private updateUrl = 'https://api.infofix.eu/if/projects/update.php';  // URL to web api /read.php
+  private createUrl = 'https://api.infofix.eu/list/projects/create.php';  // URL to web api /read.php
+  private updateUrl = 'https://api.infofix.eu/list/projects/update.php';  // URL to web api /read.php
 
+  private deleteUrl = 'https://api.infofix.eu/if/projects/delete.php';  // URL to web api /read.php
+  
   constructor(
     private http: HttpClient) { }
 

@@ -144,7 +144,7 @@
 
 //BODY
 .body {
-  cursor: pointer;
+  //cursor: pointer;
   color: black;
 }
 
@@ -152,6 +152,7 @@
 .footer {
   color: white;
 }
+
 
 .footer-item {
   background-color: #5929e7;
@@ -177,8 +178,22 @@
 }
 .footer-item:hover {
   background-color: #3779c1;
+  //cursor: pointer;
+}
+
+.ri {
+  float: right;
+
+  margin-right: 0.5em;
+  margin-top: -1em;
+
+  background-color: gray;
+
+  padding: 0.8em 1em 0.8em 1em;
+
   cursor: pointer;
 }
+
 
 .fr {
   border-left: 5px solid red;
@@ -197,7 +212,7 @@
 }
 .tags:hover {
   background-color: #3779c1;
-  cursor: pointer;
+  //cursor: pointer;
 }
 
 hr {
@@ -207,7 +222,8 @@ hr {
 }
 
 .banner {
-  cursor: pointer;
+  margin-left: 0.5em;
+  //cursor: pointer;
   height: 150px;
   width: 450px;
   width: auto;

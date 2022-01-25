@@ -11,16 +11,31 @@ import { ListService } from 'src/app/_services/list.service';
 })
 export class ActiveComponent implements OnInit {
 
-  list!: List[];
+  @Input() list: List[] = [];
 
   loading = false;
   errorMessage!: string;
 
   uID: string = this.appService.getUser();
 
+  selItem!: List;
+
+
+
   constructor(private listService: ListService, private appService: AppService) {}
 
   ngOnInit() {
+    this.getList();
+
+  }
+
+  save(i: number): void {
+    this.selItem = this.list[i];
+    this.selItem.done = "1";
+
+    this.listService.updateProj(this.selItem)
+      .subscribe();
+
     this.getList();
   }
 
