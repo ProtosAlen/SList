@@ -39,7 +39,7 @@ export class ListService {
     return this.http.get(this.readUrl);
   }
 
-  /** GET PROJECT by id. Will 404 if id not found */
+  /** GET PROJECT by id. Will 404 if id not found -- NOT IN USE */
   getProject(id: number): Observable<any> {
     const url = `${this.readOneUrl}?id=${id}`; // REad one url
     return this.http.get<List>(url).pipe(
@@ -57,10 +57,7 @@ export class ListService {
     );
   }
 
-
-
-
-  /** POST: add a new hero to the server */
+  /** POST: add a new Item to the server */
   addProject(project: List): Observable<List> {
     return this.http.post<List>(this.createUrl, project, this.httpOptions).pipe(
       tap((newProject: List) => console.log(`added project w/ id=${newProject.id}`)),

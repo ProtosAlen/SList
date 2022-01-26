@@ -8,13 +8,17 @@ export class SharedService {
   userName: any;
 
   constructor(){
-    localStorage.setItem('role', this.userID);
+    this.userID = localStorage.getItem('role') + "";
+    this.userName = localStorage.getItem('uName');
   }
 
   setUser(val: string, n: string): void {
     this.userID = val;
     this.userName = n;
-    console.log('DEV-ID: ' + this.userID);
+
+    localStorage.setItem('role', this.userID);
+    localStorage.setItem('uName', this.userName);
+    console.log('ID: ' + this.userID + " UN: " + this.userName);
   }
 
   getUser(): string {

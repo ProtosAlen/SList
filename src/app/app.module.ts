@@ -1,4 +1,6 @@
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
+import { NewComponent } from './_pages/new/new.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,8 +25,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatIconModule} from '@angular/material/icon'; 
 
-import { NewComponent } from './_pages/new/new.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [

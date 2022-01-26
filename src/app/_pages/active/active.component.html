@@ -15,6 +15,12 @@
     </li>
   </div>
 
+  <div *ngIf="list.length === 0 && !loading">
+    <h3>Seznam za nabavo</h3> 
+    
+    <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">Seznam zalog ></button>
+  </div>
+
 
 <div *ngIf="!small">
 

@@ -19,17 +19,20 @@ export class AppComponent {
   @Input() selectedUser = '1';
 
   constructor(private router: Router,
-              private sharedService: SharedService) {}
+    private sharedService: SharedService) {
+      var a = this.sharedService.userID;
+      var b = this.sharedService.userName;
+
+      if(a !== null)
+        this.role = parseInt(a);
+      if(b !== null)
+        this.uName = b + "";
+    }
   
   ngOnInit() {
-    var a = localStorage.getItem('role');
-    var b = localStorage.getItem('uName');
+
     var o = localStorage.getItem('acs');
 
-    if(a !== null)
-      this.role = parseInt(a);
-    if(b !== null)
-      this.uName = b + "";
     this.access = JSON.parse(o + "") === true;
   }
 
@@ -42,7 +45,7 @@ export class AppComponent {
     this.role = parseInt(this.role + "");
 
     if(this.role === 52112 || this.role === 27695 || this.role === 90091 
-    || this.role === 60316 || this.role === 29554 || this.role === 21551) {
+    || this.role === 60316 || this.role === 21554 || this.role === 21551) {
 
       if(this.uName === "Alen" || this.uName === "Ata" || this.uName === "Tjaša" || this.uName === "Teo") {
 
@@ -51,9 +54,6 @@ export class AppComponent {
         '! . . .';
         
         this.setUser();
-
-        localStorage.setItem('role', this.role + "");
-        localStorage.setItem('uName', this.uName + "");
 
         setTimeout(() => 
         {
@@ -76,8 +76,6 @@ export class AppComponent {
 
   setUser() {
     this.sharedService.setUser(this.role + "", this.uName);
-
-    
 
     let uri = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>

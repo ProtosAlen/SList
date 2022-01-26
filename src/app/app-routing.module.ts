@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'h', redirectTo: 'l', pathMatch: 'full' },
   { path: 'l', component: ActiveComponent },
   { path: 'zaloge', component: ArchiveComponent },
-  { path: 'new', component: NewComponent },
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
 

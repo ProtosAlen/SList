@@ -34,10 +34,15 @@ $S-List-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { 
+  height: 100%; 
+  scrollbar-color: #311b92 lightgray;
+  scrollbar-width: thin;  
+}
+
+
 
 body {
-
 
   margin: 0;
 
@@ -45,10 +50,17 @@ body {
   color: black;
   text-align: center;
   background-color: white;
+
 }
 ::selection {
   color: white;
   background: #311b92;
+}
+
+
+/* Add a thumb */
+.mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+    background: #000;
 }
 
 
