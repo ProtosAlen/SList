@@ -4,21 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedService {
-  userID: any;
+  userID = '1';
   userName: any;
 
   constructor(){
-    //this.userID = 3;
-    //this.userName = 'Bob';
+    localStorage.setItem('role', this.userID);
   }
 
-  setUser(val: number, n: string): void {
+  setUser(val: string, n: string): void {
     this.userID = val;
     this.userName = n;
     console.log('DEV-ID: ' + this.userID);
   }
 
-  getUser(): number {
+  getUser(): string {
     return this.userID;
   }
 }

@@ -45,6 +45,7 @@
 .login-txt {
   font-size: 21px;
   letter-spacing: 0.1em;
+  width: 150px;
 }
 
 .login-input {
@@ -118,6 +119,18 @@
   padding: 2em;
   margin-bottom: 2em;
   color: white;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button.login-input {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number].login-input {
+  -moz-appearance: textfield;
 }
 
 

@@ -58,29 +58,34 @@
   </div>
 
 
+  
+
   <div class="sect-1">
     <h3 class="text3">{{accessMsg}}</h3>
 
-    <form>
+    <form >
       <mat-form-field class="login-txt">
         <mat-label>IME</mat-label>
         <input matInput type="text" 
-        [(ngModel)]="uName" c
-        lass="login-input" autofocus
+        [(ngModel)]="uName"
+        class="login-input" 
+        [ngModelOptions]="{standalone:true}"
+        autofocus 
         aria-label="Ime">
       </mat-form-field>
   
       <br>
       <mat-form-field class="login-txt">
         <mat-label>GESLO</mat-label>
-        <input matInput [type]="hide ? 'number' : 'password'"
+        <input matInput [type]="hide ? 'password' : 'number'"
         [(ngModel)]="role" 
         class="login-input"
+        [ngModelOptions]="{standalone:true}"
         aria-label="Geslo">
+        <mat-icon style="font-size: 22px;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
 
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    
     </form>
     
 

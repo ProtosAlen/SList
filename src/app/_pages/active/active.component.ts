@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { List } from 'src/app/_interfaces/list';
-import { AppService } from 'src/app/_services/app.service';
 import { ListService } from 'src/app/_services/list.service';
+import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
   selector: 'app-active',
@@ -16,13 +16,13 @@ export class ActiveComponent implements OnInit {
   loading = false;
   errorMessage!: string;
 
-  uID: string = this.appService.getUser();
+  uID: string = this.sService.getUser() + "";
 
   selItem!: List;
 
   small: boolean = false;
 
-  constructor(private listService: ListService, private appService: AppService) {}
+  constructor(private listService: ListService, private sService: SharedService) {}
 
   ngOnInit() {
     this.getList();
@@ -42,9 +42,12 @@ export class ActiveComponent implements OnInit {
       .subscribe();
 
     this.getList();
+    
   }
 
   getList(): void {
+
+    console.log(this.uID);
 
     this.loading = true;
     this.errorMessage = '';

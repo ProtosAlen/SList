@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { List } from 'src/app/_interfaces/list';
-import { AppService } from 'src/app/_services/app.service';
 import { ListService } from 'src/app/_services/list.service';
+import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
   selector: 'app-archive',
@@ -19,7 +19,7 @@ export class ArchiveComponent implements OnInit {
 
   small: boolean = false;
 
-  constructor(private listService: ListService, private appService: AppService) {}
+  constructor(private listService: ListService, private sService: SharedService) {}
 
 
 
@@ -54,7 +54,7 @@ export class ArchiveComponent implements OnInit {
           const doneFilter = this.list.filter(p => p.done === '1');
           this.list = doneFilter;
 
-          const userFilter = this.list.filter(p => p.user_id === this.appService.getUser());
+          const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
 
         },
