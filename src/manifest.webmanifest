@@ -1,6 +1,6 @@
 {
-  "name": "S_List",
-  "short_name": "S_List",
+  "name": "SList",
+  "short_name": "SList",
   "theme_color": "#311b92",
   "background_color": "#fafafa",
   "display": "standalone",

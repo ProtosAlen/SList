@@ -3,7 +3,7 @@
   <mat-toolbar-row class="head">
     <div class="logo" routerLink="/l">
       <img class="logo-img"
-      alt="ITC List Logo"
+      alt="S-List Logo"
       src="assets\icon-72x72.png"/>
     </div>
 
@@ -17,8 +17,9 @@
       <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
     </div>
 
-    <hr>
+    <hr style="visibility: hidden;">
 
+    <!--
     <div>
       <mat-form-field appearance="outline" class="selectUser">
         <mat-label>Uporabnik {{selectedUser}}</mat-label>
@@ -35,18 +36,70 @@
         </mat-select>
       </mat-form-field>
     </div>
+-->
 
-
-
+    <a style="color: white; font-size: 14px;">
+      {{uName}}
+    </a>
 
 
   </mat-toolbar-row>
 
 </mat-toolbar>
 
-<div class="body">
 
-  <mat-expansion-panel style="margin-bottom: 5em;">
+<div *ngIf="!access" style="margin-top: 5em;">
+  
+  
+  <div>
+    <img class="logoImgAuth" 
+    src="assets\icons\icon-128x128.png" 
+    alt="S-List Logo">
+  </div>
+
+
+  <div class="sect-1">
+    <h3 class="text3">{{accessMsg}}</h3>
+
+    <form>
+      <mat-form-field class="login-txt">
+        <mat-label>IME</mat-label>
+        <input matInput type="text" 
+        [(ngModel)]="uName" c
+        lass="login-input" autofocus
+        aria-label="Ime">
+      </mat-form-field>
+  
+      <br>
+      <mat-form-field class="login-txt">
+        <mat-label>GESLO</mat-label>
+        <input matInput [type]="hide ? 'number' : 'password'"
+        [(ngModel)]="role" 
+        class="login-input"
+        aria-label="Geslo">
+      </mat-form-field>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </form>
+    
+
+  </div>
+
+  <div class="sect-0">
+    <button mat-raised-button class="btn-a" (click)="loginDev();">
+      <span class="login-txt">VSTOP -_></span>
+    </button>
+  </div>
+  
+
+</div>
+
+
+
+<div *ngIf="access" class="body">
+
+  <mat-expansion-panel style="margin: 1em; margin-bottom: 5em;">
     <mat-expansion-panel-header>
       <mat-panel-title><h3>Dodaj nov predmet</h3></mat-panel-title>
     </mat-expansion-panel-header>
@@ -62,7 +115,9 @@
 </div>
 
 <footer>
-
+  <div style="margin-top: 10em;">
+    <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">SList © Intercell Labs - Ꮢ2022v{{appVersion}}</a>
+  </div>
 </footer>
 
 <app-scroll-top></app-scroll-top>
