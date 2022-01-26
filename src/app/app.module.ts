@@ -1,3 +1,4 @@
+import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +30,8 @@ import { NewComponent } from './_pages/new/new.component';
     ArchiveComponent,
     PageNotFoundComponent,
     HomeComponent,
-    NewComponent
+    NewComponent,
+    ScrollTopComponent
   ],
   imports: [
     AppRoutingModule,

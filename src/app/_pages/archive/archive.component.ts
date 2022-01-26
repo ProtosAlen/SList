@@ -17,12 +17,18 @@ export class ArchiveComponent implements OnInit {
 
   selItem!: List;
 
+  small: boolean = false;
+
   constructor(private listService: ListService, private appService: AppService) {}
 
 
 
   ngOnInit() {
     this.getList();
+  }
+
+  trackByFn(i: number) { 
+    return i
   }
 
   save(i: number): void {

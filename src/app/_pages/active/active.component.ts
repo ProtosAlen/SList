@@ -11,7 +11,7 @@ import { ListService } from 'src/app/_services/list.service';
 })
 export class ActiveComponent implements OnInit {
 
-  @Input() list: List[] = [];
+  list: List[] = [];
 
   loading = false;
   errorMessage!: string;
@@ -20,15 +20,20 @@ export class ActiveComponent implements OnInit {
 
   selItem!: List;
 
-
+  small: boolean = false;
 
   constructor(private listService: ListService, private appService: AppService) {}
 
   ngOnInit() {
     this.getList();
 
+  } 
+
+  trackByFn(i: number) { 
+    return i
   }
 
+  // REMOVE ITEM
   save(i: number): void {
     this.selItem = this.list[i];
     this.selItem.done = "1";

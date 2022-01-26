@@ -1,6 +1,19 @@
 <ul class="project">
 
+  <button mat-stroked-button 
+  class="small-btn" 
+  (click)="small = !small">
+    | | |
+  </button>
+
   <h2 class="green">V zalogi</h2>
+
+
+  <div *ngIf="small">
+    <li *ngFor="let p of list; let i = index" class="smL">
+      <h3> > {{p.name}}</h3>
+    </li>
+  </div>
 
 
   <div *ngIf="list.length === 0 && !loading">
@@ -9,7 +22,10 @@
     <button mat-stroked-button class="toolbarBtn" routerLink="/l">< Seznam za nabavo</button>
   </div>
 
-  <li *ngFor="let p of list; let i = index">
+
+<div *ngIf="!small">
+
+  <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
 
     <div class="head">
 
@@ -51,7 +67,11 @@
 
   </li>
 
+</div>
+
 </ul>
+
+
 
 
 <!--
