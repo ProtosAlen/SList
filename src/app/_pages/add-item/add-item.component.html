@@ -1,0 +1,20 @@
+
+  <div class="banner">
+    <img class="bannerImg" src="https://api.infofix.eu/list/file/uploads/{{pImg}}">
+  </div>
+
+        <input matInput #projectName [(ngModel)]="pName">
+
+
+        {{pUserName}}
+
+
+        <iframe src="https://api.infofix.eu/list/file/" title="Fup"></iframe> 
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" class="btn-save" (click)="add(); projectName.value='';">
+      <span>Dodaj predmet</span>
+    </button>
+  </div>
+
+  <h2>{{status}}</h2>

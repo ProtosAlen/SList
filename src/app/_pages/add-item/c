@@ -6,6 +6,7 @@
       <img class="bannerImg" src="https://itc.infofix.eu/img/if/projects/no">
     </div>
 
+    
     <mat-form-field appearance="fill" class="nameInput">
       <mat-label>Image</mat-label>
       <!-- <input matInput #projectName [(ngModel)]="pImage"> -->

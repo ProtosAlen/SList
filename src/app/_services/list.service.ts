@@ -34,12 +34,12 @@ export class ListService {
   }
 */
 
-  /** GET ALL PROJECTS. Will 404 if id not found */
+  /** GET ALL Items. Will 404 if id not found */
   getProjs(): Observable<any> {
     return this.http.get(this.readUrl);
   }
 
-  /** GET PROJECT by id. Will 404 if id not found -- NOT IN USE */
+  /** GET Item by id. Will 404 if id not found -- NOT IN USE */
   getProject(id: number): Observable<any> {
     const url = `${this.readOneUrl}?id=${id}`; // REad one url
     return this.http.get<List>(url).pipe(
@@ -48,20 +48,21 @@ export class ListService {
     );
   }
 
-  /** POST: UPDATE the Project on the server */
+  /** POST: UPDATE the Item on the server */
   updateProj(project: List): Observable<any> {
     console.log(project);
     return this.http.post(this.updateUrl, project, this.httpOptions).pipe(
-      tap(_ => console.log(`updated project id=${project.id}`)),
-      catchError(this.handleError<List>(`updated project id=${project.id}`))
+      tap(_ => console.log(`Updated Item id=${project.id}`)),
+      catchError(this.handleError<List>(`Updated Item id=${project.id}`))
     );
   }
 
   /** POST: add a new Item to the server */
-  addProject(project: List): Observable<List> {
-    return this.http.post<List>(this.createUrl, project, this.httpOptions).pipe(
-      tap((newProject: List) => console.log(`added project w/ id=${newProject.id}`)),
-      catchError(this.handleError<List>('addProject'))
+  addProject(project: List): Observable<any> {
+    console.log("AI ", project);
+    return this.http.post<List>(this.createUrl, project, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('Add Item', project))
     );
   }
 

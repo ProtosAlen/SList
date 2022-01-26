@@ -1,5 +1,4 @@
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
-import { NewComponent } from './_pages/new/new.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -27,6 +26,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddItemComponent } from './_pages/add-item/add-item.component';
 
 
 @NgModule({
@@ -36,8 +36,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ArchiveComponent,
     PageNotFoundComponent,
     HomeComponent,
-    NewComponent,
-    ScrollTopComponent
+    ScrollTopComponent,
+    AddItemComponent
   ],
   imports: [
     AppRoutingModule,

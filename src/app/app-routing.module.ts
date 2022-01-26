@@ -1,4 +1,3 @@
-import { NewComponent } from './_pages/new/new.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActiveComponent } from './_pages/active/active.component';
