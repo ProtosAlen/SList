@@ -12,7 +12,7 @@ export class AppComponent {
   appVersion = "0.1.20";
 
   access = false;
-  accessMsg = 'Vnesi ime in geslo';
+  accessMsg = 'Vnesite ime in geslo:';
   role: number = 0;
   uName = "";
 
@@ -34,6 +34,12 @@ export class AppComponent {
     var o = localStorage.getItem('acs');
 
     this.access = JSON.parse(o + "") === true;
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.access = false;
+    this.accessMsg = 'Ponovno se prijavite:';
   }
 
 
@@ -60,7 +66,7 @@ export class AppComponent {
           this.access = true;
           localStorage.setItem('acs', this.access + "");
         },
-        1000);
+        900);
       }
       else {
         this.access = false;

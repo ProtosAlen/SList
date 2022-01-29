@@ -54,6 +54,15 @@
   font-weight: 200;
 }
 
+.logout {
+  color: white; font-size: 14px;
+}
+.logout:hover {
+  color: red;
+  cursor: pointer;
+  text-decoration: line-through;
+}
+
 .btn-a { 
   background-color: #311b92;
   margin: 0.3em;

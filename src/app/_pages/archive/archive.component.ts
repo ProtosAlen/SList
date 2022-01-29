@@ -41,6 +41,8 @@ export class ArchiveComponent implements OnInit {
     this.getList();
   }
 
+  tst = 0; // TODO: Change class on item priority
+
   getList(): void {
 
     this.loading = true;

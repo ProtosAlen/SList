@@ -126,6 +126,8 @@
   display: inline-block;
 }
 
+
+
 .team {
   padding: 0.4em;
   margin: 0.4em;
@@ -134,6 +136,20 @@
   font-weight: 400;
   border: 2px solid yellow;
   letter-spacing: 0.06em;
+}
+
+
+
+.bs0 {
+  border: 2px solid green;
+}
+
+.bs1 {
+  border: 2px solid green;
+}
+
+.bs2 {
+  border: 2px solid red;
 }
 
 .status {
@@ -206,6 +222,32 @@
   cursor: pointer;
 }
 
+// Delete Item Button & Div
+.r {
+  float: right;
+  margin: 1em;
+}
+.rBtn { 
+  background-color: #00000000;
+  border-color: #00000000;
+  color: white;
+  font-weight: 200;
+  line-height: 0.8;
+  font-size: 26px;
+}
+.rBtn:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.floatR {
+  float: right;
+  color: black;
+  margin: 0.1em;
+  margin-right: 0.3em;
+  font-size: 30px;
+  font-weight: 100;
+}
 
 .fr {
   border-left: 5px solid red;

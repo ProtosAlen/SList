@@ -11,6 +11,7 @@
 
   <div *ngIf="small">
     <li *ngFor="let p of list; let i = index" class="smL">
+      <a class="floatR rBtn" (click)="save(i)"> > </a>
       <h3> > {{p.name}}</h3>
     </li>
   </div>
@@ -36,6 +37,10 @@
       <a class="team">{{p.user_name}}</a>
       <div class="vl"></div>
       <span class="status">Za nabavo</span>
+
+      <div class="r">
+        <a class="rBtn">X</a>
+      </div>
 
       <!--<div class="date">{{p.created}}</div>-->
 
