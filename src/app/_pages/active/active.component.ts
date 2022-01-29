@@ -11,7 +11,7 @@ import { SharedService } from 'src/app/_services/shared.service';
 })
 export class ActiveComponent implements OnInit {
 
-  list: List[] = [];
+  @Input() list: List[] = [];
 
   loading = false;
   errorMessage!: string;
@@ -41,8 +41,7 @@ export class ActiveComponent implements OnInit {
     this.listService.updateProj(this.selItem)
       .subscribe();
 
-    this.getList();
-    
+    this.list.splice(i, 1);
   }
 
   getList(): void {
