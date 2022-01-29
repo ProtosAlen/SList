@@ -38,10 +38,10 @@ export class ActiveComponent implements OnInit {
     this.selItem = this.list[i];
     this.selItem.done = "1";
 
+    this.list.splice(i, 1);
+
     this.listService.updateProj(this.selItem)
       .subscribe();
-
-    this.list.splice(i, 1);
   }
 
   getList(): void {
