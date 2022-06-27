@@ -47,7 +47,7 @@ export class AppComponent {
 
   loginDev() {
 
-    console.log("R: " + this.role + " U: " + this.uName)
+    //console.log("R: " + this.role + " U: " + this.uName)
     this.role = parseInt(this.role + "");
 
     if(this.role === 52112 || this.role === 27695 || this.role === 90091 

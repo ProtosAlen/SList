@@ -18,13 +18,13 @@ export class ListService {
   private createUrl = 'https://api.infofix.eu/list/projects/create.php';  // URL to web api /read.php
   private updateUrl = 'https://api.infofix.eu/list/projects/update.php';  // URL to web api /read.php
 
-  private deleteUrl = 'https://api.infofix.eu/if/projects/delete.php';  // URL to web api /read.php
+  private deleteUrl = 'https://api.infofix.eu/list/projects/delete.php';  // URL to web api /read.php
   
   constructor(
     private http: HttpClient) { }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
   };
 
   /*
@@ -58,11 +58,11 @@ export class ListService {
   }
 
   /** POST: add a new Item to the server */
-  addProject(project: List): Observable<any> {
-    console.log("AI ", project);
-    return this.http.post<List>(this.createUrl, project, this.httpOptions)
-    .pipe(
-      catchError(this.handleError('Add Item', project))
+  addProject(project: any): Observable<any> {
+    console.log(project);
+    return this.http.post<any>(this.createUrl, project, this.httpOptions).pipe(
+      tap((newProject: any) => console.log(`Created Item ID: ${newProject.name}`)),
+      catchError(this.handleError<any>('Add Item'))
     );
   }
 
