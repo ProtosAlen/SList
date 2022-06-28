@@ -19,7 +19,7 @@ export class ArchiveComponent implements OnInit {
 
   small: boolean = false;
 
-  constructor(private listService: ListService, private sService: SharedService) {}
+  constructor(private listService: ListService, private sService: SharedService) { }
 
 
 
@@ -27,7 +27,7 @@ export class ArchiveComponent implements OnInit {
     this.getList();
   }
 
-  trackByFn(i: number) { 
+  trackByFn(i: number) {
     return i
   }
 
@@ -42,6 +42,19 @@ export class ArchiveComponent implements OnInit {
   }
 
   tst = 0; // TODO: Change class on item priority
+
+  // REMOVE ITEM
+  remove(i: number): void {
+    this.listService.deleteProject(this.list[i])
+      .subscribe(
+        (response) => {                           // next() callback
+          //console.log('Item Removed', i);
+          this.list.splice(i, 1);
+          //this.getList();
+        },
+      );
+  }
+
 
   getList(): void {
 
@@ -70,3 +83,4 @@ export class ArchiveComponent implements OnInit {
         });
   }
 }
+

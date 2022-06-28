@@ -44,9 +44,11 @@
       <!--<div class="date">{{p.created}}</div>-->
 
       <div class="r">
-        <a class="rBtn">X</a>
+        <button class="rBtn" mat-mini-fab color="accent" (click)="remove(i)" aria-label="Delete Item">
+          X
+        </button>
       </div>
-
+      
     </div>
 
     <div class="banner">

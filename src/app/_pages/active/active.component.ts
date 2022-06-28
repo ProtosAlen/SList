@@ -22,18 +22,30 @@ export class ActiveComponent implements OnInit {
 
   small: boolean = false;
 
-  constructor(private listService: ListService, private sService: SharedService) {}
+  constructor(private listService: ListService, private sService: SharedService) { }
 
   ngOnInit() {
     this.getList();
 
-  } 
+  }
 
-  trackByFn(i: number) { 
+  trackByFn(i: number) {
     return i
   }
 
   // REMOVE ITEM
+  remove(i: number): void {
+    this.listService.deleteProject(i)
+      .subscribe(
+        (response) => {                           // next() callback
+          //console.log('Item Removed', i);
+          this.list.splice(i, 1);
+          //this.getList();
+        },
+      );
+  }
+
+  // SAVE ITEM
   save(i: number): void {
     this.selItem = this.list[i];
     this.selItem.done = "1";

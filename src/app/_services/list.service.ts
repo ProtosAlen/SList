@@ -71,7 +71,7 @@ export class ListService {
     const id = typeof project === 'number' ? project : project.id;
     const url = `${this.deleteUrl}?id=${id}`;
 
-    return this.http.delete<List>(url, this.httpOptions).pipe(
+    return this.http.post<List>(url, this.httpOptions).pipe(
       tap(_ => console.log(`deleted project id=${id}`)),
       catchError(this.handleError<List>('deleteProject'))
     );
