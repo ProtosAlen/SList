@@ -9,7 +9,7 @@ import { SharedService } from './_services/shared.service';
 })
 export class AppComponent {
   title = 'S-List';
-  appVersion = "0.1.20";
+  appVersion = "0.1.30";
 
   access = false;
   accessMsg = 'Vnesite ime in geslo:';
