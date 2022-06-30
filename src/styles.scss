@@ -34,6 +34,20 @@ $S-List-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  src: local('Raleway'), local('Raleway'), url(https://fonts.googleapis.com/css2?family=Raleway);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  src: local('Lato'), local('Lato'), url(https://fonts.googleapis.com/css2?family=Lato);
+  font-display: swap;
+}
+
 html, body { 
   height: 100%; 
   scrollbar-color: #311b92 lightgray;
@@ -46,7 +60,7 @@ body {
 
   margin: 0;
 
-  font-family: Roboto, "Verdana";
+
   color: black;
   text-align: center;
   background-color: white;

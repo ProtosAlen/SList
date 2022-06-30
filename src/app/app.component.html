@@ -7,13 +7,13 @@
       src="assets\icon-72x72.png"/>
     </div>
 
-    <div>
+    <div  *ngIf="access">
       <button mat-stroked-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
     </div>
 
     <span class="vl">|</span>
     
-    <div>
+    <div  *ngIf="access">
       <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
     </div>
 
@@ -53,7 +53,7 @@
   
   <div>
     <img class="logoImgAuth" 
-    src="assets\icons\icon-128x128.png" 
+    src="assets\icons\icon-128x128.png"
     alt="S-List Logo">
   </div>
 
@@ -93,7 +93,7 @@
 
   <div class="sect-0">
     <button mat-raised-button class="btn-a" (click)="loginDev();">
-      <span class="login-txt">VSTOP -_></span>
+      VSTOP -_>
     </button>
   </div>
   
