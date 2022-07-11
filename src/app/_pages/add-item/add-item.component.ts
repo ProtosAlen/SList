@@ -71,7 +71,7 @@ export class AddItemComponent implements OnInit {
         //console.log(this.projects);
         //this.projects.push(project);
 
-        this.status = 'Project Created!';
+        this.status = 'Predmet dodan!';
 
         console.log(project);
         console.log( this.status);
