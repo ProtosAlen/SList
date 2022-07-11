@@ -37,14 +37,17 @@
 
       <div class="vl"></div>
 
-      <div class="team" [ngClass]="{'bs0' :tst == 0 ,'bs1' :tst == 3 , 'bs2' :tst > 5 }">| | |</div>
+      <div class="team" [ngClass]="{'bs0' :tst == 0 ,'bs1' :tst == 3 , 'bs2' :tst > 5 }">{{p.pri}}</div>
+
+            <!-- TODO: priority symbols     
+                <div class="team" [ngClass]="{'bs0' :tst == 0 ,'bs1' :tst == 3 , 'bs2' :tst > 5 }">| | |{{p.pri}}</div> -->
 
       <span class="in-stock">V zalogi</span>
 
       <!--<div class="date">{{p.created}}</div>-->
 
       <div class="r">
-        <button class="rBtn" mat-mini-fab color="accent" (click)="remove(i)" aria-label="Delete Item">
+        <button class="rBtn" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
           X
         </button>
       </div>

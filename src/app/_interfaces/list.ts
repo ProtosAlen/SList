@@ -7,5 +7,6 @@ export class List {
     category_name: string = "";
     user_id: string = "";
     user_name: string = "";
+    pri: string = "";
     done: string = "";
 }

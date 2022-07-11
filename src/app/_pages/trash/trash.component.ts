@@ -1,22 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { List } from 'src/app/_interfaces/list';
 import { ListService } from 'src/app/_services/list.service';
 import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
-  selector: 'app-active',
-  templateUrl: './active.component.html',
-  styleUrls: ['./active.component.scss']
+  selector: 'app-archive',
+  templateUrl: './trash.component.html',
+  styleUrls: ['../active/active.component.scss']
 })
-export class ActiveComponent implements OnInit {
+export class ArchiveComponent implements OnInit {
 
-  @Input() list: List[] = [];
+  list: List[] = [];
 
   loading = false;
-  errorMessage!: string;
-
-  uID: string = this.sService.getUser() + "";
+  errorMessage = "";
 
   selItem!: List;
 
@@ -24,31 +21,19 @@ export class ActiveComponent implements OnInit {
 
   constructor(private listService: ListService, private sService: SharedService) { }
 
+
+
   ngOnInit() {
     this.getList();
-
   }
 
   trackByFn(i: number) {
     return i
   }
 
-  // REMOVE ITEM
-  remove(i: number): void {
-    this.listService.deleteProject(i)
-      .subscribe(
-        (response) => {                           // next() callback
-          //console.log('Item Removed', i);
-          this.list.splice(i, 1);
-          //this.getList();
-        },
-      );
-  }
-
-  // SAVE ITEM
   save(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = "1";
+    this.selItem.done = "0";
 
     this.list.splice(i, 1);
 
@@ -56,7 +41,6 @@ export class ActiveComponent implements OnInit {
       .subscribe();
   }
 
-  // TRASH ITEM
   trash(i: number): void {
     this.selItem = this.list[i];
     this.selItem.done = "2";
@@ -67,9 +51,22 @@ export class ActiveComponent implements OnInit {
       .subscribe();
   }
 
-  getList(): void {
+  tst = 0; // TODO: Change class on item priority
 
-    console.log(this.uID);
+  // REMOVE ITEM
+  remove(i: number): void {
+    this.listService.deleteProject(this.list[i])
+      .subscribe(
+        (response) => {                           // next() callback
+          //console.log('Item Removed', i);
+          this.list.splice(i, 1);
+          //this.getList();
+        },
+      );
+  }
+
+
+  getList(): void {
 
     this.loading = true;
     this.errorMessage = '';
@@ -79,13 +76,12 @@ export class ActiveComponent implements OnInit {
           console.log('Projects Loaded');
           this.list = response.projects;
 
-          const doneFilter = this.list.filter(p => p.done === '0');
+          const doneFilter = this.list.filter(p => p.done === '1');
           this.list = doneFilter;
 
-          const userFilter = this.list.filter(p => p.user_id === this.uID);
+          const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
 
-          this.list.sort((b,a) => a.id.toString().localeCompare(b.id.toString()));
         },
         (error) => {                              // error() callback
           console.error('Error Loading Projects');
@@ -96,6 +92,5 @@ export class ActiveComponent implements OnInit {
           this.loading = false;
         });
   }
-
-
 }
+

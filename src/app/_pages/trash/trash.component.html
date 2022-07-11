@@ -6,28 +6,27 @@
     | | |
   </button>
 
-  <h2 class="red">Za nabavo</h2>
+  <h2 class="green">V zalogi</h2>
 
 
   <div *ngIf="small">
     <li *ngFor="let p of list; let i = index" class="smL">
-      <a class="floatR rBtn" (click)="save(i)"> > </a>
+      <a class="floatR rBtn" (click)="save(i)"> < </a>
       <h3> > {{p.name}}</h3>
     </li>
   </div>
 
+
   <div *ngIf="list.length === 0 && !loading">
-    <h3>Seznam za nabavo</h3> 
+    <h3>Seznam zalog prazen</h3> 
     
-    <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">Seznam zalog ></button>
+    <button mat-stroked-button class="toolbarBtn" routerLink="/l">< Seznam za nabavo</button>
   </div>
 
 
 <div *ngIf="!small">
 
-
   <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
-
 
     <div class="head">
 
@@ -36,24 +35,26 @@
 
       <a class="team">{{p.user_name}}</a>
 
-
       <div class="vl"></div>
-      <div class="team">{{p.pri}}</div>
 
-      <div class="vl"></div>
-      <span class="status">Za nabavo</span>
+  <!--    <div class="team" [ngClass]="{'bs0' :tst == 0 ,'bs1' :tst == 3 , 'bs2' :tst > 5 }">| | |</div> -->
+
+      <span class="in-stock">V zalogi</span>
+
+      <!--<div class="date">{{p.created}}</div>-->
 
       <div class="r">
         <button class="rBtn" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
           X
         </button>
       </div>
-
+      
     </div>
 
     <div class="banner">
       <img class="bannerImg" src="https://itc.infofix.eu/img/slist/items/{{p.img}}">
     </div>
+
 
     <div class="body">
       <div class="desc">{{p.description}}
@@ -61,16 +62,15 @@
     </div>
 
     <div class="footer">
-      <div class="footer-item fr">
+      <div class="footer-item gr">
         <!--<fa-icon [icon]="faTag"></fa-icon>-->
         {{p.category_name}}
       </div>
 
       <div class="footer-item ri" (click)="save(i)">
         <!--<fa-icon [icon]="faTag"></fa-icon>-->
-        V zalogo >
-      </div> 
-
+        < Za nabavo
+      </div>
 
     </div>
 
@@ -81,6 +81,8 @@
 </div>
 
 </ul>
+
+
 
 
 <!--

@@ -41,6 +41,16 @@ export class ArchiveComponent implements OnInit {
       .subscribe();
   }
 
+  trash(i: number): void {
+    this.selItem = this.list[i];
+    this.selItem.done = "2";
+
+    this.list.splice(i, 1);
+
+    this.listService.updateProj(this.selItem)
+      .subscribe();
+  }
+
   tst = 0; // TODO: Change class on item priority
 
   // REMOVE ITEM
