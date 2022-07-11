@@ -18,7 +18,7 @@ export class AddItemComponent implements OnInit {
   pUserId: string = this.sService.getUser() + "";
   pUserName: string = this.sService.userName;
   pDone: string = "0";
-  pImg: string = "tes.png";
+  pImg: string = "infofix-test-banner-v5.png";
   pCatId = 0;
   pDesc: string = "";
 
@@ -43,6 +43,7 @@ export class AddItemComponent implements OnInit {
     const done = this.pDone.trim();
     const description = this.pDesc.trim();
     const category_id = this.pCatId.toString();
+    const img = this.pImg.toString();
 
     let customObj = new List();
     customObj.name = name;
@@ -50,8 +51,9 @@ export class AddItemComponent implements OnInit {
     customObj.done = done;
     customObj.description = description;
     customObj.category_id = category_id;
+    customObj.img = img;
     //this.pUserId = "";
-    this.pImg = "tes.png"; 
+    //this.pImg = "tes.png"; 
 
 
 
@@ -62,7 +64,7 @@ export class AddItemComponent implements OnInit {
 
     
     if (!name) { return; }
-    this.listService.addProject({ name, user_id, done, description, category_id} as any)
+    this.listService.addProject({ name, user_id, done, description, category_id, img} as any)
       .subscribe(project => {
 
         this.projects.push(customObj);
