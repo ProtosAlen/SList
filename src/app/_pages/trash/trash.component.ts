@@ -67,14 +67,14 @@ export class ArchiveComponent implements OnInit {
 
 
   getList(): void {
-
     this.loading = true;
     this.errorMessage = '';
-    this.listService.getProjs()
-      .subscribe(
-        (response) => {                           // next() callback
+    this.listService.getAll()
+      .subscribe({
+        next: async (v) => {
+          console.log(v)
           console.log('Projects Loaded');
-          this.list = response.projects;
+          this.list = await v.projects;
 
           const doneFilter = this.list.filter(p => p.done === '1');
           this.list = doneFilter;
@@ -82,15 +82,19 @@ export class ArchiveComponent implements OnInit {
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
 
+          this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
         },
-        (error) => {                              // error() callback
-          console.error('Error Loading Projects');
-          this.errorMessage = error;
+        error: (e) => {
+          console.error('Error Loading Projects', e);
+          this.errorMessage = e;
           this.loading = false;
         },
-        () => {                                   // complete() callback
+        complete: () => {
+          console.info('complete');
           this.loading = false;
-        });
+        }
+      });
   }
+
 }
 

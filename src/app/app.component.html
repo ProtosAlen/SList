@@ -2,45 +2,23 @@
 <mat-toolbar>
   <mat-toolbar-row class="head">
     <div class="logo" routerLink="/l">
-      <img class="logo-img"
-      alt="S-List Logo"
-      src="assets\icon-72x72.png"/>
+      <img class="logo-img" alt="S-List Logo" src="assets\icon-72x72.png" />
     </div>
 
-    <div  *ngIf="access">
+    <div *ngIf="access">
       <button mat-stroked-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
     </div>
 
     <span class="vl">|</span>
-    
-    <div  *ngIf="access">
+
+    <div *ngIf="access">
       <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
     </div>
 
     <hr style="visibility: hidden;">
 
-    <!--
-    <div>
-      <mat-form-field appearance="outline" class="selectUser">
-        <mat-label>Uporabnik {{selectedUser}}</mat-label>
-        <mat-select  [(value)]="selectedUser">
-          <mat-option [value]='1' (click)="setUser('1')">
-            Ata
-          </mat-option>
-          <mat-option [value]='2' (click)="setUser('2')">
-            Mama
-          </mat-option>
-          <mat-option [value]='3' (click)="setUser('3')">
-            Alen
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
--->
-
     <a class="logout" (click)="logout()">
-      {{uName}} <
-    </a>
+      {{uName}} < </a>
 
 
   </mat-toolbar-row>
@@ -49,45 +27,37 @@
 
 
 <div *ngIf="!access" style="margin-top: 5em;">
-  
-  
+
+
   <div>
-    <img class="logoImgAuth" 
-    src="assets\icons\icon-128x128.png"
-    alt="S-List Logo">
+    <img class="logoImgAuth" src="assets\icons\icon-128x128.png" alt="S-List Logo">
   </div>
 
 
-  
+
 
   <div class="sect-1">
     <h3 class="text3">{{accessMsg}}</h3>
 
-    <form >
+    <form>
       <mat-form-field class="login-txt">
         <mat-label>IME</mat-label>
-        <input matInput type="text" 
-        [(ngModel)]="uName"
-        class="login-input" 
-        [ngModelOptions]="{standalone:true}"
-        autofocus 
-        aria-label="Ime">
+        <input matInput type="text" [(ngModel)]="uName" class="login-input" [ngModelOptions]="{standalone:true}"
+          autofocus aria-label="Ime">
       </mat-form-field>
-  
+
       <br>
       <mat-form-field class="login-txt">
         <mat-label>GESLO</mat-label>
-        <input matInput [type]="hide ? 'password' : 'number'"
-        [(ngModel)]="role" 
-        class="login-input"
-        [ngModelOptions]="{standalone:true}"
-        aria-label="Geslo">
-        <mat-icon style="font-size: 22px;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <input matInput [type]="hide ? 'password' : 'number'" [(ngModel)]="role" class="login-input"
+          [ngModelOptions]="{standalone:true}" aria-label="Geslo">
+        <mat-icon style="font-size: 22px;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
       </mat-form-field>
 
-    
+
     </form>
-    
+
 
   </div>
 
@@ -96,7 +66,7 @@
       VSTOP -_>
     </button>
   </div>
-  
+
 
 </div>
 
@@ -106,17 +76,19 @@
 
   <mat-expansion-panel style="margin: 1em; margin-bottom: 5em;">
     <mat-expansion-panel-header>
-      <mat-panel-title><h3>Dodaj nov predmet</h3></mat-panel-title>
+      <mat-panel-title>
+        <h3>Dodaj nov predmet</h3>
+      </mat-panel-title>
     </mat-expansion-panel-header>
-  
-   
+
+
     <app-add-item></app-add-item>
-    
-    
+
+
     <div>
       V razvoju
     </div>
-  
+
   </mat-expansion-panel>
 
   <router-outlet></router-outlet>
@@ -127,7 +99,7 @@
   <div style="margin-top: 10em;">
     <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">SList © Intercell Labs - Made with ❤️</a>
     <br>
-    <a href="https://itc.infofix.eu/"  class="footer-made">Ꮢ2022v{{appVersion}}</a>
+    <a href="https://itc.infofix.eu/" class="footer-made">Ꮢ2022v{{appVersion}}</a>
   </div>
 </footer>
 

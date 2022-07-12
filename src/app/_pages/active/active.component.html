@@ -1,8 +1,6 @@
 <ul class="project">
 
-  <button mat-stroked-button 
-  class="small-btn" 
-  (click)="small = !small">
+  <button mat-stroked-button class="small-btn" (click)="small = !small">
     | | |
   </button>
 
@@ -17,68 +15,68 @@
   </div>
 
   <div *ngIf="list.length === 0 && !loading">
-    <h3>Seznam za nabavo</h3> 
-    
+    <h3>Seznam za nabavo</h3>
+
     <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">Seznam zalog ></button>
   </div>
 
 
-<div *ngIf="!small">
+  <div *ngIf="!small">
 
 
-  <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+    <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
 
 
-    <div class="head">
+      <div class="head">
 
-      <a class="title">{{p.name}}</a>
-      <div class="vl"></div>
+        <a class="title">{{p.name}}</a>
+        <div class="vl"></div>
 
-      <a class="team">{{p.user_name}}</a>
+        <a class="team">{{p.user_name}}</a>
 
 
-      <div class="vl"></div>
-      <div class="team">{{p.pri}}</div>
+        <div class="vl"></div>
+        <div class="team">{{p.pri}}</div>
 
-      <div class="vl"></div>
-      <span class="status">Za nabavo</span>
+        <div class="vl"></div>
+        <span class="status">Za nabavo</span>
 
-      <div class="r">
-        <button class="rBtn" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
-          X
-        </button>
+        <div class="r">
+          <button class="rBtn" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
+            X
+          </button>
+        </div>
+
       </div>
 
-    </div>
-
-    <div class="banner">
-      <img class="bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
-    </div>
-
-    <div class="body">
-      <div class="desc">{{p.description}}
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="footer-item fr">
-        <!--<fa-icon [icon]="faTag"></fa-icon>-->
-        {{p.category_name}}
+      <div class="banner">
+        <img class="bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
       </div>
 
-      <div class="footer-item ri" (click)="save(i)">
-        <!--<fa-icon [icon]="faTag"></fa-icon>-->
-        V zalogo >
-      </div> 
+      <div class="body">
+        <div class="desc">{{p.description}}
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-item fr">
+          <!--<fa-icon [icon]="faTag"></fa-icon>-->
+          {{p.category_name}}
+        </div>
+
+        <div class="footer-item ri" (click)="save(i)">
+          <!--<fa-icon [icon]="faTag"></fa-icon>-->
+          V zalogo >
+        </div>
 
 
-    </div>
+      </div>
 
-    <hr>
+      <hr>
 
-  </li>
+    </li>
 
-</div>
+  </div>
 
 </ul>
 
@@ -89,7 +87,7 @@
 </div>
 -->
 
-<div *ngIf="loading">.   .   .</div>
+<div *ngIf="loading">. . .</div>
 
 <div *ngIf="errorMessage" class="alert alert-warning">
   <strong>Warning!</strong> {{errorMessage}}

@@ -37,6 +37,8 @@ export class AddItemComponent implements OnInit {
     */
   }
 
+
+
   add(): void {
     const name = this.pName.trim();
     const user_id = this.pUserId.toString();
@@ -62,9 +64,9 @@ export class AddItemComponent implements OnInit {
     //this.listService.addProject(this.projects[0]);
 
 
-    
+
     if (!name) { return; }
-    this.listService.addProject({ name, user_id, done, description, category_id, img} as any)
+    this.listService.addProject({ name, user_id, done, description, category_id, img } as any)
       .subscribe(project => {
 
         this.projects.push(customObj);
@@ -74,7 +76,7 @@ export class AddItemComponent implements OnInit {
         this.status = 'Predmet dodan!';
 
         console.log(project);
-        console.log( this.status);
+        console.log(this.status);
 
       });
   }

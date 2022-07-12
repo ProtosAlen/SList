@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { List } from 'src/app/_interfaces/list';
 import { ListService } from 'src/app/_services/list.service';
 import { SharedService } from 'src/app/_services/shared.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-archive',
@@ -18,6 +21,10 @@ export class ArchiveComponent implements OnInit {
   selItem!: List;
 
   small: boolean = false;
+
+  data = new Observable<string>(observer => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+  });
 
   constructor(private listService: ListService, private sService: SharedService) { }
 
@@ -67,14 +74,14 @@ export class ArchiveComponent implements OnInit {
 
 
   getList(): void {
-
     this.loading = true;
     this.errorMessage = '';
-    this.listService.getProjs()
-      .subscribe(
-        (response) => {                           // next() callback
+    this.listService.getAll()
+      .subscribe({
+        next: async (v) => {
+          console.log(v)
           console.log('Projects Loaded');
-          this.list = response.projects;
+          this.list = await v.projects;
 
           const doneFilter = this.list.filter(p => p.done === '1');
           this.list = doneFilter;
@@ -82,15 +89,19 @@ export class ArchiveComponent implements OnInit {
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
 
+          this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
         },
-        (error) => {                              // error() callback
-          console.error('Error Loading Projects');
-          this.errorMessage = error;
+        error: (e) => {
+          console.error('Error Loading Projects', e);
+          this.errorMessage = e;
           this.loading = false;
         },
-        () => {                                   // complete() callback
+        complete: () => {
+          console.info('complete');
           this.loading = false;
-        });
+        }
+      });
   }
+
 }
 

@@ -7,7 +7,7 @@ export class SharedService {
   userID = '1';
   userName: any;
 
-  constructor(){
+  constructor() {
     this.userID = localStorage.getItem('role') + "";
     this.userName = localStorage.getItem('uName');
   }

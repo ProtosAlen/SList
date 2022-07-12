@@ -27,11 +27,21 @@
       }
     },
     {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "lazy",
+      "name": "api",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
-          "urls": ["https://itc.infofix.eu/img/slist/**", "https://api.infofix.eu/list/**"]
+          "urls": ["https://api.infofix.eu/list/**"]
+      }
+    },
+    {
+      "name": "img",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+          "urls": ["https://api.infofix.eu/list/file/uploads/items/**",
+          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ]
       }
     }
   ]

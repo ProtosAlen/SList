@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,20 +12,38 @@ import { List } from '../_interfaces/list';
 })
 export class ListService {
 
+  private baseUrl = 'https://api.infofix.eu/list/projects/';  // URL to web api /read.php
+
   private readOneUrl = 'https://api.infofix.eu/list/projects/read-one.php';  // URL to web api /read-one.php
-  
+
   private readUrl = 'https://api.infofix.eu/list/projects/read.php';  // URL to web api /read.php
   private createUrl = 'https://api.infofix.eu/list/projects/create.php';  // URL to web api /read.php
   private updateUrl = 'https://api.infofix.eu/list/projects/update.php';  // URL to web api /read.php
 
   private deleteUrl = 'https://api.infofix.eu/list/projects/delete.php';  // URL to web api /read.php
-  
+
+  items: List[] = [];
+
+  private _data = new BehaviorSubject<List[]>([]);
+  private dataStore: { data: List[] } = { data: [] }; // store our data in memory
+  readonly data = this._data.asObservable();
+
+
   constructor(
     private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
   };
+
+  addItem(item: List) {
+    this.items.push(item);
+  }
+
+  clearItems() {
+    this.items = [];
+    return this.items;
+  }
 
   /*
   getProjectsOLD(): Observable<Project[]> {
@@ -35,7 +53,7 @@ export class ListService {
 */
 
   /** GET ALL Items. Will 404 if id not found */
-  getProjs(): Observable<any> {
+  getAll(): Observable<any> {
     return this.http.get(this.readUrl);
   }
 
@@ -79,12 +97,12 @@ export class ListService {
 
 
 
-/**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
