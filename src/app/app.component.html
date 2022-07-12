@@ -72,7 +72,7 @@
 
 
 
-<div *ngIf="access" class="body">
+<div *ngIf="access" class="bodyMain">
 
   <mat-expansion-panel style="margin: 1em; margin-bottom: 5em;">
     <mat-expansion-panel-header>
@@ -91,7 +91,106 @@
 
   </mat-expansion-panel>
 
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet>-->
+
+
+  <ul class="project">
+
+    <button mat-stroked-button class="small-btn" (click)="small = !small">
+      | | |
+    </button>
+
+    <h2 class="red">Za nabavo</h2>
+
+
+    <div *ngIf="small">
+      <li *ngFor="let p of list; let i = index" class="smL">
+        <a class="floatR rBtn" (click)="save(i)"> > </a>
+        <h3> > {{p.name}}</h3>
+      </li>
+    </div>
+
+    <div *ngIf="list.length === 0 && !loading">
+      <h3>Seznam za nabavo</h3>
+
+      <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">Seznam zalog ></button>
+    </div>
+
+
+    <div *ngIf="!small">
+
+
+      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+
+
+        <div class="head">
+
+          <a class="title">{{p.name}}</a>
+          <div class="vl"></div>
+
+          <a class="team">{{p.user_name}}</a>
+
+
+          <div class="vl"></div>
+          <div class="team" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">|{{p.pri}}</div>
+
+          <div class="vl"></div>
+          <span *ngIf="p.done == 0" class="status">Za nabavo</span>
+
+          <div class="r">
+            <button class="rBtnI" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
+              X
+            </button>
+          </div>
+
+        </div>
+
+        <div class="banner">
+          <img class="bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
+        </div>
+
+        <div class="body">
+          <div class="desc">{{p.description}}
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-item fr">
+            <!--<fa-icon [icon]="faTag"></fa-icon>-->
+            {{p.category_name}}
+          </div>
+
+          <div class="footer-item ri" (click)="save(i)">
+            <!--<fa-icon [icon]="faTag"></fa-icon>-->
+            V zalogo >
+          </div>
+
+
+        </div>
+
+        <hr>
+
+      </li>
+
+    </div>
+
+  </ul>
+
+
+  <!--
+  <div class="form-group">
+    <button type="button" (click)="getProjs()">Fetch Projects</button>
+  </div>
+  -->
+
+  <div *ngIf="loading">. . .</div>
+
+  <div *ngIf="errorMessage" class="alert alert-warning">
+    <strong>Warning!</strong> {{errorMessage}}
+  </div>
+
+
+
 
 </div>
 

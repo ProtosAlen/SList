@@ -10,7 +10,7 @@ import { SharedService } from 'src/app/_services/shared.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  list: List[] = [];
+  @Input() list: List[] = [];
 
   loading = false;
   errorMessage = "";
@@ -33,7 +33,7 @@ export class ArchiveComponent implements OnInit {
 
   save(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = "0";
+    this.selItem.done = 0;
 
     this.list.splice(i, 1);
 
@@ -43,7 +43,7 @@ export class ArchiveComponent implements OnInit {
 
   trash(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = "2";
+    this.selItem.done = 2;
 
     this.list.splice(i, 1);
 
@@ -76,7 +76,7 @@ export class ArchiveComponent implements OnInit {
           console.log('Projects Loaded');
           this.list = await v.projects;
 
-          const doneFilter = this.list.filter(p => p.done === '1');
+          const doneFilter = this.list.filter(p => p.done === 1);
           this.list = doneFilter;
 
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");

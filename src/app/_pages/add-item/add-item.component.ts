@@ -17,7 +17,7 @@ export class AddItemComponent implements OnInit {
   pName: string = "Test";
   pUserId: string = this.sService.getUser() + "";
   pUserName: string = this.sService.userName;
-  pDone: string = "0";
+  pDone: number = 0;
   pImg: string = "infofix-test-banner-v5.png";
   pCatId = 0;
   pDesc: string = "";
@@ -42,7 +42,7 @@ export class AddItemComponent implements OnInit {
   add(): void {
     const name = this.pName.trim();
     const user_id = this.pUserId.toString();
-    const done = this.pDone.trim();
+    const done = this.pDone;
     const description = this.pDesc.trim();
     const category_id = this.pCatId.toString();
     const img = this.pImg.toString();

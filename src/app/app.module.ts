@@ -6,11 +6,11 @@ import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatSelectModule} from '@angular/material/select';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion'; 
-import {MatInputModule} from '@angular/material/input'; 
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,7 +22,7 @@ import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.co
 import { HomeComponent } from './_pages/home/home.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {MatIconModule} from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';

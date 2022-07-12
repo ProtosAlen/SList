@@ -16,11 +16,13 @@ export class ActiveComponent implements OnInit {
   loading = false;
   errorMessage!: string;
 
-  uID: string = this.sService.getUser() + "";
+  uID: string = this.sService.getUser().toString();
 
   selItem!: List;
 
   small: boolean = false;
+
+  done: number = 0;
 
   constructor(private listService: ListService, private sService: SharedService) { }
 
@@ -48,7 +50,7 @@ export class ActiveComponent implements OnInit {
   // SAVE ITEM
   save(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = "1";
+    this.selItem.done = 1;
 
     this.list.splice(i, 1);
 
@@ -59,7 +61,7 @@ export class ActiveComponent implements OnInit {
   // TRASH ITEM
   trash(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = "2";
+    this.selItem.done = 2;
 
     this.list.splice(i, 1);
 
@@ -77,7 +79,7 @@ export class ActiveComponent implements OnInit {
           console.log('Projects Loaded');
           this.list = await v.projects;
 
-          const doneFilter = this.list.filter(p => p.done === '1');
+          const doneFilter = this.list.filter(p => p.done === 1);
           this.list = doneFilter;
 
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
