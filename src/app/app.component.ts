@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { List } from './_interfaces/list';
 import { ListService } from './_services/list.service';
@@ -10,6 +11,10 @@ import { SharedService } from './_services/shared.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  @ViewChild(MatAccordion)
+  accordion!: MatAccordion;
+  
   title = 'S-List';
   appVersion = "0.1.40";
 
@@ -20,7 +25,8 @@ export class AppComponent {
 
   @Input() selectedUser = '1';
 
-  tst = 1;
+  headerTxt = "Za nabavo"
+  selPage = 1;
 
   constructor(private router: Router,
     private sService: SharedService,
@@ -46,7 +52,16 @@ export class AppComponent {
   }
 
   setPage(i: number) {
+    this.selPage = i;
 
+    this.getList();
+
+    if(this.selPage == 0) {
+      this.headerTxt = "V zalogi"
+    }
+    else if(this.selPage == 1) {
+      this.headerTxt = "Za nabavo"
+    }
   }
 
   logout(): void {
@@ -120,6 +135,8 @@ export class AppComponent {
 
   done: number = 0;
 
+  
+
   trackByFn(i: number) {
     return i
   }
@@ -136,10 +153,16 @@ export class AppComponent {
       );
   }
 
-  // ITEM DONE
+  // MOVE ITEM - Za nabavo <> V zalogi 
   save(i: number): void {
     this.selItem = this.list[i];
-    this.selItem.done = 1;
+    if(this.selPage == 0) {
+      this.selItem.done = 1;
+    }
+    else {
+      this.selItem.done = 0;
+    }
+
 
     this.list.splice(i, 1);
 
@@ -166,9 +189,11 @@ export class AppComponent {
         next: async (v) => {
           console.log(v)
           console.log('Projects Loaded');
-          this.list = await v.projects;
+          var tl;
+          this.list = v.projects;
 
-          const doneFilter = this.list.filter(p => (p.done === 1).toString());
+          console.log(this.selPage)
+          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
           this.list = doneFilter;
 
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
@@ -190,5 +215,66 @@ export class AppComponent {
       });
   }
 
+
+
+  projects: List[] = [];
+
+  status: any;
+
+  pName: string = "Test";
+  pUserId: string = this.sService.getUser() + "";
+  pUserName: string = this.sService.userName;
+  pDone: number = 1;
+  pImg: string = "infofix-test-banner-v5.png";
+  pCatId = 0;
+  pPri = 0;
+  pOrd = 0;
+  pDesc: string = "";
+
+  add(): void {
+    const name = this.pName.trim();
+    const user_id = this.pUserId.toString();
+    const done = this.pDone;
+    const description = this.pDesc.trim();
+    const pri = this.pPri;
+    const ord = this.pOrd;
+    const category_id = this.pCatId.toString();
+    const img = this.pImg.toString();
+
+    let customObj = new List();
+    customObj.name = name;
+    customObj.user_id = user_id;
+    customObj.done = done;
+    customObj.description = description;
+    customObj.category_id = category_id;
+    customObj.img = img;
+    customObj.pri = pri;
+    customObj.ord = ord;
+    //this.pUserId = "";
+    //this.pImg = "tes.png"; 
+
+
+
+    //if (!name) { return; }
+    //console.log(this.projects[0])
+    //this.listService.addProject(this.projects[0]);
+
+
+
+    if (!name) { return; }
+    this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord } as any)
+      .subscribe(project => {
+
+        this.projects.push(customObj);
+        //console.log(this.projects);
+        //this.projects.push(project);
+
+        this.status = 'Predmet dodan!';
+
+        console.log(project);
+        console.log(this.status);
+        this.getList();
+      });
+  }
 
 }

@@ -1,5 +1,6 @@
-.head {
+.headTb {
   background-color: #311b92;
+  overflow: hidden;
 }
 
 
@@ -31,7 +32,7 @@
   max-width: 1200px;
   margin: auto;
   padding: 0.4em;
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 .text3 {
@@ -58,11 +59,24 @@
   letter-spacing: 0.25px;
 }
 
-.logout {
-  color: white;
+.buttons button {
+  margin: 0.3em;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
+  letter-spacing: 1.25px;
 }
 
+.logout {
+  color: white;
+  margin-left: auto; 
+  margin-right: 0;
+  // Button
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  font-weight: 400;
+  transition: .1s ease-in-out;
+}
 .logout:hover {
   color: red;
   cursor: pointer;
@@ -93,42 +107,22 @@
 }
 
 
-mat-form-field {
-  margin-top: 1.4em;
-  font-size: 13px;
-}
 
-@media screen and (max-width: 600px) {
-  .title {
-    display: none;
-  }
-
-  .logo {
-    height: 20px;
-  }
-
-  .logo-img {
-    width: 20px;
-  }
-}
-
-
-
-.vl {
+.vlT {
   color: gray;
   font-size: 18px;
 }
 
 .toolbarBtn {
+  // BUTTON
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.25px;
   margin: 0.2em;
   color: white;
-
-  letter-spacing: 0.07em;
-  font-size: 16px;
-
-
+  background-color: #311b92;
+  transition: .1s ease-in-out;
 }
-
 .toolbarBtn:hover {
   border-color: #275dd3;
   background-color: #275dd3;
@@ -180,22 +174,32 @@ input[type=number].login-input {
   width: 48px;
 }
 
-
-//// 
-/// 
-/// 
-/// 
-/// 
-//
+////
 
 .red {
+  // Headline 6
+  font-family: 'Raleway', sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+
   border-left: 5px solid red;
   padding-left: 0.5em;
+
+  transition: .1s ease-in-out;
 }
 
 .green {
+  // Headline 6
+  font-family: 'Raleway', sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+
   border-left: 5px solid rgb(0, 255, 34);
   padding-left: 0.5em;
+
+  transition: .1s ease-in-out;
 }
 
 .h3 {
@@ -256,14 +260,17 @@ input[type=number].login-input {
 }
 
 .title {
-  font-size: 18px;
+  // Headline 6
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.15px;
+
+
 
   margin: 0.4em;
   margin-left: 0.6em;
   display: inline-block;
 
-  font-weight: 500;
-  letter-spacing: 0.08em;
 }
 
 .title,
@@ -326,13 +333,19 @@ a:visited {
 
 
 .team {
+  // MAT: Body 1
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+
+
   padding: 0.4em;
   margin: 0.4em;
   display: inline-block;
-  font-size: 16px;
-  font-weight: 400;
+
+
   border: 2px solid yellow;
-  letter-spacing: 0.06em;
 }
 
 .pri0 {
@@ -374,12 +387,32 @@ a:visited {
 }
 
 .in-stock {
+  // MAT: Body 1
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+
   padding: 0.4em;
   margin: 0.4em;
   display: inline-block;
   border: 2px solid rgb(0, 255, 34);
+
+  transition: .1s ease-in-out;
+}
+.out-stock {
+  // MAT: Body 1
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
-  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+
+  padding: 0.4em;
+  margin: 0.4em;
+  display: inline-block;
+  border: 2px solid rgb(255, 0, 0);
+
+  transition: .1s ease-in-out;
 }
 
 //BODY
@@ -396,9 +429,15 @@ a:visited {
 
 
 .footer-item {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1.25px;
+  font-weight: 500;
+
   background-color: #5929e7;
 
   display: inline-block;
+  vertical-align: middle;
 
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 
@@ -407,20 +446,24 @@ a:visited {
   margin-bottom: 0.5em;
   margin-left: 0.5em;
 
+  
 
   border-radius: 20px;
-  letter-spacing: 0.05em;
-  transition-duration: 0.25s;
+  transition-duration: 0.1s;
 
-  font-size: 15px;
 
-  font-weight: 300;
   color: white;
 }
 
 .footer-item:hover {
   background-color: #3779c1;
   //cursor: pointer;
+}
+.footer-item mat-icon {
+  display: inline;
+  vertical-align: middle;
+  font-size: 15px;
+  padding-bottom: 0.2em;
 }
 
 .ri {
@@ -436,6 +479,14 @@ a:visited {
   cursor: pointer;
 }
 
+.add-stock:hover {
+  background-color: #3aad5e;
+}
+
+.del-stock:hover {
+  background-color: #c1378a;
+}
+
 // Delete Item Button & Div
 .r {
   float: right;
@@ -444,18 +495,24 @@ a:visited {
 }
 
 .rBtnI {
+  // BUTTON
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.25px;
+
   background-color: #00000000;
   border-color: #00000000;
   color: white;
-  font-weight: 300;
-  //line-height: 0.8;
+  font-weight: 500;
+  top: 2px;
   font-size: 16px;
+  display: inline-block;
   vertical-align: middle;
-
 }
 .rBtnI:hover {
   cursor: pointer;
   color: red;
+
 }
 
 .floatR {
@@ -509,8 +566,39 @@ hr {
   height: 95%;
 }
 
-@media screen and (max-width: 600px) {
+
+// MOBILE
+@media screen and (max-width: 500px) {
   .banner {
     height: 100px;
   }
+  .toolbarBtn {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    font-weight: 400;
+    margin: 0em;
+  }
+  .logout {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    font-weight: 400;
+  }
+  .logo {
+    height: 32px;
+  }
+  .logo-img {
+    width: 32px;
+  }
+}
+
+
+.bannerD {
+  margin-left: 0.5em;
+  //cursor: pointer;
+  height: 70px;
+  width: auto;
+}
+.bannerImgD {
+  max-height: 100%;
+  /* The width is 100%, when the viewport is 800px or smaller */
 }

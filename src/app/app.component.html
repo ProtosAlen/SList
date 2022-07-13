@@ -1,28 +1,26 @@
 <!-- Toolbar -->
 <mat-toolbar>
-  <mat-toolbar-row class="head">
-    <div class="logo" routerLink="/l">
+  <mat-toolbar-row class="headTb">
+
+    <div class="logo" (click)="setPage(1)">
       <img class="logo-img" alt="S-List Logo" src="assets\icon-72x72.png" />
     </div>
 
     <div *ngIf="access">
-      <button mat-stroked-button class="toolbarBtn" routerLink="/l">Za nabavo</button>
+      <button mat-stroked-button class="toolbarBtn" (click)="setPage(1)">NABAVA</button>
+
+      <span class="vlT">|</span>
+
+      <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)">ZALOGA</button>
+
+      <span class="vlT">|</span>
+
+      <button mat-stroked-button class="toolbarBtn" (click)="accordion.openAll()">Dodaj +</button>
     </div>
 
-    <span class="vl">|</span>
-
-    <div *ngIf="access">
-      <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">V zalogi</button>
-    </div>
-
-    <hr style="visibility: hidden;">
-
-    <a class="logout" (click)="logout()">
-      {{uName}} < </a>
-
+    <a class="logout" (click)="logout()">{{uName}} < </a>
 
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 
@@ -74,23 +72,86 @@
 
 <div *ngIf="access" class="bodyMain">
 
-  <mat-expansion-panel style="margin: 1em; margin-bottom: 5em;">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h3>Dodaj nov predmet</h3>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+  <mat-accordion multi>
+    <mat-expansion-panel style="margin: 1em; margin-bottom: 5em; margin-top: 0em;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Dodaj nov predmet</mat-panel-title>
+      </mat-expansion-panel-header>
 
 
-    <app-add-item></app-add-item>
+
+      <!-- DODAJ -->
+      <div>
+        <div class="bannerD">
+          <img class="bannerImgD" src="https://api.infofix.eu/list/file/uploads/items/{{pImg}}">
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Slika</mat-label>
+          <input matInput #projectName [(ngModel)]="pImg">
+        </mat-form-field>
 
 
-    <div>
-      V razvoju
-    </div>
 
-  </mat-expansion-panel>
+        <div class="">
 
+          <mat-form-field appearance="fill">
+            <mat-label>Ime</mat-label>
+            <input matInput #li [(ngModel)]="pName">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Opis</mat-label>
+            <input matInput #li [(ngModel)]="pDesc">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Prioriteta</mat-label>
+            <mat-select [(ngModel)]="pPri">
+              <mat-option value="0">Nizka - 0</mat-option>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">Visoka - 4</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Kategorija</mat-label>
+            <mat-select [(ngModel)]="pCatId">
+              <mat-option value="100">-- Brez --</mat-option>
+              <mat-option value="1">Hrana</mat-option>
+              <mat-option value="2">Oblačila</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+        </div>
+
+        <!--
+        {{pUserId}}
+        <iframe src="https://api.infofix.eu/list/file/" title="Fup"></iframe>  -->
+
+        <div class="buttons">
+          <button mat-stroked-button color="warn" (click)="accordion.closeAll()">Prekliči</button>
+          <button mat-flat-button color="primary" (click)="add(); li.value='';">
+            <span>Dodaj predmet</span>
+          </button>
+
+        </div>
+
+        <h2>{{status}}</h2>
+      </div>
+      <!-- < DODAJ -->
+
+      <div>
+        V razvoju - {{pUserName}}
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
   <!-- <router-outlet></router-outlet>-->
 
 
@@ -100,7 +161,7 @@
       | | |
     </button>
 
-    <h2 class="red">Za nabavo</h2>
+    <h2 [ngClass]="{'green' :selPage == 0, 'red' :selPage == 1}">{{headerTxt}}</h2>
 
 
     <div *ngIf="small">
@@ -111,9 +172,15 @@
     </div>
 
     <div *ngIf="list.length === 0 && !loading">
-      <h3>Seznam za nabavo</h3>
-
-      <button mat-stroked-button class="toolbarBtn" routerLink="/zaloge">Seznam zalog ></button>
+      <div *ngIf="selPage == 1">
+        <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)">
+          Seznam zalog >
+        </button>
+      </div>
+      <div *ngIf="selPage == 0">
+        <button mat-stroked-button class="toolbarBtn" (click)="setPage(1)">
+          < Seznam za nabavo </button>
+      </div>
     </div>
 
 
@@ -132,13 +199,20 @@
 
 
           <div class="vl"></div>
-          <div class="team" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">|{{p.pri}}</div>
+          <div class="team"
+            [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
+            |{{p.pri}}</div>
 
           <div class="vl"></div>
-          <span *ngIf="p.done == 0" class="status">Za nabavo</span>
+
+          <!--   <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> -->
+
+          <div *ngIf="p.done == 0" class="in-stock">V zalogi</div>
+          <div *ngIf="p.done == 1" class="out-stock">Za nabavo</div>
+
 
           <div class="r">
-            <button class="rBtnI" mat-mini-fab color="accent" (click)="trash(i)" aria-label="Delete Item">
+            <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
               X
             </button>
           </div>
@@ -155,16 +229,22 @@
         </div>
 
         <div class="footer">
-          <div class="footer-item fr">
-            <!--<fa-icon [icon]="faTag"></fa-icon>-->
+          <div class="footer-item" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+            <mat-icon>category</mat-icon>
             {{p.category_name}}
           </div>
 
-          <div class="footer-item ri" (click)="save(i)">
-            <!--<fa-icon [icon]="faTag"></fa-icon>-->
-            V zalogo >
+          <div *ngIf="selPage == 0" class="footer-item ri del-stock" (click)="save(i)">
+            <mat-icon>chevron_left</mat-icon>
+            ZA NABAVO
+          </div>
+          <div *ngIf="selPage == 1" class="footer-item ri add-stock" (click)="save(i)">
+            V ZALOGO
+            <mat-icon>chevron_right</mat-icon>
           </div>
 
+
+        
 
         </div>
 

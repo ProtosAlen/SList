@@ -1,4 +1,7 @@
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
+import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -11,33 +14,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
-import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { ActiveComponent } from './_pages/active/active.component';
-import { ArchiveComponent } from './_pages/archive/archive.component';
-import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.component';
-import { HomeComponent } from './_pages/home/home.component';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { MatIconModule } from '@angular/material/icon';
-
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AddItemComponent } from './_pages/add-item/add-item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActiveComponent,
-    ArchiveComponent,
     PageNotFoundComponent,
-    HomeComponent,
     ScrollTopComponent,
-    AddItemComponent
   ],
   imports: [
     AppRoutingModule,
@@ -45,12 +36,15 @@ import { AddItemComponent } from './_pages/add-item/add-item.component';
     HttpClientModule,
     MatInputModule,
     FormsModule,
-    BrowserAnimationsModule,
+    CdkAccordionModule,
+
     MatSelectModule,
     MatIconModule,
     MatFormFieldModule,
+
     MatExpansionModule,
     MatToolbarModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
