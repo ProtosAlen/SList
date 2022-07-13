@@ -16,7 +16,7 @@ export class AppComponent {
   accordion!: MatAccordion;
   
   title = 'S-List';
-  appVersion = "0.1.40";
+  appVersion = "0.1.50";
 
   access = false;
   accessMsg = 'Vnesite ime in geslo:';
