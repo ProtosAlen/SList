@@ -216,8 +216,6 @@
           <div *ngIf="p.done == 1" class="item-out-stock">Za nabavo</div>
 
 
-
-
         </div>
 
         <div class="item-banner">
@@ -244,6 +242,11 @@
           <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
             V ZALOGO
             <mat-icon>chevron_right</mat-icon>
+          </div>
+
+          <div *ngIf="selPage == 2" class="item-footer-pill ri add-stock" (click)="save(i)">
+            <mat-icon>chevron_left</mat-icon>
+            VRNI
           </div>
 
           <!--
@@ -278,6 +281,15 @@
 <!-- FOOTER & MISC -->
 <footer>
   <div style="margin-top: 10em;">
+
+
+    <div *ngIf="access">
+      <button mat-icon-button (click)="setPage(2)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <br>
+
     <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">SList © Intercell Labs - Made with ❤️</a>
     <br>
     <a href="https://itc.infofix.eu/" class="footer-made">Ꮢ2022v{{appVersion}}</a>

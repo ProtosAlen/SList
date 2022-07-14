@@ -159,8 +159,11 @@ export class AppComponent {
     if(this.selPage == 0) {
       this.selItem.done = 1;
     }
-    else {
+    else if(this.selPage == 1) {
       this.selItem.done = 0;
+    }
+    else if(this.selPage == 2) {
+      this.selItem.done = 1;
     }
 
 

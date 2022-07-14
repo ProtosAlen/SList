@@ -264,9 +264,11 @@ input[type=number].login-input {
   letter-spacing: 0.15px;
   font-weight: 500;
 
+  line-height: 35px;
 
   margin: 0.4em;
   margin-left: 0.6em;
+  margin-right: 0.6em;
   display: inline-block;
 
 }
@@ -335,6 +337,7 @@ a:visited {
   letter-spacing: 0.15px;
   font-weight: 400;
 
+  line-height: 15px;
 
   padding: 0.4em;
   margin: 0.4em;
@@ -389,6 +392,8 @@ a:visited {
   letter-spacing: 0.15px;
   font-weight: 400;
 
+  line-height: 15px;
+
   padding: 0.4em;
   margin: 0.4em;
   display: inline-block;
@@ -403,6 +408,8 @@ a:visited {
   letter-spacing: 0.15px;
   font-weight: 400;
 
+  line-height: 15px;
+
   padding: 0.4em;
   margin: 0.4em;
   display: inline-block;
@@ -413,8 +420,9 @@ a:visited {
 
 // ITEM FOOTER PILL
 .item-footer-pill {
-  font-family: 'Raleway', sans-serif;
-  font-size: 13px;
+  // MAT: BUTTON
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
   letter-spacing: 1.25px;
   font-weight: 500;
 
@@ -425,7 +433,7 @@ a:visited {
 
   //box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 
-  padding: 0.5em 1em 0.5em 0.85em;
+  padding: 0.5em 1em 0.5em 1em;
 
   margin-bottom: 0.6em;
   margin-left: 0.5em;
@@ -436,14 +444,16 @@ a:visited {
   color: white;
 }
 .item-footer-pill:hover {
-  background-color: #3779c1;
-  //cursor: pointer;
+  background-color: #945aff;
+  //cursor: pointer; TODO: Tag Details Page
 }
 .item-footer-pill mat-icon {
   display: inline;
   vertical-align: middle;
-  font-size: 15px;
-  padding-bottom: 0.2em;
+  font-size: 12px;
+  letter-spacing: 1.25px;
+  font-weight: 500;
+  padding-bottom: 0.1em;
 }
 
 // ITEM DELETE BUTTON
@@ -524,6 +534,8 @@ a:visited {
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   letter-spacing: 0.25px;
+
+  line-height: 44px;
 
   background-color: #00000000;
   border-color: #00000000;
