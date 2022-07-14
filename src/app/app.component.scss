@@ -163,7 +163,6 @@ input[type=number].login-input {
 .logo {
   height: 48px;
   width: auto;
-  margin-left: -0.5em;
 }
 
 .logo:hover {
@@ -176,12 +175,12 @@ input[type=number].login-input {
 
 ////
 
-.red {
-  // Headline 6
+.h-red {
+  // MAT: Headline 5
   font-family: 'Raleway', sans-serif;
   font-size: 21px;
-  letter-spacing: 0.15px;
-  font-weight: 500;
+  letter-spacing: 0px;
+  font-weight: 400;
 
   border-left: 5px solid red;
   padding-left: 0.5em;
@@ -189,12 +188,12 @@ input[type=number].login-input {
   transition: .1s ease-in-out;
 }
 
-.green {
-  // Headline 6
+.h-green {
+  // MAT: Headline 5
   font-family: 'Raleway', sans-serif;
   font-size: 21px;
-  letter-spacing: 0.15px;
-  font-weight: 500;
+  letter-spacing: 0px;
+  font-weight: 400;
 
   border-left: 5px solid rgb(0, 255, 34);
   padding-left: 0.5em;
@@ -240,30 +239,30 @@ input[type=number].login-input {
   line-height: 0;
 }
 
-//HEAD
-.head {
+// ITEM HEAD
+.item-head {
   margin-top: 3em;
   color: white;
-  background-color: #311b92;
+  background-color: #331b92;
   margin-bottom: 0.5em;
   overflow: hidden;
 }
 
-.vl {
+.item-vl {
   display: inline-block;
-  border-right: 1px solid #c7c7c7;
+  border-right: 1px solid #ababab;
   font-weight: 500;
   vertical-align: middle;
-  height: 2em;
-  margin: 0.4em;
+  height: 1.5em;
+  margin: 0.1em;
 }
 
-.title {
+.item-title {
   // Headline 6
   font-family: 'Raleway', sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   letter-spacing: 0.15px;
-
+  font-weight: 500;
 
 
   margin: 0.4em;
@@ -271,47 +270,43 @@ input[type=number].login-input {
   display: inline-block;
 
 }
-
-.title,
-.user,
-.status,
+.item-title,
+.item-user,
+.item-status,
 a:link {
   color: white;
   text-decoration: none;
   vertical-align: middle;
 }
-
-.title,
-.user,
-.status,
+.item-title,
+.item-user,
+.item-status,
 a:visited {
   color: white;
 }
 
-.desc {
+// ITEM BODY
+.item-desc {
   // MAT: Body 1
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
   letter-spacing: 0.5px;
   font-weight: 400;
 
-  padding: 0.5em;
-  padding-top: 0em;
+  padding: 1.2em;
+  padding-top: 0.5em;
 }
 
-.desc a {
+.item-desc a {
   color: #5929e7;
 }
-
-.desc a:link {
+.item-desc a:link {
   text-decoration: none;
 }
-
-.desc a:visited {
+.item-desc a:visited {
   color: #5929e7;
 }
-
-.desc a:hover {
+.item-desc a:hover {
   color: #30589E;
 }
 
@@ -332,12 +327,12 @@ a:visited {
 }
 
 
-
-.team {
-  // MAT: Body 1
+// ITEM HEAD INFOBOX
+.item-infobox {
+  // MAT: SUBTITLE 1
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  letter-spacing: 0.15px;
   font-weight: 400;
 
 
@@ -387,11 +382,11 @@ a:visited {
   font-weight: 300;
 }
 
-.in-stock {
-  // MAT: Body 1
+.item-in-stock {
+  // MAT: SUBTITLE 1
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  letter-spacing: 0.15px;
   font-weight: 400;
 
   padding: 0.4em;
@@ -401,11 +396,11 @@ a:visited {
 
   transition: .1s ease-in-out;
 }
-.out-stock {
-  // MAT: Body 1
+.item-out-stock {
+  // MAT: SUBTITLE 1
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  letter-spacing: 0.15px;
   font-weight: 400;
 
   padding: 0.4em;
@@ -416,20 +411,8 @@ a:visited {
   transition: .1s ease-in-out;
 }
 
-//BODY
-.body {
-  //cursor: pointer;
-  margin: 0.5em;
-  color: black;
-}
-
-//FOOTER
-.footer {
-  color: white;
-}
-
-
-.footer-item {
+// ITEM FOOTER PILL
+.item-footer-pill {
   font-family: 'Raleway', sans-serif;
   font-size: 13px;
   letter-spacing: 1.25px;
@@ -440,27 +423,64 @@ a:visited {
   display: inline-block;
   vertical-align: middle;
 
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  //box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 
-  padding: 0.4em 1em 0.4em 0.8em;
+  padding: 0.5em 1em 0.5em 0.85em;
 
-  margin-bottom: 0.5em;
+  margin-bottom: 0.6em;
   margin-left: 0.5em;
-
-  
 
   border-radius: 20px;
   transition-duration: 0.1s;
 
-
   color: white;
 }
-
-.footer-item:hover {
+.item-footer-pill:hover {
   background-color: #3779c1;
   //cursor: pointer;
 }
-.footer-item mat-icon {
+.item-footer-pill mat-icon {
+  display: inline;
+  vertical-align: middle;
+  font-size: 15px;
+  padding-bottom: 0.2em;
+}
+
+// ITEM DELETE BUTTON
+.item-delete-btn {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0px;
+  font-weight: 500;
+
+  background-color: #f7f7f7;
+
+  display: inline-block;
+  vertical-align: middle;
+
+  //box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+
+
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
+
+  border-radius: 20px;
+  transition-duration: 0.1s;
+
+  color: red;
+
+  margin-right: 0.5em;
+  margin-top: -0.5em;
+
+  padding: 0.5em 1em 0.5em 1em;
+
+  cursor: pointer;
+}
+.item-delete-btn:hover {
+  background-color: #3779c1;
+  //cursor: pointer;
+}
+.item-delete-btn mat-icon {
   display: inline;
   vertical-align: middle;
   font-size: 15px;
@@ -471,21 +491,25 @@ a:visited {
   float: right;
 
   margin-right: 0.5em;
-  margin-top: -0.5em;
 
-  background-color: gray;
-
-  padding: 0.6em 1em 0.6em 1em;
+  padding: 0.5em 1em 0.5em 1em;
 
   cursor: pointer;
 }
 
+
+.add-stock {
+  background-color: #b1e0ce
+}
 .add-stock:hover {
-  background-color: #3aad5e;
+  background-color: #81AE9D;
 }
 
+.del-stock {
+  background-color: #ffd1b9;
+}
 .del-stock:hover {
-  background-color: #c1378a;
+  background-color: #FB9F89;
 }
 
 // Delete Item Button & Div
@@ -498,15 +522,13 @@ a:visited {
 .rBtnI {
   // BUTTON
   font-family: 'Raleway', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0.25px;
 
   background-color: #00000000;
   border-color: #00000000;
   color: white;
   font-weight: 500;
-  top: 2px;
-  font-size: 16px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -554,13 +576,13 @@ hr {
 }
 
 
-.banner {
+.item-banner {
   margin-left: 0.5em;
   height: 150px;
   width: auto;
 }
 
-.bannerImg {
+.item-bannerImg {
   display: block;
   margin-top: auto;
   margin-bottom: auto;
@@ -570,7 +592,7 @@ hr {
 
 // MOBILE
 @media screen and (max-width: 500px) {
-  .banner {
+  .item-banner {
     height: 100px;
   }
   .toolbarBtn {
@@ -602,4 +624,12 @@ hr {
 .bannerImgD {
   max-height: 100%;
   /* The width is 100%, when the viewport is 800px or smaller */
+}
+
+mat-panel-title {
+    // MAT: SUBTITLE 1
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.15px;
+    font-weight: 400;
 }

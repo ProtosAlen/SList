@@ -25,7 +25,7 @@ export class AppComponent {
 
   @Input() selectedUser = '1';
 
-  headerTxt = "Za nabavo"
+  headerTxt = "ZA NABAVO"
   selPage = 1;
 
   constructor(private router: Router,
@@ -57,10 +57,10 @@ export class AppComponent {
     this.getList();
 
     if(this.selPage == 0) {
-      this.headerTxt = "V zalogi"
+      this.headerTxt = "V ZALOGI"
     }
     else if(this.selPage == 1) {
-      this.headerTxt = "Za nabavo"
+      this.headerTxt = "ZA NABAVO"
     }
   }
 

@@ -39,33 +39,15 @@ $S-List-theme: mat.define-light-theme((
 @font-face {
   font-family: 'Raleway', sans-serif;
   font-style: normal;
-  src: local('Raleway'), local('Raleway'), url(https://fonts.googleapis.com/css2?family=Raleway);
+  src: local('Raleway'), local('Raleway'), url(https://fonts.googleapis.com/css2?family=Raleway&display=swap);
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Lato', sans-serif;
-  font-style: normal;
-  src: local('Lato'), local('Lato'), url(https://fonts.googleapis.com/css2?family=Lato);
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-$fontConfig: (
-  display-4: mat-typography-level(100px, 100px, 300, 'Lato', -0.0150em),
-  display-3: mat-typography-level(62px, 62px, 300, 'Lato', -0.0081em),
-  display-2: mat-typography-level(50px, 50px, 400, 'Lato', 0.0000em),
-  display-1: mat-typography-level(35px, 35px, 400, 'Lato', 0.0071em),
-  headline: mat-typography-level(25px, 25px, 400, 'Lato', 0.0000em),
-  title: mat-typography-level(21px, 21px, 500, 'Lato', 0.0071em),
-  subheading-2: mat-typography-level(17px, 17px, 400, 'Lato', 0.0088em),
-  subheading-1: mat-typography-level(15px, 15px, 500, 'Lato', 0.0067em),
-  body-2: mat-typography-level(16px, 16px, 400, 'Raleway', 0.0313em),
-  body-1: mat-typography-level(14px, 14px, 400, 'Raleway', 0.0179em),
-  button: mat-typography-level(14px, 14px, 500, 'Raleway', 0.0893em),
-  caption: mat-typography-level(12px, 12px, 400, 'Raleway', 0.0333em),
-  input: mat-typography-level(10px, 10px, 400, 'Raleway', 0.1500em)
-);
+
+
 
 
 html,
@@ -84,6 +66,23 @@ body {
 }
 
 
+/*
+
+$fontConfig: (
+  display-4: mat-typography-level(100px, 100px, 300, 'Lato', -0.0150em),
+  display-3: mat-typography-level(62px, 62px, 300, 'Lato', -0.0081em),
+  display-2: mat-typography-level(50px, 50px, 400, 'Lato', 0.0000em),
+  display-1: mat-typography-level(35px, 35px, 400, 'Lato', 0.0071em),
+  headline: mat-typography-level(25px, 25px, 400, 'Lato', 0.0000em),
+  title: mat-typography-level(21px, 21px, 500, 'Lato', 0.0071em),
+  subheading-2: mat-typography-level(17px, 17px, 400, 'Lato', 0.0088em),
+  subheading-1: mat-typography-level(15px, 15px, 500, 'Lato', 0.0067em),
+  body-2: mat-typography-level(16px, 16px, 400, 'Raleway', 0.0313em),
+  body-1: mat-typography-level(14px, 14px, 400, 'Raleway', 0.0179em),
+  button: mat-typography-level(14px, 14px, 500, 'Raleway', 0.0893em),
+  caption: mat-typography-level(12px, 12px, 400, 'Raleway', 0.0333em),
+  input: mat-typography-level(10px, 10px, 400, 'Raleway', 0.1500em)
+);
 
 h1 {
   font-family: unquote("Lato");
@@ -138,7 +137,7 @@ $mdc-typography-styles-caption: (
   font-family: unquote("Raleway"),
   font-size: 12
 );
-
+*/
 
 /* Add a thumb */
 .mostly-customized-scrollbar::-webkit-scrollbar-thumb {

@@ -154,7 +154,7 @@
       | | |
     </button>
 
-    <h2 [ngClass]="{'green' :selPage == 0, 'red' :selPage == 1}">{{headerTxt}}</h2>
+    <h2 [ngClass]="{'h-green' :selPage == 0, 'h-red' :selPage == 1}">{{headerTxt}}</h2>
 
     <!-- SMALL VIEW >> -->
     <div *ngIf="small">
@@ -180,33 +180,14 @@
     <!-- << EMPTY VIEW -->
 
 
-    <!-- NORMAL/BIG VIEW >> -->
+    <!-- NORMAL/BIG ITEM VIEW >> -->
     <div *ngIf="!small">
 
 
       <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
 
 
-        <div class="head">
-
-          <a class="title">{{p.name}}</a>
-          <div class="vl"></div>
-
-          <a class="team">{{p.user_name}}</a>
-
-
-          <div class="vl"></div>
-          <div class="team"
-            [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
-            |{{p.pri}}</div>
-
-          <div class="vl"></div>
-
-          <!--   <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> -->
-
-          <div *ngIf="p.done == 0" class="in-stock">V zalogi</div>
-          <div *ngIf="p.done == 1" class="out-stock">Za nabavo</div>
-
+        <div class="item-head">
 
           <div class="r">
             <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
@@ -214,38 +195,64 @@
             </button>
           </div>
 
+          <a class="item-title">{{p.name}}</a>
+          <div class="item-vl"></div>
+
+          <a class="item-infobox">{{p.user_name}}</a>
+
+
+          <div class="item-vl"></div>
+          <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
+            'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
+            |{{p.pri}}</div>
+
+          <div class="item-vl"></div>
+
+          <!-- TODO: 
+            <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> 
+          -->
+
+          <div *ngIf="p.done == 0" class="item-in-stock">V zalogi</div>
+          <div *ngIf="p.done == 1" class="item-out-stock">Za nabavo</div>
+
+
+
+
         </div>
 
-        <div class="banner">
-          <img class="bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
+        <div class="item-banner">
+          <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
         </div>
 
-        <div class="body">
-          <div class="desc">{{p.description}}
-          </div>
+        <div class="item-desc">
+          {{p.description}}
         </div>
 
-        <div class="footer">
-          <div class="footer-item" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+        <div>
+          <div class="item-footer-pill" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
             <mat-icon>category</mat-icon>
             {{p.category_name}}
           </div>
 
-          <div *ngIf="selPage == 0" class="footer-item ri del-stock" (click)="save(i)">
+
+
+
+          <div *ngIf="selPage == 0" class="item-footer-pill ri del-stock" (click)="save(i)">
             <mat-icon>chevron_left</mat-icon>
             ZA NABAVO
           </div>
-          <div *ngIf="selPage == 1" class="footer-item ri add-stock" (click)="save(i)">
+          <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
             V ZALOGO
             <mat-icon>chevron_right</mat-icon>
           </div>
 
-
-
+          <!--
+          <button mat-icon-button color="warn" (click)="trash(i)" class="item-delete-btn ri" aria-label="Delete Item">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+          -->
 
         </div>
-
-        <hr>
 
       </li>
 

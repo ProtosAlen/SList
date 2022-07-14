@@ -1,13 +1,18 @@
 .scroll-to-top {
+  // MAT: Headline 5
+  font-family: 'Raleway', sans-serif;
+  font-size: 21px;
+  letter-spacing: 0px;
+  font-weight: 400;
+
   z-index: 99 !important;
   background:linear-gradient(#30589E, #5929e7);
   color: white;
   border-radius:1em;
 	display:inline-block;
 	cursor:pointer;
-	font-size:22px;
-	font-weight:300;
-  line-height: 1.1em;
+
+  line-height: 1em;
   padding: 0.4em;
   height: 1em;
   width: 1em;
