@@ -5,10 +5,36 @@ import { List } from './_interfaces/list';
 import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
+import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
+
+const listAnimation = trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter',
+      [style({ opacity: 0 }), stagger('100ms', animate('100ms ease-in-out', style({ opacity: 1 })))],
+      { optional: true }
+    ),
+    query(':leave',
+      animate('50ms', style({ opacity: 0 })),
+      { optional: true }
+    )
+  ])
+]);
+
+
+const listAnim1 = trigger('listAnim1', [
+  state('void', style({
+    opacity: 0
+  })),
+  transition('void <=> *', animate('100ms ease-in-out')),
+]);
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [listAnimation]
 })
 export class AppComponent {
 
@@ -52,7 +78,11 @@ export class AppComponent {
   }
 
   setPage(i: number) {
-    this.selPage = i;
+    this.selPage = i; 
+
+    if(this.list) {
+      this.list = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
+    }
 
     this.getList();
 
@@ -190,17 +220,14 @@ export class AppComponent {
     this.listService.getAll()
       .subscribe({
         next: async (v) => {
-          console.log(v)
-          console.log('Projects Loaded');
-          var tl;
+          console.log('Items Fetched', v);
           this.list = v.projects;
-
-          console.log(this.selPage)
-          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
-          this.list = doneFilter;
 
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
+
+          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
+          this.list = doneFilter;
 
           this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
           this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));

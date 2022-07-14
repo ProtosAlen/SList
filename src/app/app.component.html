@@ -184,7 +184,7 @@
     <div *ngIf="!small">
 
 
-      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@listAnimation]>
 
 
         <div class="item-head">

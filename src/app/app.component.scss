@@ -68,7 +68,7 @@
 
 .logout {
   color: white;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: 0;
   // Button
   font-family: 'Raleway', sans-serif;
@@ -77,6 +77,7 @@
   font-weight: 400;
   transition: .1s ease-in-out;
 }
+
 .logout:hover {
   color: red;
   cursor: pointer;
@@ -123,6 +124,7 @@
   background-color: #311b92;
   transition: .1s ease-in-out;
 }
+
 .toolbarBtn:hover {
   border-color: #275dd3;
   background-color: #275dd3;
@@ -148,13 +150,6 @@ input[type=number].login-input {
 }
 
 
-.selectUser {
-  margin-top: 1.5em;
-  font-size: 13px;
-  color: white;
-  width: 120px;
-}
-
 .logoImgAuth {
   height: 96px;
   width: auto;
@@ -173,8 +168,7 @@ input[type=number].login-input {
   width: 48px;
 }
 
-////
-
+// HEADLINES
 .h-red {
   // MAT: Headline 5
   font-family: 'Raleway', sans-serif;
@@ -201,12 +195,7 @@ input[type=number].login-input {
   transition: .1s ease-in-out;
 }
 
-.h3 {
-  display: inline;
-  text-align: left;
-}
-
-/* ITEM */
+/* ! ITEM ! */
 .item {
   font-size: 16px;
   width: 95%;
@@ -222,6 +211,7 @@ input[type=number].login-input {
   box-shadow: 0px 2px 10px 2px rgba(180, 180, 180, 0.2);
   transition: all 0.25s ease-out;
 }
+
 .item li:hover {
   background-image: linear-gradient(white, rgba(224, 219, 224, 0.205));
   box-shadow: -1px 3px 10px 3px rgba(0, 0, 0, 0.2);
@@ -272,6 +262,7 @@ input[type=number].login-input {
   display: inline-block;
 
 }
+
 .item-title,
 .item-user,
 .item-status,
@@ -280,6 +271,7 @@ a:link {
   text-decoration: none;
   vertical-align: middle;
 }
+
 .item-title,
 .item-user,
 .item-status,
@@ -302,32 +294,18 @@ a:visited {
 .item-desc a {
   color: #5929e7;
 }
+
 .item-desc a:link {
   text-decoration: none;
 }
+
 .item-desc a:visited {
   color: #5929e7;
 }
+
 .item-desc a:hover {
   color: #30589E;
 }
-
-.date {
-  font-size: 16px;
-  font-weight: 300;
-  padding: 0.4em;
-  margin: 0.4em;
-  display: inline-block;
-}
-
-.user {
-  font-size: 18px;
-  font-weight: 300;
-  padding: 0.4em;
-  margin: 0.1em;
-  display: inline-block;
-}
-
 
 // ITEM HEAD INFOBOX
 .item-infobox {
@@ -343,48 +321,31 @@ a:visited {
   margin: 0.4em;
   display: inline-block;
 
-
   border: 2px solid yellow;
 }
 
+// PRIORITY COLORS
 .pri0 {
   border: 2px solid green;
 }
+
 .pri1 {
   border: 2px solid yellow;
 }
+
 .pri2 {
   border: 2px solid orange;
 }
+
 .pri3 {
   border: 2px solid orangered;
 }
+
 .pri4 {
   border: 2px solid red;
 }
 
-
-.bs0 {
-  border: 2px solid green;
-}
-
-.bs1 {
-  border: 2px solid green;
-}
-
-.bs2 {
-  border: 2px solid red;
-}
-
-.status {
-  padding: 0.4em;
-  margin: 0.4em;
-  display: inline-block;
-  border: 2px solid rgb(255, 0, 0);
-  font-size: 16px;
-  font-weight: 300;
-}
-
+// ITEM STOCK BOX
 .item-in-stock {
   // MAT: SUBTITLE 1
   font-family: 'Raleway', sans-serif;
@@ -401,6 +362,7 @@ a:visited {
 
   transition: .1s ease-in-out;
 }
+
 .item-out-stock {
   // MAT: SUBTITLE 1
   font-family: 'Raleway', sans-serif;
@@ -443,10 +405,12 @@ a:visited {
 
   color: white;
 }
+
 .item-footer-pill:hover {
   background-color: #945aff;
   //cursor: pointer; TODO: Tag Details Page
 }
+
 .item-footer-pill mat-icon {
   display: inline;
   vertical-align: middle;
@@ -486,10 +450,12 @@ a:visited {
 
   cursor: pointer;
 }
+
 .item-delete-btn:hover {
   background-color: #3779c1;
   //cursor: pointer;
 }
+
 .item-delete-btn mat-icon {
   display: inline;
   vertical-align: middle;
@@ -507,10 +473,11 @@ a:visited {
   cursor: pointer;
 }
 
-
+// ITEM BUTTON COLORS
 .add-stock {
   background-color: #b1e0ce
 }
+
 .add-stock:hover {
   background-color: #81AE9D;
 }
@@ -518,19 +485,19 @@ a:visited {
 .del-stock {
   background-color: #ffd1b9;
 }
+
 .del-stock:hover {
   background-color: #FB9F89;
 }
 
-// Delete Item Button & Div
+// Delete Item Button Div
 .r {
   float: right;
   margin: 0.2em;
-
 }
 
 .rBtnI {
-  // BUTTON
+  // MAT: BUTTON?
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   letter-spacing: 0.25px;
@@ -544,6 +511,7 @@ a:visited {
   display: inline-block;
   vertical-align: middle;
 }
+
 .rBtnI:hover {
   cursor: pointer;
   color: red;
@@ -567,26 +535,11 @@ a:visited {
   border-left: 5px solid rgb(0, 255, 34);
 }
 
-
-.tags {
-  background-color: #5929e7;
-  padding: 0.4em;
-  margin: 0.5em;
-  display: inline-block;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-}
-
-.tags:hover {
-  background-color: #3779c1;
-  //cursor: pointer;
-}
-
 hr {
   color: #45475721;
   margin: 0;
   padding: 0;
 }
-
 
 .item-banner {
   margin-left: 0.5em;
@@ -601,26 +554,29 @@ hr {
   height: 95%;
 }
 
-
 // MOBILE
 @media screen and (max-width: 500px) {
   .item-banner {
     height: 100px;
   }
+
   .toolbarBtn {
     font-size: 12px;
     letter-spacing: 0.4px;
     font-weight: 400;
     margin: 0em;
   }
+
   .logout {
     font-size: 12px;
     letter-spacing: 0.4px;
     font-weight: 400;
   }
+
   .logo {
     height: 32px;
   }
+
   .logo-img {
     width: 32px;
   }
@@ -633,15 +589,16 @@ hr {
   height: 70px;
   width: auto;
 }
+
 .bannerImgD {
   max-height: 100%;
   /* The width is 100%, when the viewport is 800px or smaller */
 }
 
 mat-panel-title {
-    // MAT: SUBTITLE 1
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.15px;
-    font-weight: 400;
+  // MAT: SUBTITLE 1
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.15px;
+  font-weight: 400;
 }
