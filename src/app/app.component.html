@@ -1,4 +1,4 @@
-<!-- Toolbar -->
+<!-- TOOLBAR >> -->
 <mat-toolbar>
   <mat-toolbar-row class="headTb">
 
@@ -22,8 +22,9 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
+<!-- << TOOLBAR -->
 
-
+<!-- LOGIN PAGE >> -->
 <div *ngIf="!access" style="margin-top: 5em;">
 
 
@@ -67,20 +68,18 @@
 
 
 </div>
-
+<!-- << LOGIN PAGE -->
 
 
 <div *ngIf="access" class="bodyMain">
 
+  <!-- ADD NEW ITEM >> -->
   <mat-accordion multi>
     <mat-expansion-panel style="margin: 1em; margin-bottom: 5em; margin-top: 0em;">
       <mat-expansion-panel-header>
         <mat-panel-title>Dodaj nov predmet</mat-panel-title>
       </mat-expansion-panel-header>
 
-
-
-      <!-- DODAJ -->
       <div>
         <div class="bannerD">
           <img class="bannerImgD" src="https://api.infofix.eu/list/file/uploads/items/{{pImg}}">
@@ -92,8 +91,8 @@
         </mat-form-field>
 
 
-
         <div class="">
+          <!-- TODO class add-item-footer -->
 
           <mat-form-field appearance="fill">
             <mat-label>Ime</mat-label>
@@ -127,10 +126,9 @@
           </mat-form-field>
 
 
-
         </div>
 
-        <!--
+        <!-- TODO IMAGE
         {{pUserId}}
         <iframe src="https://api.infofix.eu/list/file/" title="Fup"></iframe>  -->
 
@@ -144,18 +142,13 @@
 
         <h2>{{status}}</h2>
       </div>
-      <!-- < DODAJ -->
-
-      <div>
-        V razvoju - {{pUserName}}
-      </div>
 
     </mat-expansion-panel>
   </mat-accordion>
-  <!-- <router-outlet></router-outlet>-->
+  <!-- << ADD NEW ITEM -->
 
-
-  <ul class="project">
+  <!-- ITEM LIST >> -->
+  <ul class="item">
 
     <button mat-stroked-button class="small-btn" (click)="small = !small">
       | | |
@@ -163,14 +156,16 @@
 
     <h2 [ngClass]="{'green' :selPage == 0, 'red' :selPage == 1}">{{headerTxt}}</h2>
 
-
+    <!-- SMALL VIEW >> -->
     <div *ngIf="small">
       <li *ngFor="let p of list; let i = index" class="smL">
         <a class="floatR rBtn" (click)="save(i)"> > </a>
         <h3> > {{p.name}}</h3>
       </li>
     </div>
+    <!-- << SMALL VIEW -->
 
+    <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
       <div *ngIf="selPage == 1">
         <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)">
@@ -182,8 +177,10 @@
           < Seznam za nabavo </button>
       </div>
     </div>
+    <!-- << EMPTY VIEW -->
 
 
+    <!-- NORMAL/BIG VIEW >> -->
     <div *ngIf="!small">
 
 
@@ -244,7 +241,7 @@
           </div>
 
 
-        
+
 
         </div>
 
@@ -253,27 +250,25 @@
       </li>
 
     </div>
+    <!-- << NORMAL/BIG VIEW -->
 
   </ul>
+  <!-- << ITEM LIST -->
 
-
-  <!--
-  <div class="form-group">
-    <button type="button" (click)="getProjs()">Fetch Projects</button>
-  </div>
-  -->
-
+  <!-- LOADING INFO >> -->
   <div *ngIf="loading">. . .</div>
 
   <div *ngIf="errorMessage" class="alert alert-warning">
     <strong>Warning!</strong> {{errorMessage}}
   </div>
+  <!-- << LOADING INFO -->
 
 
 
 
 </div>
 
+<!-- FOOTER & MISC -->
 <footer>
   <div style="margin-top: 10em;">
     <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">SList © Intercell Labs - Made with ❤️</a>
@@ -283,3 +278,4 @@
 </footer>
 
 <app-scroll-top></app-scroll-top>
+<!-- << FOOTER & MISC -->
