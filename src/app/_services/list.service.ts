@@ -12,22 +12,23 @@ import { List } from '../_interfaces/list';
 })
 export class ListService {
 
-  private baseUrl = 'https://api.infofix.eu/list/projects/';  // URL to web api /read.php
+  private baseUrl = 'https://api.infofix.eu/list/projects/';  // BASE REST API URL
+  /*
+    read
+    read-one
+    create
+    update
+    delete?
+  */
 
   private readOneUrl = 'https://api.infofix.eu/list/projects/read-one.php';  // URL to web api /read-one.php
 
-  private readUrl = 'https://api.infofix.eu/list/projects/read.php';  // URL to web api /read.php
   private createUrl = 'https://api.infofix.eu/list/projects/create.php';  // URL to web api /read.php
   private updateUrl = 'https://api.infofix.eu/list/projects/update.php';  // URL to web api /read.php
 
   private deleteUrl = 'https://api.infofix.eu/list/projects/delete.php';  // URL to web api /read.php
 
   items: List[] = [];
-
-  private _data = new BehaviorSubject<List[]>([]);
-  private dataStore: { data: List[] } = { data: [] }; // store our data in memory
-  readonly data = this._data.asObservable();
-
 
   constructor(
     private http: HttpClient) { }
@@ -36,25 +37,9 @@ export class ListService {
     headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
   };
 
-  addItem(item: List) {
-    this.items.push(item);
-  }
-
-  clearItems() {
-    this.items = [];
-    return this.items;
-  }
-
-  /*
-  getProjectsOLD(): Observable<Project[]> {
-    this.messageService.add('ProjectService: Fetched Projects');
-    return of(PROJECTS);
-  }
-*/
-
   /** GET ALL Items. Will 404 if id not found */
   getAll(): Observable<any> {
-    return this.http.get(this.readUrl);
+    return this.http.get(this.baseUrl + "read.php");
   }
 
   /** GET Item by id. Will 404 if id not found -- NOT IN USE */
@@ -67,11 +52,11 @@ export class ListService {
   }
 
   /** POST: UPDATE the Item on the server */
-  updateProj(project: List): Observable<any> {
-    console.log(project);
-    return this.http.post(this.updateUrl, project, this.httpOptions).pipe(
-      tap(_ => console.log(`Updated Item id=${project.id}`)),
-      catchError(this.handleError<List>(`Updated Item id=${project.id}`))
+  updateProj(itm: List): Observable<any> {
+    console.log(itm);
+    return this.http.post(this.updateUrl, itm, this.httpOptions).pipe(
+      tap(_ => console.log(`Updated Item ID: ${itm.id}`)),
+      catchError(this.handleError<List>(`Updated Item id=${itm.id}`))
     );
   }
 

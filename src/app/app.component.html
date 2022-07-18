@@ -7,15 +7,15 @@
     </div>
 
     <div *ngIf="access">
-      <button mat-stroked-button class="toolbarBtn" (click)="setPage(1)">NABAVA</button>
+      <button title="Nabava" mat-stroked-button class="toolbarBtn" (click)="setPage(1)">NABAVA</button>
 
       <span class="vlT">|</span>
 
-      <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)">ZALOGA</button>
+      <button title="Zaloga" mat-stroked-button class="toolbarBtn" (click)="setPage(0)">ZALOGA</button>
 
       <span class="vlT">|</span>
 
-      <button mat-stroked-button class="toolbarBtn" (click)="accordion.openAll()">Dodaj +</button>
+      <button title="Dodaj" mat-stroked-button class="toolbarBtn" (click)="accordion.openAll()">Dodaj +</button>
     </div>
 
     <a class="logout" (click)="logout()">{{uName}} < </a>
@@ -150,9 +150,12 @@
   <!-- ITEM LIST >> -->
   <ul class="item">
 
+    <!-- SMALL VIEW BTN
     <button mat-stroked-button class="small-btn" (click)="small = !small">
       | | |
     </button>
+
+    -->
 
     <h2 [ngClass]="{'h-green' :selPage == 0, 'h-red' :selPage == 1}">{{headerTxt}}</h2>
 
@@ -198,14 +201,13 @@
           <a class="item-title">{{p.name}}</a>
           <div class="item-vl"></div>
 
+          <!-- 
           <a class="item-infobox">{{p.user_name}}</a>
-
-
-          <div class="item-vl"></div>
+-->
           <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
-            |{{p.pri}}</div>
-
+            |{{p.pri}}
+          </div>
           <div class="item-vl"></div>
 
           <!-- TODO: 
@@ -218,11 +220,11 @@
 
         </div>
 
-        <div class="item-banner">
+        <div class="item-banner" *ngIf="p.img">
           <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
         </div>
 
-        <div class="item-desc">
+        <div class="item-desc" *ngIf="p.description">
           {{p.description}}
         </div>
 
@@ -284,7 +286,7 @@
 
 
     <div *ngIf="access">
-      <button mat-icon-button (click)="setPage(2)">
+      <button title="Trash Item" mat-icon-button (click)="setPage(2)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

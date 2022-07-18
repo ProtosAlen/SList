@@ -40,7 +40,7 @@ export class AppComponent {
 
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
-  
+
   title = 'S-List';
   appVersion = "0.1.50";
 
@@ -78,18 +78,18 @@ export class AppComponent {
   }
 
   setPage(i: number) {
-    this.selPage = i; 
+    this.selPage = i;
 
-    if(this.list) {
+    if (this.list) {
       this.list = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
     }
 
     this.getList();
 
-    if(this.selPage == 0) {
+    if (this.selPage == 0) {
       this.headerTxt = "V ZALOGI"
     }
-    else if(this.selPage == 1) {
+    else if (this.selPage == 1) {
       this.headerTxt = "ZA NABAVO"
     }
   }
@@ -165,13 +165,13 @@ export class AppComponent {
 
   done: number = 0;
 
-  
+
 
   trackByFn(i: number) {
     return i
   }
 
-  // REMOVE ITEM
+  // REMOVE ITEM -- TODO: not in use - remove func
   remove(i: number): void {
     this.listService.deleteProject(i)
       .subscribe(
@@ -185,22 +185,38 @@ export class AppComponent {
 
   // MOVE ITEM - Za nabavo <> V zalogi 
   save(i: number): void {
-    this.selItem = this.list[i];
-    if(this.selPage == 0) {
-      this.selItem.done = 1;
+    const tmp: List = this.list[i];
+    //this.selItem = this.list[i];
+    console.log("TEMP ITEM:", tmp)
+    if (this.selPage == 0) {
+      tmp.done = 1;
     }
-    else if(this.selPage == 1) {
-      this.selItem.done = 0;
+    else if (this.selPage == 1) {
+      tmp.done = 0;
     }
-    else if(this.selPage == 2) {
-      this.selItem.done = 1;
+    else if (this.selPage == 2) {
+      tmp.done = 1;
     }
 
+    //this.list.splice(i, 1);
 
-    this.list.splice(i, 1);
+    this.listService.updateProj(tmp) // TODO: Retry
+      .subscribe({
+        next: (v) => {
+          console.log('Items Moved!', i, v, tmp);
+          this.list.splice(i, 1);
+        },
+        error: (e) => {
+          console.error('Error Moving Item!', e);
+          this.errorMessage = e;
+          this.loading = false;
+        },
+        complete: () => {
+          console.info('complete');
+          this.loading = false;
+        }
+      });
 
-    this.listService.updateProj(this.selItem)
-      .subscribe();
   }
 
   // TRASH ITEM
@@ -219,7 +235,7 @@ export class AppComponent {
     this.errorMessage = '';
     this.listService.getAll()
       .subscribe({
-        next: async (v) => {
+        next: (v) => {
           console.log('Items Fetched', v);
           this.list = v.projects;
 
