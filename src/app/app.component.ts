@@ -271,9 +271,9 @@ export class AppComponent {
   pUserId: string = this.sService.getUser() + "";
   pUserName: string = this.sService.userName;
   pDone: number = 1;
-  pImg: string = "infofix-test-banner-v5.png";
-  pCatId = 0;
-  pPri = 0;
+  pImg: string = ""; //infofix-test-banner-v5.png
+  pCatId = "100";
+  pPri = "4";
   pOrd = 0;
   pDesc: string = "";
 
@@ -282,7 +282,7 @@ export class AppComponent {
     const user_id = this.pUserId.toString();
     const done = this.pDone;
     const description = this.pDesc.trim();
-    const pri = this.pPri;
+    const pri = Number(this.pPri);
     const ord = this.pOrd;
     const category_id = this.pCatId.toString();
     const img = this.pImg.toString();

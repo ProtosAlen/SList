@@ -27,19 +27,24 @@
       }
     },
     {
-      "name": "api",
+      "name": "img",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
-          "urls": ["https://api.infofix.eu/list/**"]
-      }
-    },
-    {
-      "name": "img",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
           "urls": ["https://api.infofix.eu/list/file/uploads/items/**"]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-performance",
+      "urls": [
+        "https://api.infofix.eu/list/projects/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 200,
+        "maxAge": "30d2h"
       }
     }
   ]

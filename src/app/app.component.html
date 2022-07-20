@@ -107,18 +107,18 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Prioriteta</mat-label>
-            <mat-select [(ngModel)]="pPri">
-              <mat-option value="0">Nizka - 0</mat-option>
-              <mat-option value="1">1</mat-option>
-              <mat-option value="2">2</mat-option>
-              <mat-option value="3">3</mat-option>
+            <mat-select [(value)]="pPri">
               <mat-option value="4">Visoka - 4</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="0">Nizka - 0</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>Kategorija</mat-label>
-            <mat-select [(ngModel)]="pCatId">
+            <mat-select [(value)]="pCatId">
               <mat-option value="100">-- Brez --</mat-option>
               <mat-option value="1">Hrana</mat-option>
               <mat-option value="2">Oblačila</mat-option>
