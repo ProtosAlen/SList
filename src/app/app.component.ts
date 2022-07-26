@@ -6,15 +6,17 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
+import { timeout } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({ opacity: 0 }), stagger('100ms', animate('100ms ease-in-out', style({ opacity: 1 })))],
+      [style({ opacity: 0 }), stagger('60ms', animate('150ms ease-in-out', style({ opacity: 1 })))],
       { optional: true }
     ),
     query(':leave',
-      animate('50ms', style({ opacity: 0 })),
+      animate('100ms', style({ opacity: 0 })),
       { optional: true }
     )
   ])
@@ -230,13 +232,27 @@ export class AppComponent {
       .subscribe();
   }
 
+  errMsg = "";
+
   getList(): void {
     this.loading = true;
     this.errorMessage = '';
     this.listService.getAll()
+      .pipe(
+        timeout(2500),
+        catchError(err => {
+          if (err.name === "TimeoutError" || err.status === 403) {
+            // handle error
+            this.errMsg = "Error: Timeout!"
+            console.log('Handling error 401 or 403...', err);
+          }
+          console.log('Handling error locally and rethrowing it...', err, err.name);
+          return err;
+      })
+      )
       .subscribe({
         next: (v) => {
-          console.log('Items Fetched', v);
+          console.log('Get All Items', v);
           this.list = v.projects;
 
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
@@ -250,12 +266,12 @@ export class AppComponent {
           //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
         },
         error: (e) => {
-          console.error('Error Loading Projects', e);
-          this.errorMessage = e;
+          console.error('Error Loading Items!', e);
+          this.errorMessage = this.errMsg;
           this.loading = false;
         },
         complete: () => {
-          console.info('complete');
+          console.info('Get All Items Complete!');
           this.loading = false;
         }
       });
