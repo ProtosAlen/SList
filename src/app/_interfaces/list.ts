@@ -10,4 +10,5 @@ export class List {
     pri: number = 0;
     ord: number = 0;
     done: number = 0;
+    for_id: string = "";
 }

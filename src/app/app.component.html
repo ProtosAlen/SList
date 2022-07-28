@@ -77,7 +77,10 @@
   <mat-accordion multi>
     <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0em 1em 3em 1em;">
       <mat-expansion-panel-header>
-        <mat-panel-title>Dodaj nov predmet</mat-panel-title>
+        <mat-panel-title>
+          <mat-icon class="new_item_icon">add</mat-icon>
+          Dodaj nov predmet
+        </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div>
@@ -97,7 +100,7 @@
         <div class="">
           <!-- TODO class add-item-footer -->
 
-          <mat-form-field appearance="fill">
+          <mat-form-field>
             <mat-label>Ime</mat-label>
             <input matInput #li [(ngModel)]="pName">
           </mat-form-field>
@@ -128,6 +131,11 @@
             </mat-select>
           </mat-form-field>
 
+          <mat-form-field>
+            <mat-label>Uporabnik</mat-label>
+            <input matInput [(ngModel)]="pFor">
+          </mat-form-field>
+
 
         </div>
 
@@ -143,7 +151,7 @@
 
         </div>
 
-        <h2>{{status}}</h2>
+        <h2 class="status-txt">{{status}}</h2>
       </div>
 
     </mat-expansion-panel>
@@ -153,22 +161,102 @@
   <!-- ITEM LIST >> -->
   <ul class="item">
 
-    <!-- SMALL VIEW BTN
+    <!-- SMALL VIEW BTN -->
     <button mat-stroked-button class="small-btn" (click)="small = !small">
       | | |
     </button>
 
-    -->
+    
 
     <h2 [ngClass]="{'h-green' :selPage == 0, 'h-red' :selPage == 1}">{{headerTxt}}</h2>
 
-    <!-- SMALL VIEW >> -->
+    <!-- SMALL VIEW >> 
+
     <div *ngIf="small">
       <li *ngFor="let p of list; let i = index" class="smL">
         <a class="floatR rBtn" (click)="save(i)"> > </a>
         <h3> > {{p.name}}</h3>
       </li>
     </div>
+-->
+
+
+    <div *ngIf="small"  [@listAnimation]="list.length">
+
+
+      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+
+
+        <div class="small-item-head">
+
+          <a class="item-title">{{p.name}}</a>
+          <div class="item-vl"></div>
+
+          <div class="r">
+            <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
+              X
+            </button>
+          </div>
+
+          <span *ngIf="p.for_id">
+            <a class="item-infobox">{{p.for_id}}</a>
+            <div class="item-vl"></div>
+          </span>
+          
+
+          <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
+            'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
+            |{{p.pri}}
+          </div>
+
+
+          <!-- TODO: 
+            <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> 
+
+          <div class="item-vl"></div>
+
+          <div *ngIf="p.done == 0" class="item-in-stock">V zalogi</div>
+          <div *ngIf="p.done == 1" class="item-out-stock">Za nabavo</div>
+          -->
+
+        </div>
+
+        <div>
+          <div class="item-footer-pill" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+            <mat-icon>category</mat-icon>
+            {{p.category_name}}
+          </div>
+
+
+
+
+          <div *ngIf="selPage == 0" class="item-footer-pill ri del-stock" (click)="save(i)">
+            <mat-icon>chevron_left</mat-icon>
+            ZA NABAVO
+          </div>
+          <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
+            V ZALOGO
+            <mat-icon>chevron_right</mat-icon>
+          </div>
+
+          <div *ngIf="selPage == 2" class="item-footer-pill ri add-stock" (click)="save(i)">
+            <mat-icon>chevron_left</mat-icon>
+            VRNI
+          </div>
+
+          <!--
+          <button mat-icon-button color="warn" (click)="trash(i)" class="item-delete-btn ri" aria-label="Delete Item">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+          -->
+
+        </div>
+
+      </li>
+
+    </div>
+
+
     <!-- << SMALL VIEW -->
 
     <!-- EMPTY VIEW >> -->
@@ -193,7 +281,11 @@
       <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
 
 
+        <!-- Item Header -->
         <div class="item-head">
+
+          <a class="item-title">{{p.name}}</a>
+          <div class="item-vl"></div>
 
           <div class="r">
             <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
@@ -201,12 +293,11 @@
             </button>
           </div>
 
-          <a class="item-title">{{p.name}}</a>
-          <div class="item-vl"></div>
+          <span *ngIf="p.for_id">
+            <a class="item-infobox">{{p.for_id}}</a>
+            <div class="item-vl"></div>
+          </span>
 
-          <!-- 
-          <a class="item-infobox">{{p.user_name}}</a>
--->
           <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
             |{{p.pri}}
@@ -223,14 +314,17 @@
 
         </div>
 
+        <!-- Item Banner -->
         <div class="item-banner" *ngIf="p.img">
           <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
         </div>
 
+        <!-- Item Desc -->
         <div class="item-desc" *ngIf="p.description">
           {{p.description}}
         </div>
 
+        <!-- Item Footer -->
         <div>
           <div class="item-footer-pill" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
             <mat-icon>category</mat-icon>

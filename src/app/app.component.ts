@@ -292,6 +292,7 @@ export class AppComponent {
   pPri = "4";
   pOrd = 0;
   pDesc: string = "";
+  pFor: string = "";
 
   add(): void {
     const name = this.pName.trim();
@@ -302,6 +303,7 @@ export class AppComponent {
     const ord = this.pOrd;
     const category_id = this.pCatId.toString();
     const img = this.pImg.toString();
+    const for_id = this.pFor.trim();
 
     let customObj = new List();
     customObj.name = name;
@@ -312,6 +314,7 @@ export class AppComponent {
     customObj.img = img;
     customObj.pri = pri;
     customObj.ord = ord;
+    customObj.for_id = for_id;
     //this.pUserId = "";
     //this.pImg = "tes.png"; 
 
@@ -324,7 +327,7 @@ export class AppComponent {
 
 
     if (!name) { return; }
-    this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord } as any)
+    this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
       .subscribe(project => {
 
         this.projects.push(customObj);
