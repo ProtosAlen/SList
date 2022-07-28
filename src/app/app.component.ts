@@ -113,9 +113,9 @@ export class AppComponent {
     this.role = parseInt(this.role + "");
 
     if (this.role === 52112 || this.role === 27695 || this.role === 90091
-      || this.role === 60316 || this.role === 21554 || this.role === 21551) {
+      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313) {
 
-      if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Tjaša" || this.uName === "Teo") {
+      if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož" || this.uName === "Tjaša" || this.uName === "Teo") {
 
 
         this.accessMsg = 'Dobrodošli, ' + this.uName +

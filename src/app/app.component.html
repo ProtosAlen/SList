@@ -132,7 +132,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Uporabnik</mat-label>
+            <mat-label>Lok. oznaka</mat-label>
             <input matInput [(ngModel)]="pFor">
           </mat-form-field>
 
@@ -163,7 +163,7 @@
 
     <!-- SMALL VIEW BTN -->
     <button mat-stroked-button class="small-btn" (click)="small = !small">
-      | | |
+    <span *ngIf="small">M</span>  | | |
     </button>
 
     
@@ -181,7 +181,7 @@
 -->
 
 
-    <div *ngIf="small"  [@listAnimation]="list.length">
+    <div *ngIf="small" [@listAnimation]="list.length">
 
 
       <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
@@ -262,12 +262,12 @@
     <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
       <div *ngIf="selPage == 1">
-        <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)">
+        <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)" [@listAnimation]>
           Seznam zalog >
         </button>
       </div>
       <div *ngIf="selPage == 0">
-        <button mat-stroked-button class="toolbarBtn" (click)="setPage(1)">
+        <button mat-stroked-button class="toolbarBtn" (click)="setPage(1)" [@listAnimation]>
           < Seznam za nabavo </button>
       </div>
     </div>
