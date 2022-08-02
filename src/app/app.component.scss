@@ -26,6 +26,7 @@ mat-form-field {
     0px 30px 83px rgba(0, 0, 0, 0.07);
 }
 
+
 .new_item:hover {
   box-shadow:
     0px 2px 5.5px rgba(0, 0, 0, 0.069),
@@ -255,6 +256,8 @@ input[type=number].login-input {
   0px 69px 130px rgba(50, 50, 50, 0.1)
 ;
 
+
+border-radius: 0px 0px 4px 4px; 
 //   box-shadow:
 //   0px 0.9px 2.8px rgba(100, 100, 100, 0.017),
 //   0px 2.7px 6.7px rgba(100, 100, 100, 0.024),
@@ -297,21 +300,25 @@ input[type=number].login-input {
 
 // SMALL ITEM HEAD
 .small-item-head {
-  margin-top: 1em;
+  margin-top: 12px;
   color: white;
   background-color: #331b92;
   margin-bottom: 0.5em;
   overflow: hidden;
+
+  border-radius: 4px 4px 0px 0px; 
 }
 
 
 // ITEM HEAD
 .item-head {
-  margin-top: 3em;
+  margin-top: 24px;
   color: white;
   background-color: #331b92;
   margin-bottom: 0.5em;
   overflow: hidden;
+
+  border-radius: 4px 4px 0px 0px; 
 }
 
 .item-vl {
@@ -412,6 +419,20 @@ a:visited {
   display: inline-block;
 
   border: 2px solid yellow;
+}
+
+
+// FOR ID COLORS
+.fid0 {
+  border: 2px solid pink;
+}
+
+.fid1 {
+  border: 2px solid purple;
+}
+
+.fid2 {
+  border: 2px solid lightblue;
 }
 
 // PRIORITY COLORS
@@ -565,19 +586,22 @@ a:visited {
 
 // ITEM BUTTON COLORS
 .add-stock {
-  background-color: #b1e0ce
+  background-color:#9bdca4; //#b1e0ce
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .add-stock:hover {
-  background-color: #81AE9D;
+  background-color: #6BAA75;//#81AE9D;
 }
 
 .del-stock {
-  background-color: #ffd1b9;
+  background-color: #ff8781;//#ffd1b9;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .del-stock:hover {
-  background-color: #FB9F89;
+  background-color: #E15554;// #FB9F89;
+  color: rgba(0, 0, 0, 0.77);
 }
 
 // Delete Item Button Div

@@ -94,6 +94,10 @@ export class AppComponent {
     else if (this.selPage == 1) {
       this.headerTxt = "ZA NABAVO"
     }
+    else if (this.selPage == 2) {
+      this.headerTxt = "SMETI"
+    }
+
   }
 
   logout(): void {
