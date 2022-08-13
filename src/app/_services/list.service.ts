@@ -29,7 +29,7 @@ export class ListService {
 
   /** GET ALL Items. */
   getAll(): Observable<any> {
-    return this.http.get(this.baseUrl + "read.php", this.httpOptions);
+    return this.http.get(this.baseUrl + "read.php", this.httpOptions)
   }
 
   /** POST: ADD Item */

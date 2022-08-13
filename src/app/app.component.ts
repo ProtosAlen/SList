@@ -1,5 +1,4 @@
-import { delay } from 'rxjs/operators';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { List } from './_interfaces/list';
@@ -7,7 +6,7 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout, take, catchError, of, Observable } from 'rxjs';
+import { timeout, take, catchError,Observable, switchMap } from 'rxjs';
 
 import packageJson from '../../package.json';
 
