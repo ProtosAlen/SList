@@ -1,6 +1,6 @@
 {
   "name": "s-list",
-  "version": "0.1.70",
+  "version": "0.1.80",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

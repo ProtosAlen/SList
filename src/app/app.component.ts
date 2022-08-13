@@ -1,4 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { delay } from 'rxjs/operators';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { List } from './_interfaces/list';
@@ -6,37 +7,40 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { timeout, take, catchError, of, Observable } from 'rxjs';
+
+import packageJson from '../../package.json';
 
 const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
+  transition('* => *', [
     query(':enter',
-      [style({ opacity: 0 }), stagger('60ms', animate('150ms ease-in-out', style({ opacity: 1 })))],
+      [style({ opacity: 0 }), stagger('50ms', animate('150ms ease-in-out', style({ opacity: 1 })))],
       { optional: true }
     ),
     query(':leave',
-      animate('100ms', style({ opacity: 0 })),
+      stagger('5ms', animate('50ms ease-in-out', style({ opacity: 0 }))),
       { optional: true }
     )
   ])
 ]);
 
-
-const listAnim1 = trigger('listAnim1', [
-  state('void', style({
-    opacity: 0
-  })),
-  transition('void <=> *', animate('100ms ease-in-out')),
-]);
-
-
+const taskState = trigger('taskState', [ // TODO: translate to opacity
+  state('inactive', style({ opacity: 1, transform: 'translateX(0) scale(1)' })),
+  state('active', style({ opacity: 1, transform: 'translateX(0) scale(1)' })),
+  state('void', style({ opacity: 0, display: 'none', transform: 'translateX(0) scale(1)' })),
+  transition('* => void', [
+    animate('1s ease-out', style({
+      opacity: 0,
+      transform: 'translateX(0) scale(0.5)'
+    }))
+  ])
+])
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [listAnimation]
+  animations: [listAnimation, taskState]
 })
 export class AppComponent {
 
@@ -44,251 +48,32 @@ export class AppComponent {
   accordion!: MatAccordion;
 
   title = 'S-List';
-  appVersion = "0.1.70";
+  public appVersion: string = packageJson.version;
 
   access = false;
   accessMsg = 'Vnesite ime in geslo:';
+  hidePass: any;
   role: number = 0;
   uName = "";
-
-  @Input() selectedUser = '1';
+  uID: string = this.sService.getUser().toString();
 
   headerTxt = "ZA NABAVO"
   selPage = 1;
-
-  constructor(private router: Router,
-    private sService: SharedService,
-    private listService: ListService) {
-    var a = this.sService.userID;
-    var b = this.sService.userName;
-
-    if (a !== null)
-      this.role = parseInt(a);
-    if (b !== null)
-      this.uName = b + "";
-  }
-
-  ngOnInit() {
-
-    var o = localStorage.getItem('acs');
-
-    this.access = JSON.parse(o + "") === true;
-
-
-    // GET ALL ITEMS
-    this.getList();
-  }
-
-  setPage(i: number) {
-    this.selPage = i;
-
-    if (this.list) {
-      this.list = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
-    }
-
-    this.getList();
-
-    if (this.selPage == 0) {
-      this.headerTxt = "V ZALOGI"
-    }
-    else if (this.selPage == 1) {
-      this.headerTxt = "ZA NABAVO"
-    }
-    else if (this.selPage == 2) {
-      this.headerTxt = "SMETI"
-    }
-
-  }
-
-  logout(): void {
-    localStorage.clear();
-    this.access = false;
-    this.accessMsg = 'Ponovno se prijavite:';
-  }
-
-
-
-
-  hide: any;
-
-  loginDev() {
-
-    //console.log("R: " + this.role + " U: " + this.uName)
-    this.role = parseInt(this.role + "");
-
-    if (this.role === 52112 || this.role === 27695 || this.role === 90091
-      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313) {
-
-      if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož" || this.uName === "Tjaša" || this.uName === "Teo") {
-
-
-        this.accessMsg = 'Dobrodošli, ' + this.uName +
-          '! . . .';
-
-        this.setUser();
-
-        setTimeout(() => {
-          this.access = true;
-          localStorage.setItem('acs', this.access + "");
-        },
-          900);
-      }
-      else {
-        this.access = false;
-        this.accessMsg = 'Napačno ime!'
-      }
-
-    }
-    else {
-      this.access = false;
-      this.accessMsg = 'Napačno geslo!'
-    }
-  }
-
-  setUser() {
-    this.sService.setUser(this.role + "", this.uName);
-
-    let uri = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri]));
-  }
-
-
-
-
-
-
-  @Input() list: List[] = [];
-
-  loading = false;
-  errorMessage!: string;
-
-  uID: string = this.sService.getUser().toString();
-
-  selItem!: List;
-
   small: boolean = false;
 
+  @Input() list: List[] = [];
+  @Input() selItem!: List;
   done: number = 0;
 
+  loading = false;
+  listErrTxt!: string;
 
-
-  trackByFn(i: number) {
-    return i
-  }
-
-  // REMOVE ITEM -- TODO: not in use - remove func
-  remove(i: number): void {
-    this.listService.deleteProject(i)
-      .subscribe(
-        (response) => {                           // next() callback
-          //console.log('Item Removed', i);
-          this.list.splice(i, 1);
-          //this.getList();
-        },
-      );
-  }
-
-  // MOVE ITEM - Za nabavo <> V zalogi 
-  save(i: number): void {
-    const tmp: List = this.list[i];
-    //this.selItem = this.list[i];
-    console.log("TEMP ITEM:", tmp)
-    if (this.selPage == 0) {
-      tmp.done = 1;
-    }
-    else if (this.selPage == 1) {
-      tmp.done = 0;
-    }
-    else if (this.selPage == 2) {
-      tmp.done = 1;
-    }
-
-    //this.list.splice(i, 1);
-
-    this.listService.updateProj(tmp) // TODO: Retry
-      .subscribe({
-        next: (v) => {
-          console.log('Items Moved!', i, v, tmp);
-          this.list.splice(i, 1);
-        },
-        error: (e) => {
-          console.error('Error Moving Item!', e);
-          this.errorMessage = e;
-          this.loading = false;
-        },
-        complete: () => {
-          console.info('complete');
-          this.loading = false;
-        }
-      });
-
-  }
-
-  // TRASH ITEM
-  trash(i: number): void {
-    this.selItem = this.list[i];
-    this.selItem.done = 2;
-
-    this.list.splice(i, 1);
-
-    this.listService.updateProj(this.selItem)
-      .subscribe();
-  }
 
   errMsg = "";
   tp: List[] = [];
 
-  getList(): void {
-    this.loading = true;
-    this.errorMessage = '';
 
-    this.listService.getAll()
-      .pipe(
-        timeout(2500),
-        catchError(err => {
-          if (err.name === "TimeoutError" || err.status === 403) {
-            // handle error
-
-            console.log('Handling error 401 or 403...', err);
-          }
-          this.errMsg = "Error: Timeout!"
-          console.log('Error: Get Items. Handling error locally and rethrowing it...', err, err.statusText);
-          return err;
-        })
-      )
-      .subscribe({
-        next: (v) => {
-
-          this.tp = v.projects
-          console.log('Get List:', v);
-        },
-        error: (e) => {
-          console.error('Error Loading Items!', e);
-          this.errorMessage = this.errMsg;
-          this.loading = false;
-        },
-        complete: () => {
-
-          this.list = this.tp;
-          const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
-          this.list = userFilter;
-
-          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
-          this.list = doneFilter;
-
-          this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
-          this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
-          //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
-
-
-          console.info('Get All Items Complete!');
-          this.loading = false;
-        }
-      });
-  }
-
-  projects: List[] = [];
+  newItem: List[] = [];
 
   status: any;
 
@@ -303,7 +88,184 @@ export class AppComponent {
   pDesc: string = "";
   pFor: string = "";
 
-  add(): void {
+
+  constructor(private router: Router,
+    private sService: SharedService,
+    private listService: ListService) {
+    var a = this.sService.userID;
+    var b = this.sService.userName;
+    if (a !== null)
+      this.role = parseInt(a);
+    if (b !== null)
+      this.uName = b + "";
+  }
+
+  ngOnInit() {
+    var o = localStorage.getItem('acs');
+    this.access = JSON.parse(o + "") === true;
+    this.getList();
+  }
+
+  setPage(i: number) {
+    this.selPage = i;
+    if (this.list) {
+      this.list = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
+    }
+    this.getList();
+
+    switch (this.selPage) {
+      case 0: {
+        this.headerTxt = "V ZALOGI"
+        break;
+      }
+      case 1: {
+        this.headerTxt = "ZA NABAVO"
+        break;
+      }
+      case 2: {
+        this.headerTxt = "SMETI"
+        break;
+      }
+    }
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.access = false;
+    this.accessMsg = 'Ponovno se prijavite:';
+  }
+
+  loginDev() {
+    this.role = parseInt(this.role + "");
+
+    if (this.role === 52112 || this.role === 27695 || this.role === 90091
+      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313) {
+
+      if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
+        || this.uName === "Tjaša" || this.uName === "Teo") {
+
+        this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
+        this.setUser();
+        setTimeout(() => {
+          this.access = true;
+          localStorage.setItem('acs', this.access + "");
+        }, 900);
+      }
+      else {
+        this.access = false;
+        this.accessMsg = 'Napačno ime!'
+      }
+    }
+    else {
+      this.access = false;
+      this.accessMsg = 'Napačno geslo!'
+    }
+  }
+
+  setUser() {
+    this.sService.setUser(this.role + "", this.uName);
+    let uri = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
+  }
+
+  trackByFn(i: number) {
+    return i
+  }
+
+  getList(): void { // GET ALL ITEMS
+    this.loading = true;
+    this.listErrTxt = '';
+
+    this.listService.getAll()
+      .pipe(
+        take(1),
+        timeout(2500),
+        catchError(this.handleError<List>('getAll'))
+      )
+      .subscribe({
+        next: (v) => {
+          this.tp = v.projects
+          //console.log('Get List:', v);
+        },
+        error: () => {
+          this.listErrTxt = this.errMsg;
+          this.loading = false;
+          console.error('Error Loading Items!');
+        },
+        complete: () => {
+          this.list = this.tp;
+          const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
+          this.list = userFilter;
+
+          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
+          this.list = doneFilter;
+
+          this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
+          this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
+          //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
+
+          this.loading = false;
+          //console.log('Get All Items Complete!');
+        }
+      });
+  }
+
+
+  save(i: number): void { // MOVE ITEM - Za nabavo <> V zalogi 
+    const tmp: List = this.list[i];
+    switch (this.selPage) {
+      case 0: { // stran nabava
+        tmp.done = 1;
+        break;
+      }
+      case 1: { // stran zaloga
+        tmp.done = 0;
+        break;
+      }
+      case 2: { // stran smeti
+        tmp.done = 1;
+        break;
+      }
+    }
+
+    this.listService.updateItem(tmp) // TODO: Retry
+      .pipe(
+        take(1),
+        timeout(2500),
+        catchError(this.handleError<List>('updateItem'))
+      )
+      .subscribe({
+        complete: () => {
+          this.list.splice(i, 1);
+          //delete this.list[i];
+          //console.log('Items Moved!', i, tmp);
+        }
+      });
+  }
+
+  trash(i: number): void { // TRASH ITEM
+    this.selItem = this.list[i];
+    this.listService.updateItem(this.selItem)
+      .pipe(
+        take(1),
+        timeout(2500),
+        catchError(this.handleError<List>('updateItem/trash'))
+      )
+      .subscribe({
+        next: () => {
+
+        },
+        complete: () => {
+          this.selItem.done = 2;
+          this.list.splice(i, 1);
+
+          //console.log('Items Trashed!', i, this.selItem);
+        }
+      });
+  }
+
+  add(): void { // ADD ITEM
     const name = this.pName.trim();
     const user_id = this.pUserId.toString();
     const done = this.pDone;
@@ -324,51 +286,51 @@ export class AppComponent {
     customObj.pri = pri;
     customObj.ord = ord;
     customObj.for_id = for_id;
-    //this.pUserId = "";
-    //this.pImg = "tes.png"; 
-
-    //if (!name) { return; }
-    //console.log(this.projects[0])
-    //this.listService.addProject(this.projects[0]);
 
     if (!name) { return; }
-    this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
+    this.listService.addItem({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
       .pipe(
+        take(1),
         timeout(2500),
-        catchError(err => {
-          if (err.name === "TimeoutError" || err.status === 403) {
-            // handle error  
-            console.error('Handling error 401 or 403...', err);
-          }
-          this.status = "Error! Napaka!"
-          console.error('Error: Add Item. Handling error locally and rethrowing it...', err, err.statusText);
-          return err;
-        })
+        catchError(this.handleError<List>('add'))
       )
       .subscribe({
-        next: () => {
-
-        },
-        error: (e) => {
-          console.error('Error adding item!', e);
+        error: () => {
+          console.error('Error adding item!');
           this.status = this.status;
         },
         complete: () => {
-          this.projects.push(customObj);
+          this.newItem.push(customObj);
 
+          // Clear inputs
           this.pName = "";
           this.pDesc = "";
 
           this.status = 'Predmet dodan!';
-          console.info('Predmet uspešno dodan!');
-          console.log(this.status);
-
+          //console.log('Predmet uspešno dodan!');
           this.getList();
-
-
         }
       }
       );
   }
 
+
+  /**
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed
+  * @param result - optional value to return as the observable result
+  */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      if (error.name === "TimeoutError" || error.status === 403) {
+        console.error('Handling error 401 or 403...', error);
+      }
+      this.errMsg = "Error!"
+      // TODO: better handling
+      console.error(`Error: ${error.message}`,
+        '...handling...', error, operation, error.statusText);
+      return error(result as T);
+    };
+  }
 }

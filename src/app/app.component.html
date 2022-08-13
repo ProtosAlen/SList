@@ -48,9 +48,10 @@
       <br>
       <mat-form-field class="login-txt">
         <mat-label>GESLO</mat-label>
-        <input matInput [type]="hide ? 'password' : 'number'" [(ngModel)]="role" class="login-input"
+        <input matInput [type]="hidePass ? 'password' : 'number'" [(ngModel)]="role" class="login-input"
           [ngModelOptions]="{standalone:true}" aria-label="Geslo">
-        <mat-icon style="font-size: 22px;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+        <mat-icon style="font-size: 22px;" matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' :
+          'visibility'}}
         </mat-icon>
       </mat-form-field>
 
@@ -167,25 +168,13 @@
       <mat-icon *ngIf="!small">menu</mat-icon>
     </button>
 
-
-
     <h2 [ngClass]="{'h-green' :selPage == 0, 'h-red' :selPage == 1}">{{headerTxt}}</h2>
 
-    <!-- SMALL VIEW >> 
-
-    <div *ngIf="small">
-      <li *ngFor="let p of list; let i = index" class="smL">
-        <a class="floatR rBtn" (click)="save(i)"> > </a>
-        <h3> > {{p.name}}</h3>
-      </li>
-    </div>
--->
-
-
+    <!-- SMALL VIEW >> -->
     <div *ngIf="small" [@listAnimation]="list.length">
 
 
-      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
         <div class="small-item-head">
@@ -279,7 +268,7 @@
     <div *ngIf="!small" [@listAnimation]="list.length">
 
 
-      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;">
+      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
         <!-- Item Header -->
@@ -295,14 +284,12 @@
           </div>
 
           <span *ngIf="p.for_id">
-            <a class="item-infobox" 
-            [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
+            <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
              'fid2' :p.for_id == 'D'}">{{p.for_id}}</a>
             <div class="item-vl"></div>
           </span>
 
-          <div class="item-infobox" 
-            [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
+          <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
             |{{p.pri}}
           </div>
@@ -373,8 +360,8 @@
 
   <br>
 
-  <div *ngIf="errorMessage" class="alert alert-warning">
-    <strong>Warning!</strong> {{errorMessage}}
+  <div *ngIf="listErrTxt" class="alert alert-warning">
+    <strong>Warning!</strong> {{listErrTxt}}
   </div>
   <!-- << LOADING INFO -->
 

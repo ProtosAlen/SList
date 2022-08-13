@@ -22,7 +22,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ErrorInterceptor } from './_services/error.interceptor';
 
 
 @NgModule({
@@ -54,13 +53,7 @@ import { ErrorInterceptor } from './_services/error.interceptor';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
