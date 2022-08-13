@@ -44,7 +44,7 @@ export class AppComponent {
   accordion!: MatAccordion;
 
   title = 'S-List';
-  appVersion = "0.1.50";
+  appVersion = "0.1.70";
 
   access = false;
   accessMsg = 'Vnesite ime in geslo:';
@@ -237,29 +237,40 @@ export class AppComponent {
   }
 
   errMsg = "";
+  tp: List[] = [];
 
   getList(): void {
     this.loading = true;
     this.errorMessage = '';
+
     this.listService.getAll()
       .pipe(
         timeout(2500),
         catchError(err => {
           if (err.name === "TimeoutError" || err.status === 403) {
             // handle error
-            
+
             console.log('Handling error 401 or 403...', err);
           }
           this.errMsg = "Error: Timeout!"
           console.log('Error: Get Items. Handling error locally and rethrowing it...', err, err.statusText);
           return err;
-      })
+        })
       )
       .subscribe({
         next: (v) => {
-          console.log('Get All Items', v);
-          this.list = v.projects;
 
+          this.tp = v.projects
+          console.log('Get List:', v);
+        },
+        error: (e) => {
+          console.error('Error Loading Items!', e);
+          this.errorMessage = this.errMsg;
+          this.loading = false;
+        },
+        complete: () => {
+
+          this.list = this.tp;
           const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
           this.list = userFilter;
 
@@ -269,13 +280,8 @@ export class AppComponent {
           this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
           this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
           //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
-        },
-        error: (e) => {
-          console.error('Error Loading Items!', e);
-          this.errorMessage = this.errMsg;
-          this.loading = false;
-        },
-        complete: () => {
+
+
           console.info('Get All Items Complete!');
           this.loading = false;
         }
@@ -327,41 +333,41 @@ export class AppComponent {
 
     if (!name) { return; }
     this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
-    .pipe(
-      timeout(2500),
-      catchError(err => {
-        if (err.name === "TimeoutError" || err.status === 403) {
-          // handle error  
-          console.error('Handling error 401 or 403...', err);
+      .pipe(
+        timeout(2500),
+        catchError(err => {
+          if (err.name === "TimeoutError" || err.status === 403) {
+            // handle error  
+            console.error('Handling error 401 or 403...', err);
+          }
+          this.status = "Error! Napaka!"
+          console.error('Error: Add Item. Handling error locally and rethrowing it...', err, err.statusText);
+          return err;
+        })
+      )
+      .subscribe({
+        next: () => {
+
+        },
+        error: (e) => {
+          console.error('Error adding item!', e);
+          this.status = this.status;
+        },
+        complete: () => {
+          this.projects.push(customObj);
+
+          this.pName = "";
+          this.pDesc = "";
+
+          this.status = 'Predmet dodan!';
+          console.info('Predmet uspešno dodan!');
+          console.log(this.status);
+
+          this.getList();
+
+
         }
-        this.status = "Error! Napaka!"
-        console.error('Error: Add Item. Handling error locally and rethrowing it...', err, err.statusText);
-        return err;
-    })
-    )
-    .subscribe({
-      next: () => {
-
-      },
-      error: (e) => {
-        console.error('Error adding item!', e);
-        this.status = this.status;
-      },
-      complete: () => {
-        this.projects.push(customObj);
-
-        this.pName = "";
-        this.pDesc = "";
-
-        this.status = 'Predmet dodan!';
-        console.info('Predmet uspešno dodan!');
-        console.log(this.status);
-
-        this.getList();
-
-
       }
-    }
       );
   }
 
