@@ -3,7 +3,7 @@ import { PageNotFoundComponent } from './_pages/page-not-found/page-not-found.co
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ErrorInterceptor } from './_services/error.interceptor';
 
 
 @NgModule({
@@ -53,7 +54,13 @@ import { environment } from '../environments/environment';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

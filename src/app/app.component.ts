@@ -247,10 +247,11 @@ export class AppComponent {
         catchError(err => {
           if (err.name === "TimeoutError" || err.status === 403) {
             // handle error
-            this.errMsg = "Error: Timeout!"
+            
             console.log('Handling error 401 or 403...', err);
           }
-          console.log('Handling error locally and rethrowing it...', err, err.name);
+          this.errMsg = "Error: Timeout!"
+          console.log('Error: Get Items. Handling error locally and rethrowing it...', err, err.statusText);
           return err;
       })
       )
@@ -280,8 +281,6 @@ export class AppComponent {
         }
       });
   }
-
-
 
   projects: List[] = [];
 
@@ -322,28 +321,48 @@ export class AppComponent {
     //this.pUserId = "";
     //this.pImg = "tes.png"; 
 
-
-
     //if (!name) { return; }
     //console.log(this.projects[0])
     //this.listService.addProject(this.projects[0]);
 
-
-
     if (!name) { return; }
     this.listService.addProject({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
-      .subscribe(project => {
+    .pipe(
+      timeout(2500),
+      catchError(err => {
+        if (err.name === "TimeoutError" || err.status === 403) {
+          // handle error  
+          console.error('Handling error 401 or 403...', err);
+        }
+        this.status = "Error! Napaka!"
+        console.error('Error: Add Item. Handling error locally and rethrowing it...', err, err.statusText);
+        return err;
+    })
+    )
+    .subscribe({
+      next: () => {
 
+      },
+      error: (e) => {
+        console.error('Error adding item!', e);
+        this.status = this.status;
+      },
+      complete: () => {
         this.projects.push(customObj);
-        //console.log(this.projects);
-        //this.projects.push(project);
+
+        this.pName = "";
+        this.pDesc = "";
 
         this.status = 'Predmet dodan!';
-
-        console.log(project);
+        console.info('Predmet uspešno dodan!');
         console.log(this.status);
+
         this.getList();
-      });
+
+
+      }
+    }
+      );
   }
 
 }

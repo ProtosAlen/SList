@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of, catchError, tap } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { catchError, tap, map } from 'rxjs/operators';
 import { List } from '../_interfaces/list';
 
 @Injectable({
@@ -64,8 +63,7 @@ export class ListService {
   addProject(project: any): Observable<any> {
     console.log(project);
     return this.http.post<any>(this.createUrl, project, this.httpOptions).pipe(
-      tap((newProject: any) => console.log(`Created Item ID: ${newProject.name}`)),
-      catchError(this.handleError<any>('Add Item'))
+      tap((newProject: any) => console.log(`Created Item ID: ${newProject.name}`))
     );
   }
 
