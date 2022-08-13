@@ -234,12 +234,6 @@
             VRNI
           </div>
 
-          <!--
-          <button mat-icon-button color="warn" (click)="trash(i)" class="item-delete-btn ri" aria-label="Delete Item">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-          -->
-
         </div>
 
       </li>
@@ -285,7 +279,7 @@
 
           <span *ngIf="p.for_id">
             <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
-             'fid2' :p.for_id == 'D'}">{{p.for_id}}</a>
+             'fid2' :p.for_id == 'D' || 'Bis'}">{{p.for_id}}</a>
             <div class="item-vl"></div>
           </span>
 
@@ -338,12 +332,6 @@
             <mat-icon>chevron_left</mat-icon>
             VRNI
           </div>
-
-          <!--
-          <button mat-icon-button color="warn" (click)="trash(i)" class="item-delete-btn ri" aria-label="Delete Item">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-          -->
 
         </div>
 

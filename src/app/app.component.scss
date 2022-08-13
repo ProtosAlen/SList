@@ -245,40 +245,14 @@ input[type=number].login-input {
 /* ITEM - LIST */
 .item li {
   padding-left: 0;
-  //box-shadow: 0px 2px 10px 2px rgba(180, 180, 180, 0.2);
   transition: all 0.25s ease-out;
 
-  //border-bottom: 2px solid #311b9242;
-
   box-shadow:
-  0px 2.5px 6px rgba(50, 50, 50, 0.032),
-  0px 11.3px 24.9px rgba(50, 50, 50, 0.045),
-  0px 69px 130px rgba(50, 50, 50, 0.1)
-;
+    0px 2.5px 6px rgba(50, 50, 50, 0.032),
+    0px 11.3px 24.9px rgba(50, 50, 50, 0.045),
+    0px 69px 130px rgba(50, 50, 50, 0.1);
 
-
-border-radius: 0px 0px 4px 4px; 
-//   box-shadow:
-//   0px 0.9px 2.8px rgba(100, 100, 100, 0.017),
-//   0px 2.7px 6.7px rgba(100, 100, 100, 0.024),
-//   0px 5.9px 12.5px rgba(100, 100, 100, 0.029),
-//   0px 12.1px 22.3px rgba(100, 100, 100, 0.034),
-//   0px 25.8px 41.8px rgba(54, 54, 54, 0.042),
-//   0px 74px 100px rgba(54, 54, 54, 0.07)
-// ;
-
-  // box-shadow:
-  //   0px 0.6px 2.2px rgba(54, 54, 54, 0.011),
-  //   0px 1.3px 5.3px rgba(54, 54, 54, 0.016),
-  //   0px 2.5px 10px rgba(54, 54, 54, 0.02),
-  //   0px 4.5px 17.9px rgba(54, 54, 54, 0.024),
-  //   0px 8.4px 33.4px rgba(54, 54, 54, 0.029),
-  //   0px 20px 80px rgba(54, 54, 54, 0.04);
-}
-
-.item li:hover {
-  //background-image: linear-gradient(white, rgba(224, 219, 224, 0.205));
-  //box-shadow: -1px 3px 10px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 4px 4px;
 }
 
 .smL h3 {
@@ -307,7 +281,7 @@ border-radius: 0px 0px 4px 4px;
   margin-bottom: 0.5em;
   overflow: hidden;
 
-  border-radius: 4px 4px 0px 0px; 
+  border-radius: 4px 4px 0px 0px;
 }
 
 
@@ -319,7 +293,7 @@ border-radius: 0px 0px 4px 4px;
   margin-bottom: 0.5em;
   overflow: hidden;
 
-  border-radius: 4px 4px 0px 0px; 
+  border-radius: 4px 4px 0px 0px;
 }
 
 .item-vl {
@@ -358,7 +332,6 @@ border-radius: 0px 0px 4px 4px;
   margin-left: 0.6em;
   margin-right: 0.6em;
   display: inline-block;
-
 }
 
 .item-title,
@@ -505,8 +478,6 @@ a:visited {
   display: inline-block;
   vertical-align: middle;
 
-  //box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-
   padding: 0.5em 1em 0.5em 1em;
 
   margin-bottom: 0.6em;
@@ -532,48 +503,6 @@ a:visited {
   padding-bottom: 0.1em;
 }
 
-// ITEM DELETE BUTTON
-.item-delete-btn {
-  font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0px;
-  font-weight: 500;
-
-  background-color: #f7f7f7;
-
-  display: inline-block;
-  vertical-align: middle;
-
-  //box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-
-
-  margin-bottom: 0.5em;
-  margin-left: 0.5em;
-
-  border-radius: 20px;
-  transition-duration: 0.1s;
-
-  color: red;
-
-  margin-right: 0.5em;
-  margin-top: -0.5em;
-
-  padding: 0.5em 1em 0.5em 1em;
-
-  cursor: pointer;
-}
-
-.item-delete-btn:hover {
-  background-color: #3779c1;
-  //cursor: pointer;
-}
-
-.item-delete-btn mat-icon {
-  display: inline;
-  vertical-align: middle;
-  font-size: 15px;
-  padding-bottom: 0.2em;
-}
 
 .ri {
   float: right;
@@ -587,31 +516,30 @@ a:visited {
 
 // ITEM BUTTON COLORS
 .add-stock {
-  background-color:#9bdca4; //#b1e0ce
+  background-color: #9bdca4; //#b1e0ce
   color: rgba(0, 0, 0, 0.65);
 }
 
 .add-stock:hover {
-  background-color: #6BAA75;//#81AE9D;
+  background-color: #6BAA75; //#81AE9D;
 }
 
 .del-stock {
-  background-color: #ff8781;//#ffd1b9;
+  background-color: #ff8781; //#ffd1b9;
   color: rgba(0, 0, 0, 0.65);
 }
 
 .del-stock:hover {
-  background-color: #E15554;// #FB9F89;
+  background-color: #E15554; // #FB9F89;
   color: rgba(0, 0, 0, 0.77);
 }
 
-// Delete Item Button Div
-.r {
+.r { // Trash Item - div
   float: right;
   margin: 0.2em;
 }
 
-.rBtnI {
+.rBtnI { // Trash Item - button
   // MAT: BUTTON?
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
@@ -631,15 +559,6 @@ a:visited {
   cursor: pointer;
   color: red;
 
-}
-
-.floatR {
-  float: right;
-  color: black;
-  margin: 0.1em;
-  margin-right: 0.3em;
-  font-size: 30px;
-  font-weight: 100;
 }
 
 .fr {
