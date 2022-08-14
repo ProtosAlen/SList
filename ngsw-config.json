@@ -28,8 +28,7 @@
     },
     {
       "name": "img",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
+      "installMode": "lazy",
       "resources": {
           "urls": ["https://api.infofix.eu/list/file/uploads/items/**"]
       }

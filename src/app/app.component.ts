@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { List } from './_interfaces/list';
@@ -6,9 +6,10 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout, take, catchError,Observable, switchMap } from 'rxjs';
+import { timeout, take, catchError, Observable, switchMap, concat, first, interval } from 'rxjs';
 
 import packageJson from '../../package.json';
+import { SwUpdate } from '@angular/service-worker';
 
 const listAnimation = trigger('listAnimation', [
   transition('* => *', [
@@ -90,13 +91,25 @@ export class AppComponent {
 
   constructor(private router: Router,
     private sService: SharedService,
-    private listService: ListService) {
+    private listService: ListService,
+    appRef: ApplicationRef, updates: SwUpdate) {
+  // Allow the app to stabilize first, before starting
+    // polling for updates with `interval()`.
+    const appIsStable$ = appRef.isStable.pipe(first(isStable => isStable === true));
+    const everySixHours$ = interval(22 * 60 * 60 * 1000); //22h
+    const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
+
+    everySixHoursOnceAppIsStable$.subscribe(() => updates.checkForUpdate());
+
+
     var a = this.sService.userID;
     var b = this.sService.userName;
     if (a !== null)
       this.role = parseInt(a);
     if (b !== null)
       this.uName = b + "";
+
+      
   }
 
   ngOnInit() {
