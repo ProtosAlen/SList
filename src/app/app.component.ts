@@ -261,6 +261,7 @@ export class AppComponent {
 
   trash(i: number): void { // TRASH ITEM
     this.selItem = this.list[i];
+    this.selItem.done = 2;
     this.listService.updateItem(this.selItem)
       .pipe(
         take(1),
@@ -273,7 +274,7 @@ export class AppComponent {
           //this.newItemTxt = "Error! " + err;
         },
         complete: () => {
-          this.selItem.done = 2;
+
           this.list.splice(i, 1);
 
           //console.log('Items Trashed!', i, this.selItem);
