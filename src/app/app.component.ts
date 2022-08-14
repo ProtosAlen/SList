@@ -6,7 +6,7 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout, take, catchError, Observable, switchMap, concat, first, interval } from 'rxjs';
+import { timeout, take, catchError, Observable, concat, first, interval } from 'rxjs';
 
 import packageJson from '../../package.json';
 import { SwUpdate } from '@angular/service-worker';
@@ -25,13 +25,12 @@ const listAnimation = trigger('listAnimation', [
 ]);
 
 const taskState = trigger('taskState', [ // TODO: translate to opacity
-  state('inactive', style({ opacity: 1, transform: 'translateX(0) scale(1)' })),
-  state('active', style({ opacity: 1, transform: 'translateX(0) scale(1)' })),
-  state('void', style({ opacity: 0, display: 'none', transform: 'translateX(0) scale(1)' })),
+  state('inactive', style({ opacity: 1})),
+  state('active', style({ opacity: 1 })),
+  state('void', style({ opacity: 0, display: 'none' })),
   transition('* => void', [
     animate('1s ease-out', style({
       opacity: 0,
-      transform: 'translateX(0) scale(0.5)'
     }))
   ])
 ])
@@ -75,7 +74,7 @@ export class AppComponent {
 
   newItem: List[] = [];
 
-  status: any;
+  newItemTxt = '';
 
   pName: string = "Test";
   pUserId: string = this.sService.getUser() + "";
@@ -200,10 +199,10 @@ export class AppComponent {
           this.tp = v.projects
           //console.log('Get List:', v);
         },
-        error: () => {
+        error: (error) => {
           this.listErrTxt = this.errMsg;
           this.loading = false;
-          console.error('Error Loading Items!');
+          console.error('Error Loading Items!', error);
         },
         complete: () => {
           this.list = this.tp;
@@ -248,6 +247,10 @@ export class AppComponent {
         catchError(this.handleError<List>('updateItem'))
       )
       .subscribe({
+        error: (error) => {
+          console.error('Error trashing item!', error);
+          //this.newItemTxt = "Error! " + err;
+        },
         complete: () => {
           this.list.splice(i, 1);
           //delete this.list[i];
@@ -265,8 +268,9 @@ export class AppComponent {
         catchError(this.handleError<List>('updateItem/trash'))
       )
       .subscribe({
-        next: () => {
-
+        error: (error) => {
+          console.error('Error trashing item!', error);
+          //this.newItemTxt = "Error! " + err;
         },
         complete: () => {
           this.selItem.done = 2;
@@ -307,9 +311,9 @@ export class AppComponent {
         catchError(this.handleError<List>('add'))
       )
       .subscribe({
-        error: () => {
+        error: (error) => {
           console.error('Error adding item!');
-          this.status = this.status;
+          this.newItemTxt = "Error! " + error;
         },
         complete: () => {
           this.newItem.push(customObj);
@@ -318,7 +322,7 @@ export class AppComponent {
           this.pName = "";
           this.pDesc = "";
 
-          this.status = 'Predmet dodan!';
+          this.newItemTxt = 'Predmet dodan!';
           //console.log('Predmet uspešno dodan!');
           this.getList();
         }

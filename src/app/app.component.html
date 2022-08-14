@@ -92,7 +92,7 @@
         </mat-form-field>
 
 
-        <div class="bannerD">
+        <div class="bannerD" *ngIf="pImg">
           <img class="bannerImgD" src="https://api.infofix.eu/list/file/uploads/items/{{pImg}}">
         </div>
 
@@ -129,11 +129,12 @@
               <mat-option value="100">-- Brez --</mat-option>
               <mat-option value="1">Hrana</mat-option>
               <mat-option value="2">Oblačila</mat-option>
+              <mat-option value="3">Pohištvo</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Lok. oznaka</mat-label>
+            <mat-label>Oznaka</mat-label>
             <input matInput [(ngModel)]="pFor">
           </mat-form-field>
 
@@ -152,7 +153,7 @@
 
         </div>
 
-        <h2 class="status-txt">{{status}}</h2>
+        <h2 class="status-txt">{{newItemTxt}}</h2>
       </div>
 
     </mat-expansion-panel>
@@ -177,7 +178,7 @@
       <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
-        <div class="small-item-head">
+        <div class="small_item-head">
 
           <a class="item-title">{{p.name}}</a>
           <div class="item-vl"></div>
@@ -211,8 +212,8 @@
 
         </div>
 
-        <div>
-          <div class="item-footer-pill" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+        <div class="small_item-footer">
+          <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
             <mat-icon>category</mat-icon>
             {{p.category_name}}
           </div>
@@ -220,16 +221,16 @@
 
 
 
-          <div *ngIf="selPage == 0" class="item-footer-pill ri del-stock" (click)="save(i)">
+          <div *ngIf="selPage == 0" class="item-footer-pill ri-small del-stock" (click)="save(i)">
             <mat-icon>chevron_left</mat-icon>
             ZA NABAVO
           </div>
-          <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
+          <div *ngIf="selPage == 1" class="item-footer-pill ri-small add-stock" (click)="save(i)">
             V ZALOGO
             <mat-icon>chevron_right</mat-icon>
           </div>
 
-          <div *ngIf="selPage == 2" class="item-footer-pill ri add-stock" (click)="save(i)">
+          <div *ngIf="selPage == 2" class="item-footer-pill ri-small add-stock" (click)="save(i)">
             <mat-icon>chevron_left</mat-icon>
             VRNI
           </div>
@@ -310,8 +311,8 @@
         </div>
 
         <!-- Item Footer -->
-        <div>
-          <div class="item-footer-pill" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+        <div class="item-footer">
+          <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
             <mat-icon>category</mat-icon>
             {{p.category_name}}
           </div>
