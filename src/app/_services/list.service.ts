@@ -33,10 +33,10 @@ export class ListService {
   }
 
   /** POST: ADD Item */
-  addItem(project: any): Observable<any> {
-    console.log(project);
-    return this.http.post<any>(this.baseUrl + "create.php", project, this.httpOptions).pipe(
-      tap((newProject: any) => console.log(`Service Created Item ID: ${newProject.name}`))
+  addItem(item: any): Observable<any> {
+    console.log(item);
+    return this.http.post<any>(this.baseUrl + "create.php", item, this.httpOptions).pipe(
+      tap((newItem: any) => console.log(`Service Created Item ID: ${newItem.name}`))
     );
   }
 

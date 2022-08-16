@@ -11,6 +11,8 @@ import { timeout, take, catchError, Observable, concat, first, interval } from '
 import packageJson from '../../package.json';
 import { SwUpdate } from '@angular/service-worker';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 const listAnimation = trigger('listAnimation', [
   transition('* => *', [
     query(':enter',
@@ -25,7 +27,7 @@ const listAnimation = trigger('listAnimation', [
 ]);
 
 const taskState = trigger('taskState', [ // TODO: translate to opacity
-  state('inactive', style({ opacity: 1})),
+  state('inactive', style({ opacity: 1 })),
   state('active', style({ opacity: 1 })),
   state('void', style({ opacity: 0, display: 'none' })),
   transition('* => void', [
@@ -42,6 +44,10 @@ const taskState = trigger('taskState', [ // TODO: translate to opacity
   animations: [listAnimation, taskState]
 })
 export class AppComponent {
+
+
+  isChecked = false;
+
 
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
@@ -69,7 +75,7 @@ export class AppComponent {
 
 
   errMsg = "";
-  tp: List[] = [];
+  tp: List[] = []; // TODO const
 
 
   newItem: List[] = [];
@@ -92,7 +98,7 @@ export class AppComponent {
     private sService: SharedService,
     private listService: ListService,
     appRef: ApplicationRef, updates: SwUpdate) {
-  // Allow the app to stabilize first, before starting
+    // Allow the app to stabilize first, before starting
     // polling for updates with `interval()`.
     const appIsStable$ = appRef.isStable.pipe(first(isStable => isStable === true));
     const everySixHours$ = interval(22 * 60 * 60 * 1000); //22h
@@ -108,13 +114,17 @@ export class AppComponent {
     if (b !== null)
       this.uName = b + "";
 
-      
+
   }
 
   ngOnInit() {
     var o = localStorage.getItem('acs');
     this.access = JSON.parse(o + "") === true;
     this.getList();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.list, event.previousIndex, event.currentIndex);
   }
 
   setPage(i: number) {
@@ -150,10 +160,11 @@ export class AppComponent {
     this.role = parseInt(this.role + "");
 
     if (this.role === 52112 || this.role === 27695 || this.role === 90091
-      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313) {
+      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313
+      || this.role === 187) {
 
       if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
-        || this.uName === "Tjaša" || this.uName === "Teo") {
+        || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene") {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
@@ -212,9 +223,11 @@ export class AppComponent {
           const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
           this.list = doneFilter;
 
-          this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
-          this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
-          //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
+          if (this.isChecked) {
+            this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
+            this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
+            //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
+          }
 
           this.loading = false;
           //console.log('Get All Items Complete!');
@@ -309,7 +322,7 @@ export class AppComponent {
       .pipe(
         take(1),
         timeout(2500),
-        catchError(this.handleError<List>('add'))
+        catchError(this.handleError<any>('add'))
       )
       .subscribe({
         error: (error) => {
@@ -317,7 +330,47 @@ export class AppComponent {
           this.newItemTxt = "Error! " + error;
         },
         complete: () => {
-          this.newItem.push(customObj);
+          //this.list.push(customObj);
+
+
+          this.loading = true;
+          this.listErrTxt = '';
+      
+          this.listService.getAll()
+            .pipe(
+              take(1),
+              timeout(2500),
+              catchError(this.handleError<List>('getAll'))
+            )
+            .subscribe({
+              next: (v) => {
+                this.tp = v.projects
+                //console.log('Get List:', v);
+              },
+              error: (error) => {
+                this.listErrTxt = this.errMsg;
+                this.loading = false;
+                console.error('Error Loading Items!', error);
+              },
+              complete: () => {
+                this.list = this.tp;
+                const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
+                this.list = userFilter;
+      
+                const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
+                this.list = doneFilter;
+      
+                if (this.isChecked) {
+                  this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
+                  this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
+                  //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
+                }
+      
+                this.loading = false;
+                //console.log('Get All Items Complete!');
+              }
+            });
+
 
           // Clear inputs
           this.pName = "";
@@ -325,7 +378,7 @@ export class AppComponent {
 
           this.newItemTxt = 'Predmet dodan!';
           //console.log('Predmet uspešno dodan!');
-          this.getList();
+          //this.getList();
         }
       }
       );

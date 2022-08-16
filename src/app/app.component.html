@@ -130,6 +130,7 @@
               <mat-option value="1">Hrana</mat-option>
               <mat-option value="2">Oblačila</mat-option>
               <mat-option value="3">Pohištvo</mat-option>
+              <mat-option value="4">Orodje</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -160,8 +161,12 @@
   </mat-accordion>
   <!-- << ADD NEW ITEM -->
 
+  
+<mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked">Sort</mat-slide-toggle>
+
+
   <!-- ITEM LIST >> -->
-  <ul class="item">
+  <ol class="item">
 
     <!-- SMALL VIEW BTN -->
     <button mat-stroked-button class="small-btn" (click)="small = !small">
@@ -258,12 +263,13 @@
     </div>
     <!-- << EMPTY VIEW -->
 
+    
 
-    <!-- NORMAL/BIG ITEM VIEW >> -->
-    <div *ngIf="!small" [@listAnimation]="list.length">
+    <!-- NORMAL/BIG ITEM VIEW >>    -->
+    <div  cdkDropList  (cdkDropListDropped)="drop($event)"  class="item-list" *ngIf="!small" [@listAnimation]="list.length" >
 
-
-      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
+<!--     -->
+      <li cdkDrag  class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
         <!-- Item Header -->
@@ -345,7 +351,7 @@
     </div>
     <!-- << NORMAL/BIG VIEW -->
 
-  </ul>
+  </ol>
   <!-- << ITEM LIST -->
 
   <!-- LOADING INFO >> -->

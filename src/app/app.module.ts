@@ -22,6 +22,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { environment } from '../environments/environment';
     MatIconModule,
     MatFormFieldModule,
 
+    DragDropModule,
+
+    MatSlideToggleModule,
     MatExpansionModule,
     MatToolbarModule,
     BrowserAnimationsModule,
