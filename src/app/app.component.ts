@@ -57,8 +57,7 @@ interface Select {
 export class AppComponent {
 
 
-  isChecked = false;
-
+  isChecked = true; // Sort by Priority
 
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
@@ -66,6 +65,7 @@ export class AppComponent {
   title = 'S-List';
   public appVersion: string = packageJson.version;
 
+  // LOGIN
   access = false;
   accessMsg = 'Vnesite ime in geslo:';
   hidePass: any;
@@ -73,10 +73,12 @@ export class AppComponent {
   uName = "";
   uID: string = this.sService.getUser().toString();
 
+  // PAGE SETTINGS
   headerTxt = "ZA NABAVO"
   selPage = 1;
   small: boolean = false;
 
+  // LIST
   @Input() list: List[] = [];
   @Input() selItem!: List;
   done: number = 0;
@@ -240,6 +242,8 @@ export class AppComponent {
     this.loading = true;
     this.listErrTxt = '';
 
+    var tempP: List[];
+
     this.listService.getAll()
       .pipe(
         catchError(() => {
@@ -251,7 +255,8 @@ export class AppComponent {
       )
       .subscribe({
         next: (v) => {
-          this.tp = v.projects
+          tempP = v.projects
+          this.list = [];
           //console.log('Get List:', v);
         },
         error: (error) => {
@@ -260,14 +265,13 @@ export class AppComponent {
           console.error('Error Loading Items!', error);
         },
         complete: () => {
-          this.list = [];
-          this.list = this.tp; // TODO ?
+
+          this.list = tempP; // TODO ?
           var tempList = this.list
+
           const userFilter = tempList.filter(p => p.user_id === this.sService.getUser() + "");
-          //this.list = userFilter;
 
           tempList = userFilter.filter(p => (p.done.toString() === this.selPage.toString()));
-          //this.list = doneFilter;
 
           if (this.status !== '-1') { // CATEGORY ID FILTER
             tempList = tempList.filter(p => p.category_id === this.status);
