@@ -133,7 +133,7 @@ export class AppComponent {
     // Allow the app to stabilize first, before starting
     // polling for updates with `interval()`.
     const appIsStable$ = appRef.isStable.pipe(first(isStable => isStable === true));
-    const everySixHours$ = interval(22 * 60 * 60 * 1000); //22h
+    const everySixHours$ = interval(22 * 60 * 60 * 10000); //22h -- ?
     const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
 
     everySixHoursOnceAppIsStable$.subscribe(() => updates.checkForUpdate());

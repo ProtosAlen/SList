@@ -76,7 +76,7 @@
 
   <!-- ADD NEW ITEM >> -->
   <mat-accordion multi>
-    <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0em 1em 3em 1em;">
+    <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0px 8px 24px 8px;">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon class="new_item_icon">add</mat-icon>
@@ -286,9 +286,8 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="item-list" *ngIf="!small"
       [@listAnimation]="list.length">
 
-      <!--     -->
-      <li cdkDrag class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;"
-        [@taskState]="list.length">
+      <!--  cdkDrag   -->
+      <li class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
         <!-- Item Header -->
