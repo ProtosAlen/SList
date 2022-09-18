@@ -254,6 +254,7 @@ input[type=number].login-input {
 
 
 .item-box {
+  
    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
   margin-top: 24px;
   list-style-type: none;
@@ -298,6 +299,8 @@ input[type=number].login-input {
 
 /* ITEM - LIST */
 .item li {
+
+  
   padding-left: 0;
   //transition: all 0.25s ease-out;
 
@@ -422,6 +425,8 @@ a:visited {
   font-weight: 400;
 
   padding: 16px 4px 4px 16px;
+
+  background-color: #f8f8ff;
 }
 
 .item-desc a {
@@ -532,6 +537,8 @@ a:visited {
   padding: 8px 4px 8px 4px;
 
   border-radius: 0px 0px 4px 4px;
+
+  background-color: #f8f8ff;
 }
 
 // ITEM FOOTER PILL

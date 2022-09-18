@@ -83,6 +83,8 @@ export class AppComponent {
   @Input() selItem!: List;
   done: number = 0;
 
+  updatedItem!: List;
+
   loading = false;
   listErrTxt!: string;
 
@@ -153,6 +155,8 @@ export class AppComponent {
     var o = localStorage.getItem('acs');
     this.access = JSON.parse(o + "") === true;
     this.getList();
+
+    this.updatedItem
   }
 
   setFilter(id: number, val: string): void {
@@ -290,6 +294,37 @@ export class AppComponent {
 
           this.loading = false;
           //console.log('Get All Items Complete!');
+        }
+      });
+  }
+
+  updateOn = false;
+  select(i : number) {
+    this.updatedItem = this.list[i];
+    this.updateOn = !this.updateOn;
+  }
+
+  update(): void { // UPDATE ITEM
+
+
+    this.listService.updateItem(this.updatedItem) // TODO: Retry
+      .pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
+        take(1),
+        timeout(2500),
+        catchError(this.handleError<List>('updateItem'))
+      )
+      .subscribe({
+        error: (error) => {
+          console.error('Error trashing item!', error);
+          //this.newItemTxt = "Error! " + err;
+        },
+        complete: () => {
+          //this.list.splice(i, 1);
+          //delete this.list[i];
+          //console.log('Items Moved!', i, tmp);
         }
       });
   }
@@ -455,6 +490,19 @@ export class AppComponent {
       }
       );
   }
+
+
+
+
+  scrollToTop() {
+    (function smoothscroll() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            window.requestAnimationFrame(smoothscroll);
+            window.scrollTo(0, currentScroll - (currentScroll / 4));
+        }
+    })();
+}
 
 
   /**

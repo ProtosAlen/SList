@@ -282,6 +282,75 @@
 
 
 
+    <!-- EDIT ITEM VIEW  >>    -->
+    <div class="item-list">
+
+      <!--  cdkDrag   -->
+      <li class="item-box">
+
+        <div *ngIf="updateOn">
+          <!-- Item Header -->
+          <div class="item-head">
+
+            <a class="item-title">
+              <input (change)="update()" matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime">
+            </a>
+
+            <div class="item-vl"></div>
+
+            <div class="r">
+              <button class="rBtnI" mat-icon-button color="accent" aria-label="Delete Item">
+                X
+              </button>
+            </div>
+
+            <span *ngIf="updatedItem.for_id">
+              <a class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
+             'fid2' :updatedItem.for_id == 'D' || 'Bis'}">{{updatedItem.for_id}}</a>
+              <div class="item-vl"></div>
+            </span>
+
+            <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == 0, 'pri1' :updatedItem.pri == 1, 'pri2' :updatedItem.pri == 2, 
+            'pri3' :updatedItem.pri == 3, 'pri4' :updatedItem.pri == 4, 'pri5' :updatedItem.pri == 5 }">
+              |{{updatedItem.pri}}
+            </div>
+
+
+          </div>
+
+          <!-- Item Banner -->
+          <div class="item-banner" *ngIf="updatedItem.img">
+            <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{updatedItem.img}}">
+          </div>
+
+          <!-- Item Desc -->
+          <div class="item-desc" *ngIf="updatedItem.description">
+            <input (change)="update()" matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis">
+          </div>
+
+          <!-- Item Footer -->
+          <div class="item-footer">
+            <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :updatedItem.done == 0, 'fr' :updatedItem.done == 1}">
+              <mat-icon>category</mat-icon>
+              {{updatedItem.category_name}}
+            </div>
+
+
+            <button mat-icon-button (click)="updateOn = !updateOn;" class="ri">
+              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">done</mat-icon>
+            </button>
+
+          </div>
+        </div>
+
+
+
+      </li>
+
+    </div>
+    <!-- << EDIT VIEW -->
+
+
     <!-- NORMAL/BIG ITEM VIEW >>    -->
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="item-list" *ngIf="!small"
       [@listAnimation]="list.length">
@@ -290,35 +359,38 @@
       <li class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
-        <!-- Item Header -->
-        <div class="item-head">
+        <div *ngIf="!updateOn">
 
-          <a class="item-title">{{p.name}}</a>
-          <div class="item-vl"></div>
 
-          <div class="r">
-            <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
-              X
-            </button>
-          </div>
+          <!-- Item Header -->
+          <div class="item-head">
 
-          <span *ngIf="p.for_id">
-            <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
-             'fid2' :p.for_id == 'D' || 'Bis'}">{{p.for_id}}</a>
+            <a class="item-title">{{p.name}}</a>
             <div class="item-vl"></div>
-          </span>
 
-          <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
+            <div class="r">
+              <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
+                X
+              </button>
+            </div>
+
+            <span *ngIf="p.for_id">
+              <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
+             'fid2' :p.for_id == 'D' || 'Bis'}">{{p.for_id}}</a>
+              <div class="item-vl"></div>
+            </span>
+
+            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
-            |{{p.pri}}
-          </div>
+              |{{p.pri}}
+            </div>
 
 
-          <!-- TODO: 
+            <!-- TODO: 
             <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> 
           -->
 
-          <!--
+            <!--
 
                     <div class="item-vl"></div>
             
@@ -326,42 +398,47 @@
           <div *ngIf="p.done == 1" class="item-out-stock">Za nabavo</div>
 -->
 
-        </div>
-
-        <!-- Item Banner -->
-        <div class="item-banner" *ngIf="p.img">
-          <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
-        </div>
-
-        <!-- Item Desc -->
-        <div class="item-desc" *ngIf="p.description">
-          {{p.description}}
-        </div>
-
-        <!-- Item Footer -->
-        <div class="item-footer">
-          <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
-            <mat-icon>category</mat-icon>
-            {{p.category_name}}
           </div>
 
-
-
-
-          <div *ngIf="selPage == 0" class="item-footer-pill ri del-stock" (click)="save(i)">
-            <mat-icon>chevron_left</mat-icon>
-            ZA NABAVO
-          </div>
-          <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
-            V ZALOGO
-            <mat-icon>chevron_right</mat-icon>
+          <!-- Item Banner -->
+          <div class="item-banner" *ngIf="p.img">
+            <img class="item-bannerImg" src="https://api.infofix.eu/list/file/uploads/items/{{p.img}}">
           </div>
 
-          <div *ngIf="selPage == 2" class="item-footer-pill ri add-stock" (click)="save(i)">
-            <mat-icon>chevron_left</mat-icon>
-            VRNI
+          <!-- Item Desc -->
+          <div class="item-desc" *ngIf="p.description">
+            {{p.description}}
           </div>
 
+          <!-- Item Footer -->
+          <div class="item-footer">
+            <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+              <mat-icon>category</mat-icon>
+              {{p.category_name}}
+            </div>
+
+
+
+
+            <div *ngIf="selPage == 0" class="item-footer-pill ri del-stock" (click)="save(i)">
+              <mat-icon>chevron_left</mat-icon>
+              ZA NABAVO
+            </div>
+            <div *ngIf="selPage == 1" class="item-footer-pill ri add-stock" (click)="save(i)">
+              V ZALOGO
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+
+            <div *ngIf="selPage == 2" class="item-footer-pill ri add-stock" (click)="save(i)">
+              <mat-icon>chevron_left</mat-icon>
+              VRNI
+            </div>
+
+            <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
+              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
+            </button>
+
+          </div>
         </div>
 
       </li>
