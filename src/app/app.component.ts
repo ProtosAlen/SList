@@ -6,7 +6,7 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout, take, catchError, Observable, concat, first, interval } from 'rxjs';
+import { timeout, take, catchError, Observable, concat, first, interval, throwError } from 'rxjs';
 
 import packageJson from '../../package.json';
 import { SwUpdate } from '@angular/service-worker';
@@ -36,6 +36,17 @@ const taskState = trigger('taskState', [ // TODO: translate to opacity
     }))
   ])
 ])
+
+interface RegionsGroup {
+  disabled?: boolean;
+  name: string;
+  region: Select[];
+}
+
+interface Select {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -94,6 +105,25 @@ export class AppComponent {
   pFor: string = "";
 
 
+  popular = '-1';
+  status = '-1';
+  tagsSel = '-1';
+  regionsSel = '-1';
+
+
+
+  pop: Select[] = [
+    { value: '0', viewValue: 'Popular' },
+    { value: '1', viewValue: 'Trending' },
+    { value: '2', viewValue: 'Recent' }
+  ];
+
+  statusList: Select[] = [
+    { value: '0', viewValue: 'In Progress' },
+    { value: '1', viewValue: 'Done' },
+    { value: '2', viewValue: 'Recent' }
+  ];
+
   constructor(private router: Router,
     private sService: SharedService,
     private listService: ListService,
@@ -121,6 +151,17 @@ export class AppComponent {
     var o = localStorage.getItem('acs');
     this.access = JSON.parse(o + "") === true;
     this.getList();
+  }
+
+  setFilter(id: number, val: string): void {
+    if (id === 0) {
+      this.popular = val;
+      this.getList();
+    }
+    else if (id === 1) {
+      this.status = val;
+      this.getList();
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -201,6 +242,9 @@ export class AppComponent {
 
     this.listService.getAll()
       .pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
         take(1),
         timeout(2500),
         catchError(this.handleError<List>('getAll'))
@@ -216,18 +260,29 @@ export class AppComponent {
           console.error('Error Loading Items!', error);
         },
         complete: () => {
-          this.list = this.tp;
-          const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
-          this.list = userFilter;
+          this.list = [];
+          this.list = this.tp; // TODO ?
+          var tempList = this.list
+          const userFilter = tempList.filter(p => p.user_id === this.sService.getUser() + "");
+          //this.list = userFilter;
 
-          const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
-          this.list = doneFilter;
+          tempList = userFilter.filter(p => (p.done.toString() === this.selPage.toString()));
+          //this.list = doneFilter;
+
+          if (this.status !== '-1') { // CATEGORY ID FILTER
+            tempList = tempList.filter(p => p.category_id === this.status);
+          }
+          if (this.tagsSel !== '-1') { // FOR TAG ID FILTER
+            tempList = tempList.filter(p => p.for_id === this.tagsSel);
+          }
 
           if (this.isChecked) {
-            this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
-            this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
+            tempList = tempList.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
+            tempList = tempList.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
             //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
           }
+
+          this.list = tempList;
 
           this.loading = false;
           //console.log('Get All Items Complete!');
@@ -255,6 +310,9 @@ export class AppComponent {
 
     this.listService.updateItem(tmp) // TODO: Retry
       .pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
         take(1),
         timeout(2500),
         catchError(this.handleError<List>('updateItem'))
@@ -277,6 +335,9 @@ export class AppComponent {
     this.selItem.done = 2;
     this.listService.updateItem(this.selItem)
       .pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
         take(1),
         timeout(2500),
         catchError(this.handleError<List>('updateItem/trash'))
@@ -319,7 +380,11 @@ export class AppComponent {
 
     if (!name) { return; }
     this.listService.addItem({ name, user_id, done, description, category_id, img, pri, ord, for_id } as any)
+
       .pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
         take(1),
         timeout(2500),
         catchError(this.handleError<any>('add'))
@@ -335,9 +400,12 @@ export class AppComponent {
 
           this.loading = true;
           this.listErrTxt = '';
-      
+
           this.listService.getAll()
             .pipe(
+              catchError(() => {
+                return throwError(() => new Error('Error!'));
+              }),
               take(1),
               timeout(2500),
               catchError(this.handleError<List>('getAll'))
@@ -356,16 +424,16 @@ export class AppComponent {
                 this.list = this.tp;
                 const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
                 this.list = userFilter;
-      
+
                 const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
                 this.list = doneFilter;
-      
+
                 if (this.isChecked) {
                   this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
                   this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
                   //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
                 }
-      
+
                 this.loading = false;
                 //console.log('Get All Items Complete!');
               }

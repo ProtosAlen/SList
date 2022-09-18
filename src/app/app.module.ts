@@ -37,13 +37,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    MatInputModule,
     FormsModule,
     CdkAccordionModule,
-
+    MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
-    MatFormFieldModule,
+    MatInputModule,
 
     DragDropModule,
 

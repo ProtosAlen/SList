@@ -161,8 +161,22 @@
   </mat-accordion>
   <!-- << ADD NEW ITEM -->
 
-  
-<mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked">Sort</mat-slide-toggle>
+
+  <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked" class="head1">Sortiraj po prioriteti
+  </mat-slide-toggle>
+
+  <span class="input">
+    <mat-form-field appearance="outline" class="head1" style="width: 200px;">
+      <mat-label>Kategorija</mat-label>
+      <mat-select>
+        <mat-option (click)="setFilter(1,'-1')">Vse</mat-option>
+        <mat-option (click)="setFilter(1,'1')" value="1">Hrana</mat-option>
+        <mat-option (click)="setFilter(1,'2')" value="2">Oblačila</mat-option>
+        <mat-option (click)="setFilter(1,'3')" value="3">Pohištvo</mat-option>
+        <mat-option (click)="setFilter(1,'4')" value="4">Orodje</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
 
 
   <!-- ITEM LIST >> -->
@@ -226,19 +240,21 @@
 
 
 
-          <div *ngIf="selPage == 0" class="item-footer-pill ri-small del-stock" (click)="save(i)">
-            <mat-icon>chevron_left</mat-icon>
-            ZA NABAVO
-          </div>
-          <div *ngIf="selPage == 1" class="item-footer-pill ri-small add-stock" (click)="save(i)">
-            V ZALOGO
-            <mat-icon>chevron_right</mat-icon>
-          </div>
+          <span class="hitbox">
+            <div *ngIf="selPage == 0" class="item-footer-pill ri-small del-stock" (click)="save(i)">
+              <mat-icon>chevron_left</mat-icon>
+              ZA NABAVO
+            </div>
+            <div *ngIf="selPage == 1" class="item-footer-pill ri-small add-stock" (click)="save(i)">
+              V ZALOGO
+              <mat-icon>chevron_right</mat-icon>
+            </div>
 
-          <div *ngIf="selPage == 2" class="item-footer-pill ri-small add-stock" (click)="save(i)">
-            <mat-icon>chevron_left</mat-icon>
-            VRNI
-          </div>
+            <div *ngIf="selPage == 2" class="item-footer-pill ri-small add-stock" (click)="save(i)">
+              <mat-icon>chevron_left</mat-icon>
+              VRNI
+            </div>
+          </span>
 
         </div>
 
@@ -251,6 +267,7 @@
 
     <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
+      <h1 class="h-red">BREZ PREDMETOV NA SEZNAMU!</h1>
       <div *ngIf="selPage == 1">
         <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)" [@listAnimation]>
           Seznam zalog >
@@ -263,13 +280,15 @@
     </div>
     <!-- << EMPTY VIEW -->
 
-    
+
 
     <!-- NORMAL/BIG ITEM VIEW >>    -->
-    <div  cdkDropList  (cdkDropListDropped)="drop($event)"  class="item-list" *ngIf="!small" [@listAnimation]="list.length" >
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="item-list" *ngIf="!small"
+      [@listAnimation]="list.length">
 
-<!--     -->
-      <li cdkDrag  class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
+      <!--     -->
+      <li cdkDrag class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;"
+        [@taskState]="list.length">
 
 
         <!-- Item Header -->

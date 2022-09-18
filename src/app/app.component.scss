@@ -1,3 +1,13 @@
+.head1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  display: block;
+}
+
 .headTb {
   background-color: #311b92;
   overflow: hidden;
@@ -587,6 +597,12 @@ a:visited {
   padding: 8px 16px 8px 16px;
 
   cursor: pointer;
+}
+
+.hitbox {
+  padding: 30px;
+  margin: -30px;
+  z-index: 10;
 }
 
 // ITEM BUTTON COLORS
