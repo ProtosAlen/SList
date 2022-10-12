@@ -1,7 +1,8 @@
 {
-  "name": "SList",
   "short_name": "SList",
-  "theme_color": "#311b92",
+  "name": "slist",
+  "short_name": "slist",
+  "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

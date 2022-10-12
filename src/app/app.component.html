@@ -3,7 +3,7 @@
   <mat-toolbar-row class="headTb">
 
     <div class="logo" (click)="setPage(1)">
-      <img class="logo-img" alt="S-List Logo" src="assets\icon-72x72.png" />
+      <img class="logo-img" alt="S-List Logo" src="assets\icons\icon-72x72.png" />
     </div>
 
     <div *ngIf="access">
@@ -298,11 +298,13 @@
 
             <div class="item-vl"></div>
 
+            <!-- 
             <div class="r">
               <button class="rBtnI" mat-icon-button color="accent" aria-label="Delete Item">
                 X
               </button>
             </div>
+            -->
 
             <span *ngIf="updatedItem.for_id">
               <a class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
