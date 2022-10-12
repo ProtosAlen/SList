@@ -179,48 +179,60 @@
   </span>
 
 
+
+
+
+
+
   <!-- ITEM LIST >> -->
   <ol class="item">
 
-    <!-- SMALL VIEW BTN -->
+    <!-- HEAD TXT & BTN >> -->
     <button mat-stroked-button class="small-btn" (click)="small = !small">
       <mat-icon *ngIf="small">format_align_justify</mat-icon>
       <mat-icon *ngIf="!small">menu</mat-icon>
     </button>
 
     <h2 [ngClass]="{'h-green' :selPage == 0, 'h-red' :selPage == 1}">{{headerTxt}}</h2>
+    <!-- << HEAD TXT & BTN -->
+
+
+
+
 
     <!-- SMALL VIEW >> -->
-    <div *ngIf="small" [@listAnimation]="list.length">
+
+    <span *ngIf="!updateOn">
+
+      <div *ngIf="small" [@listAnimation]="list.length">
 
 
-      <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
+        <li *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
 
-        <div class="small_item-head">
+          <div class="small_item-head">
 
-          <a class="item-title">{{p.name}}</a>
-          <div class="item-vl"></div>
-
-          <div class="r">
-            <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
-              X
-            </button>
-          </div>
-
-          <span *ngIf="p.for_id">
-            <a class="item-infobox">{{p.for_id}}</a>
+            <a class="item-title">{{p.name}}</a>
             <div class="item-vl"></div>
-          </span>
 
+            <div class="r">
+              <button class="rBtnI" mat-icon-button color="accent" (click)="trash(i)" aria-label="Delete Item">
+                X
+              </button>
+            </div>
 
-          <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
+            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
-            |{{p.pri}}
-          </div>
+              |{{p.pri}}
+            </div>
+
+            <span *ngIf="p.for_id">
+              <div class="item-vl"></div>
+              <a class="item-infobox">{{p.for_id}}</a>
+            </span>
 
 
-          <!-- TODO: 
+            <!-- TODO: 
             <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> 
 
           <div class="item-vl"></div>
@@ -229,41 +241,52 @@
           <div *ngIf="p.done == 1" class="item-out-stock">Za nabavo</div>
           -->
 
-        </div>
-
-        <div class="small_item-footer">
-          <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
-            <mat-icon>category</mat-icon>
-            {{p.category_name}}
           </div>
 
-
-
-
-          <span class="hitbox">
-            <div *ngIf="selPage == 0" class="item-footer-pill ri-small del-stock" (click)="save(i)">
-              <mat-icon>chevron_left</mat-icon>
-              ZA NABAVO
-            </div>
-            <div *ngIf="selPage == 1" class="item-footer-pill ri-small add-stock" (click)="save(i)">
-              V ZALOGO
-              <mat-icon>chevron_right</mat-icon>
+          <div class="small_item-footer">
+            <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
+              <mat-icon>category</mat-icon>
+              {{p.category_name}}
             </div>
 
-            <div *ngIf="selPage == 2" class="item-footer-pill ri-small add-stock" (click)="save(i)">
-              <mat-icon>chevron_left</mat-icon>
-              VRNI
-            </div>
-          </span>
 
-        </div>
 
-      </li>
 
-    </div>
+            <span class="hitbox">
+              <div *ngIf="selPage == 0" class="item-footer-pill ri-small del-stock" (click)="save(i)">
+                <mat-icon>chevron_left</mat-icon>
+                ZA NABAVO
+              </div>
+              <div *ngIf="selPage == 1" class="item-footer-pill ri-small add-stock" (click)="save(i)">
+                V ZALOGO
+                <mat-icon>chevron_right</mat-icon>
+              </div>
 
+              <div *ngIf="selPage == 2" class="item-footer-pill ri-small add-stock" (click)="save(i)">
+                <mat-icon>chevron_left</mat-icon>
+                VRNI
+              </div>
+            </span>
+
+            <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
+              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
+            </button>
+
+
+          </div>
+
+        </li>
+
+      </div>
+
+    </span>
 
     <!-- << SMALL VIEW -->
+
+
+
+
+
 
     <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
@@ -282,7 +305,12 @@
 
 
 
-    <!-- EDIT ITEM VIEW  >>    -->
+
+
+
+
+
+    <!-- EDIT ITEM VIEW  >> -->
     <div class="item-list">
 
       <!--  cdkDrag   -->
@@ -306,17 +334,16 @@
             </div>
             -->
 
-            <span *ngIf="updatedItem.for_id">
-              <a class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
-             'fid2' :updatedItem.for_id == 'D' || 'Bis'}">{{updatedItem.for_id}}</a>
-              <div class="item-vl"></div>
-            </span>
-
             <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == 0, 'pri1' :updatedItem.pri == 1, 'pri2' :updatedItem.pri == 2, 
             'pri3' :updatedItem.pri == 3, 'pri4' :updatedItem.pri == 4, 'pri5' :updatedItem.pri == 5 }">
               |{{updatedItem.pri}}
             </div>
 
+            <span *ngIf="updatedItem.for_id">
+              <div class="item-vl"></div>
+              <a class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
+             'fid2' :updatedItem.for_id == 'D' || 'Bis'}">{{updatedItem.for_id}}</a>
+            </span>
 
           </div>
 
@@ -332,7 +359,8 @@
 
           <!-- Item Footer -->
           <div class="item-footer">
-            <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :updatedItem.done == 0, 'fr' :updatedItem.done == 1}">
+            <div class="item-footer-pill tag_icon"
+              [ngClass]="{'gr' :updatedItem.done == 0, 'fr' :updatedItem.done == 1}">
               <mat-icon>category</mat-icon>
               {{updatedItem.category_name}}
             </div>
@@ -376,17 +404,18 @@
               </button>
             </div>
 
-            <span *ngIf="p.for_id">
-              <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
-             'fid2' :p.for_id == 'D' || 'Bis'}">{{p.for_id}}</a>
-              <div class="item-vl"></div>
-            </span>
+
 
             <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
             'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
               |{{p.pri}}
             </div>
 
+            <span *ngIf="p.for_id">
+              <div class="item-vl"></div>
+              <a class="item-infobox" [ngClass]="{'fid0' :p.for_id == 'W', 'fid1' :p.for_id == 'AN',
+             'fid2' :p.for_id == 'D' || 'Bis'}">{{p.for_id}}</a>
+            </span>
 
             <!-- TODO: 
             <div [ngClass]="{'in-stock' :p.done == 0, 'out-stock' :p.done == 1}">V zalogi</div> 
