@@ -321,28 +321,33 @@
           <div class="item-head">
 
             <a class="item-title">
-              <input (change)="update()" matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime">
+              <input matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime" placeholder="Opis...">
             </a>
 
             <div class="item-vl"></div>
 
-            <!-- 
             <div class="r">
-              <button class="rBtnI" mat-icon-button color="accent" aria-label="Delete Item">
+              <button class="rBtnI" mat-icon-button (click)="cancelEdit();" aria-label="Cancel Edit">
                 X
               </button>
             </div>
-            -->
 
             <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == 0, 'pri1' :updatedItem.pri == 1, 'pri2' :updatedItem.pri == 2, 
             'pri3' :updatedItem.pri == 3, 'pri4' :updatedItem.pri == 4, 'pri5' :updatedItem.pri == 5 }">
-              |{{updatedItem.pri}}
+
+              <input style="width:16px;" matInput type="text" [(ngModel)]="updatedItem.pri" aria-label="Prioriteta"
+                placeholder="|" maxlength="1">
             </div>
 
-            <span *ngIf="updatedItem.for_id">
+            <span>
               <div class="item-vl"></div>
-              <a class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
-             'fid2' :updatedItem.for_id == 'D' || 'Bis'}">{{updatedItem.for_id}}</a>
+              <div class="item-infobox" [ngClass]="{'fid0' :updatedItem.for_id == 'W', 'fid1' :updatedItem.for_id == 'AN',
+             'fid2' :updatedItem.for_id == 'D' || 'Bis'}">
+
+                <input style="width: 60px;" matInput type="text" [(ngModel)]="updatedItem.for_id"
+                  aria-label="Prioriteta" maxlength="12">
+              </div>
+
             </span>
 
           </div>
@@ -353,8 +358,8 @@
           </div>
 
           <!-- Item Desc -->
-          <div class="item-desc" *ngIf="updatedItem.description">
-            <input (change)="update()" matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis">
+          <div class="item-desc">
+            <input matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis" placeholder="Opis...">
           </div>
 
           <!-- Item Footer -->
@@ -366,7 +371,7 @@
             </div>
 
 
-            <button mat-icon-button (click)="updateOn = !updateOn;" class="ri">
+            <button mat-icon-button (click)="update()" class="ri">
               <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">done</mat-icon>
             </button>
 

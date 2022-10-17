@@ -34,14 +34,15 @@ export class ListService {
 
   /** POST: ADD Item */
   addItem(item: any): Observable<any> {
-    console.log(item);
+    //console.log(item);
     return this.http.post<any>(this.baseUrl + "create.php", item, this.httpOptions).pipe(
-      tap((newItem: any) => console.log(`Service Created Item ID: ${newItem.name}`))
+      tap((newItem: any) => console.log(`Service Created Item ${newItem.name}, ID: ${newItem.id}`))
     );
   }
 
   /** POST: UPDATE Item */
-  updateItem(itm: List): Observable<any> {
+  updateItem(itm: any): Observable<any> {
+    //console.log(itm);
     return this.http.post(this.baseUrl + "update.php", itm, this.httpOptions).pipe(
       tap(_ => console.log(`Service Updated Item ID: ${itm.id}`)),
     );

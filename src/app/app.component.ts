@@ -79,11 +79,11 @@ export class AppComponent {
   small: boolean = false;
 
   // LIST
-  @Input() list: List[] = [];
+  list: List[] = [];
   @Input() selItem!: List;
   done: number = 0;
 
-  updatedItem!: List;
+  @Input() updatedItem!: List;
 
   loading = false;
   listErrTxt!: string;
@@ -155,8 +155,6 @@ export class AppComponent {
     var o = localStorage.getItem('acs');
     this.access = JSON.parse(o + "") === true;
     this.getList();
-
-    this.updatedItem
   }
 
   setFilter(id: number, val: string): void {
@@ -299,14 +297,34 @@ export class AppComponent {
   }
 
   updateOn = false;
+  tmpEditItem!: List;
+  editItemId = 0;
   select(i : number) {
-    this.updatedItem = this.list[i];
-    this.updateOn = !this.updateOn;
+    this.editItemId = i;
+
+    const tmpItemClone = JSON.parse(JSON.stringify(this.list[i]));
+    
+    const tmpEditClone = JSON.parse(JSON.stringify(this.list[i]));
+    
+
+    //const tmpItemClone: List;
+    //this.list.forEach((val: List) => tmpItemClone.push(Object.assign({}, val)));
+
+    //const tmpItemClone: List  = Object.assign([], this.list[i]);
+    //const tmpEditClone: List  = Object.assign([], this.list[i]);
+
+    this.updatedItem = tmpEditClone;
+    this.tmpEditItem = tmpItemClone;
+
+    this.updateOn = true;
+  }
+  
+  cancelEdit() {
+    //this.updatedItem = this.tmpEditItem;
+    this.updateOn = false;
   }
 
-  update(): void { // UPDATE ITEM
-
-
+  update(): void { // UPDATE ITEM   
     this.listService.updateItem(this.updatedItem) // TODO: Retry
       .pipe(
         catchError(() => {
@@ -318,10 +336,13 @@ export class AppComponent {
       )
       .subscribe({
         error: (error) => {
-          console.error('Error trashing item!', error);
+          console.error('Error updating item!', error);
           //this.newItemTxt = "Error! " + err;
         },
         complete: () => {
+          //console.log("UP ITM", this.updatedItem)
+          this.list[this.editItemId] = this.updatedItem;
+          this.updateOn=false;
           //this.list.splice(i, 1);
           //delete this.list[i];
           //console.log('Items Moved!', i, tmp);
