@@ -421,7 +421,7 @@ export class AppComponent {
     const user_id = this.pUserId.toString();
     const done = this.pDone;
     const description = this.pDesc.trim();
-    const pri = Number(this.pPri);
+    const pri = this.pPri.toString();
     const ord = this.pOrd;
     const category_id = this.pCatId.toString();
     const img = this.pImg.toString();

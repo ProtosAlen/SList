@@ -221,8 +221,8 @@
               </button>
             </div>
 
-            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
-            'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
+            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == '0', 'pri1' :p.pri == '1', 'pri2' :p.pri == '2', 
+            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5' }">
               |{{p.pri}}
             </div>
 
@@ -321,7 +321,7 @@
           <div class="item-head">
 
             <a class="item-title">
-              <input matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime" placeholder="Opis...">
+              <input style="width: 60px;" matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime" placeholder="Opis...">
             </a>
 
             <div class="item-vl"></div>
@@ -332,8 +332,8 @@
               </button>
             </div>
 
-            <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == 0, 'pri1' :updatedItem.pri == 1, 'pri2' :updatedItem.pri == 2, 
-            'pri3' :updatedItem.pri == 3, 'pri4' :updatedItem.pri == 4, 'pri5' :updatedItem.pri == 5 }">
+            <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == '0', 'pri1' :updatedItem.pri == '1', 'pri2' :updatedItem.pri == '2', 
+            'pri3' :updatedItem.pri == '3', 'pri4' :updatedItem.pri == '4', 'pri5' :updatedItem.pri == '5' }">
 
               <input style="width:16px;" matInput type="text" [(ngModel)]="updatedItem.pri" aria-label="Prioriteta"
                 placeholder="|" maxlength="1">
@@ -411,8 +411,8 @@
 
 
 
-            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == 0, 'pri1' :p.pri == 1, 'pri2' :p.pri == 2, 
-            'pri3' :p.pri == 3, 'pri4' :p.pri == 4, 'pri5' :p.pri == 5 }">
+            <div class="item-infobox" [ngClass]="{'pri0' :p.pri == '0', 'pri1' :p.pri == '1', 'pri2' :p.pri == '2', 
+            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5' }">
               |{{p.pri}}
             </div>
 
