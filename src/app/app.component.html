@@ -84,33 +84,20 @@
 
       <div>
 
-        <mat-form-field>
-          <mat-label>Slika</mat-label>
-          <input matInput #projectName [(ngModel)]="pImg">
-        </mat-form-field>
-
-
-        <div class="bannerD" *ngIf="pImg">
-          <img class="bannerImgD" src="https://api.infofix.eu/list/file/uploads/items/{{pImg}}">
-        </div>
-
-
-
         <div class="">
           <!-- TODO class add-item-footer -->
 
-          <mat-form-field>
+          <mat-form-field class="new-inp">
             <mat-label>Ime</mat-label>
             <input matInput [(ngModel)]="pName">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="new-inp">
             <mat-label>Opis</mat-label>
             <input matInput [(ngModel)]="pDesc">
           </mat-form-field>
 
-
-          <mat-form-field>
+          <mat-form-field class="new-inp">
             <mat-label>Prioriteta</mat-label>
             <mat-select [(value)]="pPri">
               <mat-option value="4">Visoka - 4</mat-option>
@@ -121,7 +108,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="new-inp">
             <mat-label>Kategorija</mat-label>
             <mat-select [(value)]="pCatId">
               <mat-option value="100">-- Brez --</mat-option>
@@ -132,14 +119,11 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0px 8px 24px 8px;">
-            <mat-form-field>
-              <mat-label>Oznaka</mat-label>
-              <input matInput [(ngModel)]="pFor">
-            </mat-form-field>
-          </mat-expansion-panel>
+
 
         </div>
+
+
 
         <!-- TODO IMAGE
         {{pUserId}}
@@ -152,6 +136,31 @@
           </button>
 
         </div>
+
+        <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 12px">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="font-size:14px">
+              <mat-icon class="new_item_icon">add</mat-icon>
+              Več...
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <span>
+            <mat-form-field class="new-inp">
+              <mat-label>Oznaka</mat-label>
+              <input matInput [(ngModel)]="pFor">
+            </mat-form-field>
+
+            <mat-form-field style="font-size: 10px; margin: 4px;">
+              <mat-label>Slika</mat-label>
+              <input matInput #projectName [(ngModel)]="pImg">
+            </mat-form-field>
+
+            <div class="bannerD" *ngIf="pImg">
+              <img class="bannerImgD" src="https://api.infofix.eu/list/file/uploads/items/{{pImg}}">
+            </div>
+          </span>
+        </mat-expansion-panel>
 
         <h2 class="status-txt">{{newItemTxt}}</h2>
       </div>
@@ -276,6 +285,7 @@
               </div>
             </span>
 
+            
             <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
               <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
             </button>
@@ -391,6 +401,12 @@
             <button mat-icon-button (click)="update()" class="ri">
               <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">done</mat-icon>
             </button>
+
+
+              <!-- <button class="ri r-btn-cancel" mat-icon-button (click)="cancelEdit();" aria-label="Cancel Edit">
+                <mat-icon style="font-size: 20px; margin-bottom: 16px; padding-right: 81px;">close</mat-icon>
+              </button> -->
+
 
           </div>
         </div>
@@ -521,6 +537,7 @@
 <footer>
   <div style="margin-top: 10em;">
 
+    {{list.length}}
 
     <div *ngIf="access">
       <button title="Trash Item" mat-icon-button (click)="setPage(2)">

@@ -206,18 +206,20 @@ export class AppComponent {
 
     if (this.role === 52112 || this.role === 27695 || this.role === 90091
       || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313
-      || this.role === 187 || this.role === 424) {
+      || this.role === 187 || this.role === 424 || this.role === 221) {
 
       if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
         || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
-        || this.uName === "Luna") {
+        || this.uName === "Luna"|| this.uName === "Jaš") {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
         setTimeout(() => {
           this.access = true;
+          this.getList();
           localStorage.setItem('acs', this.access + "");
         }, 900);
+
       }
       else {
         this.access = false;
