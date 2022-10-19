@@ -13,9 +13,7 @@
 
       <button title="Zaloga" mat-stroked-button class="toolbarBtn" (click)="setPage(0)">ZALOGA</button>
 
-      <span class="vlT">|</span>
-
-      <button title="Dodaj" mat-stroked-button class="toolbarBtn" (click)="accordion.openAll()">Dodaj +</button>
+      <!-- <span class="vlT">|</span> -->
     </div>
 
     <a class="logout" (click)="logout()">{{uName}} < </a>
@@ -76,7 +74,7 @@
 
   <!-- ADD NEW ITEM >> -->
   <mat-accordion multi>
-    <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0px 8px 24px 8px;">
+    <mat-expansion-panel class="mat-elevation-z0 new_item">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon class="new_item_icon">add</mat-icon>
@@ -134,11 +132,12 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Oznaka</mat-label>
-            <input matInput [(ngModel)]="pFor">
-          </mat-form-field>
-
+          <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 0px 8px 24px 8px;">
+            <mat-form-field>
+              <mat-label>Oznaka</mat-label>
+              <input matInput [(ngModel)]="pFor">
+            </mat-form-field>
+          </mat-expansion-panel>
 
         </div>
 
@@ -157,7 +156,11 @@
         <h2 class="status-txt">{{newItemTxt}}</h2>
       </div>
 
+
+
     </mat-expansion-panel>
+
+
   </mat-accordion>
   <!-- << ADD NEW ITEM -->
 
@@ -165,7 +168,7 @@
   <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked" class="head1">Sortiraj po prioriteti
   </mat-slide-toggle>
 
-  <span class="input">
+  <span>
     <mat-form-field appearance="outline" class="head1" style="width: 200px;">
       <mat-label>Kategorija</mat-label>
       <mat-select>
@@ -222,7 +225,7 @@
             </div>
 
             <div class="item-infobox" [ngClass]="{'pri0' :p.pri == '0', 'pri1' :p.pri == '1', 'pri2' :p.pri == '2', 
-            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5' }">
+            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5', 'p6' :p.pri == '6' }">
               |{{p.pri}}
             </div>
 
@@ -290,7 +293,13 @@
 
     <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
+      <br>
       <h1 class="h-red">BREZ PREDMETOV NA SEZNAMU!</h1>
+      <button title="Dodaj" mat-stroked-button class="toolbarBtn" (click)="accordion.openAll(); scrollToTop();">Dodaj
+        nov predmet
+        <mat-icon>add</mat-icon>
+      </button>
+      <br><br>
       <div *ngIf="selPage == 1">
         <button mat-stroked-button class="toolbarBtn" (click)="setPage(0)" [@listAnimation]>
           Seznam zalog >
@@ -321,7 +330,8 @@
           <div class="item-head">
 
             <a class="item-title">
-              <input style="width: 130px;" matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime" placeholder="Opis...">
+              <input style="width: 130px;" matInput type="text" [(ngModel)]="updatedItem.name" aria-label="Ime"
+                placeholder="Ime...">
             </a>
 
             <div class="item-vl"></div>
@@ -332,11 +342,12 @@
               </button>
             </div>
 
-            <div class="item-infobox" [ngClass]="{'pri0' :updatedItem.pri == '0', 'pri1' :updatedItem.pri == '1', 'pri2' :updatedItem.pri == '2', 
-            'pri3' :updatedItem.pri == '3', 'pri4' :updatedItem.pri == '4', 'pri5' :updatedItem.pri == '5' }">
+            <div class="item-infobox"
+              [ngClass]="{'pri0' :updatedItem.pri == '0', 'pri1' :updatedItem.pri == '1', 'pri2' :updatedItem.pri == '2', 
+            'pri3' :updatedItem.pri == '3', 'pri4' :updatedItem.pri == '4', 'pri5' :updatedItem.pri == '5', 'p6' :updatedItem.pri == '6'  }">
 
-              <input style="width:16px;" matInput type="text" [(ngModel)]="updatedItem.pri" aria-label="Prioriteta"
-                placeholder="|" maxlength="1">
+              <input style="width:16px;" class="numInput" matInput type="number" [(ngModel)]="updatedItem.pri"
+                aria-label="Prioriteta" placeholder="|" maxlength="1">
             </div>
 
             <span>
@@ -359,7 +370,8 @@
 
           <!-- Item Desc -->
           <div class="item-desc">
-            <input matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis" placeholder="Opis...">
+            <textarea matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis" placeholder="Opis..."
+              maxlength="255" style="max-height: 300px"></textarea>
           </div>
 
           <!-- Item Footer -->
@@ -412,7 +424,7 @@
 
 
             <div class="item-infobox" [ngClass]="{'pri0' :p.pri == '0', 'pri1' :p.pri == '1', 'pri2' :p.pri == '2', 
-            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5' }">
+            'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5', 'p6' :p.pri == '6' }">
               |{{p.pri}}
             </div>
 

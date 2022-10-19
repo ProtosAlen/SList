@@ -3,15 +3,31 @@
   font-size: 13px;
   letter-spacing: 0.5px;
   font-weight: 400;
-  margin-bottom: 8px;
-  margin-left: 8px;
+  margin: 16px;
+
   display: block;
+
+  
 }
 
 .headTb {
   background-color: #311b92;
   overflow: hidden;
 }
+
+ 
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 mat-form-field {
   //height: 3.7em;
@@ -30,6 +46,7 @@ mat-form-field {
 
 
 .new_item {
+  margin-bottom: 32px;
   box-shadow:
     0px 2px 5.5px rgba(0, 0, 0, 0.028),
     0px 6.7px 18.5px rgba(0, 0, 0, 0.042),
@@ -79,7 +96,7 @@ mat-form-field {
   max-width: 850px;
   margin: auto;
   padding: 4px;
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 .text3 {
@@ -244,12 +261,13 @@ input[type=number].login-input {
 
 /* ! ITEM ! */
 .item {
-  font-size: 16px;
-  width: 95%;
+  font-size: 16px;  
   margin: auto;
   padding-left: 0;
   list-style-type: none;
   text-align: left;
+
+  margin-top: -16px;
 }
 
 
@@ -397,6 +415,7 @@ input[type=number].login-input {
   margin-left: 0.6em;
   margin-right: 0.6em;
   display: inline-block;
+  
 }
 
 .item-title,
@@ -426,6 +445,19 @@ a:visited {
   padding: 16px 4px 4px 16px;
 
   background-color: #f8f8ff;
+
+
+}
+
+.item-desc input {
+    text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  line-clamp: 5 "… (continued on next page)";
+
+  max-height: 200px;
 }
 
 .item-desc a {
@@ -458,7 +490,7 @@ a:visited {
   margin: 0.4em;
   display: inline-block;
 
-  border: 2px solid yellow;
+  border: 2px solid green;
 }
 
 // FOR ID COLORS
@@ -493,6 +525,14 @@ a:visited {
 
 .pri4 {
   border: 2px solid red;
+}
+
+.pri5 {
+  border: 2px solid rgb(255, 51, 51);
+}
+
+.p6 {
+  border: 2px solid rgb(255, 0, 255);
 }
 
 // ITEM STOCK BOX
@@ -679,7 +719,7 @@ hr {
   //padding-left: 0.5em;
   height: 150px;
   width: auto;
-  background-color: white;
+  background-color: #f8f8ff;
 }
 
 .item-bannerImg {

@@ -206,10 +206,11 @@ export class AppComponent {
 
     if (this.role === 52112 || this.role === 27695 || this.role === 90091
       || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313
-      || this.role === 187) {
+      || this.role === 187 || this.role === 424) {
 
       if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
-        || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene") {
+        || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
+        || this.uName === "Luna") {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
@@ -259,7 +260,8 @@ export class AppComponent {
         next: (v) => {
           tempP = v.projects
           this.list = [];
-          //console.log('Get List:', v);
+          this.list = tempP; // TODO ?
+          console.log('Get List:', v.projects[0].name, tempP);
         },
         error: (error) => {
           this.listErrTxt = this.errMsg;
@@ -268,8 +270,10 @@ export class AppComponent {
         },
         complete: () => {
 
-          this.list = tempP; // TODO ?
+
           var tempList = this.list
+
+          console.log('t', tempList[0].user_id);
 
           const userFilter = tempList.filter(p => p.user_id === this.sService.getUser() + "");
 
@@ -287,7 +291,7 @@ export class AppComponent {
             tempList = tempList.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
             //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
           }
-
+          console.log('List:', tempList);
           this.list = tempList;
 
           this.loading = false;
@@ -299,13 +303,13 @@ export class AppComponent {
   updateOn = false;
   tmpEditItem!: List;
   editItemId = 0;
-  select(i : number) {
+  select(i: number) {
     this.editItemId = i;
 
     const tmpItemClone = JSON.parse(JSON.stringify(this.list[i]));
-    
+
     const tmpEditClone = JSON.parse(JSON.stringify(this.list[i]));
-    
+
 
     //const tmpItemClone: List;
     //this.list.forEach((val: List) => tmpItemClone.push(Object.assign({}, val)));
@@ -318,7 +322,7 @@ export class AppComponent {
 
     this.updateOn = true;
   }
-  
+
   cancelEdit() {
     //this.updatedItem = this.tmpEditItem;
     this.updateOn = false;
@@ -342,7 +346,7 @@ export class AppComponent {
         complete: () => {
           //console.log("UP ITM", this.updatedItem)
           this.list[this.editItemId] = this.updatedItem;
-          this.updateOn=false;
+          this.updateOn = false;
           //this.list.splice(i, 1);
           //delete this.list[i];
           //console.log('Items Moved!', i, tmp);
@@ -504,7 +508,7 @@ export class AppComponent {
           this.pName = "";
           this.pDesc = "";
 
-          this.newItemTxt = 'Predmet dodan!';
+          this.newItemTxt = 'Predmet dodan za nabavo!';
           //console.log('Predmet uspešno dodan!');
           //this.getList();
         }
@@ -517,13 +521,13 @@ export class AppComponent {
 
   scrollToTop() {
     (function smoothscroll() {
-        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        if (currentScroll > 0) {
-            window.requestAnimationFrame(smoothscroll);
-            window.scrollTo(0, currentScroll - (currentScroll / 4));
-        }
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 4));
+      }
     })();
-}
+  }
 
 
   /**
