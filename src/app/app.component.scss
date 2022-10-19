@@ -131,7 +131,7 @@ mat-form-field {
 }
 
 .logout {
-  color: white;
+  color: #f8f8ff;
   margin-left: auto;
   margin-right: 0;
   // Button
@@ -156,12 +156,12 @@ mat-form-field {
 
   background-color: #311b92;
   margin: 0.3em;
-  color: white;
+  color: #f8f8ff;
   padding: 5px;
   padding-left: 2em;
   padding-right: 2em;
   border-style: solid;
-  border-color: white;
+  border-color: #f8f8ff;
   border-width: 2px;
   border-radius: 50px;
 }
@@ -184,7 +184,7 @@ mat-form-field {
   font-size: 14px;
   letter-spacing: 0.25px;
   margin: 0.2em;
-  color: white;
+  color: #f8f8ff;
   background-color: #311b92;
   transition: .1s ease-in-out;
 }
@@ -198,7 +198,7 @@ mat-form-field {
   background-color: #311b92;
   padding: 2em;
   margin-bottom: 2em;
-  color: white;
+  color: #f8f8ff;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -285,7 +285,7 @@ input[type=number].login-input {
   //justify-content: space-between;
   //box-sizing: border-box;
   cursor: move;
-  //background: white;
+  //background: #f8f8ff;
   //font-size: 14px;
 }
 
@@ -350,7 +350,7 @@ input[type=number].login-input {
 // SMALL ITEM HEAD
 .small_item-head {
   margin-top: 12px;
-  color: white;
+  color: #f8f8ff;
   background-color: #331b92;
   overflow: hidden;
 
@@ -360,7 +360,7 @@ input[type=number].login-input {
 }
 
 .small_item-footer {
-  background-color: white;
+  background-color: #f8f8ff;
   padding: 4px 4px 4px 4px;
 
   border-radius: 0px 0px 4px 4px;
@@ -369,7 +369,7 @@ input[type=number].login-input {
 // ITEM HEAD
 .item-head {
 
-  color: white;
+  color: #f8f8ff;
   background-color: #331b92;
   overflow: hidden;
 
@@ -422,7 +422,7 @@ input[type=number].login-input {
 .item-user,
 .item-status,
 a:link {
-  color: white;
+  color: #f8f8ff;
   text-decoration: none;
   vertical-align: middle;
 }
@@ -431,7 +431,7 @@ a:link {
 .item-user,
 .item-status,
 a:visited {
-  color: white;
+  color: #f8f8ff;
 }
 
 // ITEM BODY
@@ -571,7 +571,6 @@ a:visited {
 }
 
 .item-footer {
-  background-color: white;
   padding: 12px 4px 12px 4px;
 
   border-radius: 0px 0px 4px 4px;
@@ -603,7 +602,7 @@ a:visited {
   border-radius: 20px;
   transition-duration: 0.1s;
 
-  color: white;
+  color: #f8f8ff;
   
 }
 
@@ -689,7 +688,7 @@ a:visited {
 
   background-color: #00000000;
   border-color: #00000000;
-  color: white;
+  color: #f8f8ff;
   font-weight: 300;
   display: inline-block;
   vertical-align: middle;

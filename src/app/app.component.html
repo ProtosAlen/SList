@@ -246,6 +246,11 @@
 
           </div>
 
+          <!-- Item Desc -->
+          <div class="item-desc" *ngIf="p.description">
+            {{p.description}}
+          </div>
+
           <div class="small_item-footer">
             <div class="item-footer-pill tag_icon" [ngClass]="{'gr' :p.done == 0, 'fr' :p.done == 1}">
               <mat-icon>category</mat-icon>
