@@ -285,7 +285,7 @@
               </div>
             </span>
 
-            
+
             <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
               <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
             </button>
@@ -403,7 +403,7 @@
             </button>
 
 
-              <!-- <button class="ri r-btn-cancel" mat-icon-button (click)="cancelEdit();" aria-label="Cancel Edit">
+            <!-- <button class="ri r-btn-cancel" mat-icon-button (click)="cancelEdit();" aria-label="Cancel Edit">
                 <mat-icon style="font-size: 20px; margin-bottom: 16px; padding-right: 81px;">close</mat-icon>
               </button> -->
 
@@ -507,6 +507,10 @@
               <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
             </button>
 
+            <!-- <button mat-icon-button (click)="select(i); scrollToTop();" class="ri" style="margin-bottom: 24px; margin-left: -8px;">
+              <mat-icon style="font-size: 20px;">edit</mat-icon>
+            </button> -->
+
           </div>
         </div>
 
@@ -530,14 +534,19 @@
 
 
 
+</div>
 
+<div class="mat-body">
+  Št. predmetov: {{list.length}}
 </div>
 
 <!-- FOOTER & MISC -->
 <footer>
+
+
   <div style="margin-top: 10em;">
 
-    {{list.length}}
+
 
     <div *ngIf="access">
       <button title="Trash Item" mat-icon-button (click)="setPage(2)">
