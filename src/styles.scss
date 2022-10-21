@@ -157,11 +157,12 @@ $S-List-theme: mat.define-light-theme((
 
 html,
 body {
-  height: 100%;
-  scrollbar-color: #311b92 lightgray;
+  min-height: 1000px;
+  max-height: 100%;
+  scrollbar-color: #311b92 #e9e4ed;
   scrollbar-width: thin;
   margin: 0;
-  color: black;
+  color: rgb(19, 19, 19);
   text-align: center;
   background-color: #e9e4ed;
 }

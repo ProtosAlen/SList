@@ -44,3 +44,4 @@ Thumbs.db
 # Other
 /_old/*
 *.log
+src/app/_mock/data.json

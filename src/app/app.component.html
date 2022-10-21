@@ -130,12 +130,12 @@
         <iframe src="https://api.infofix.eu/list/file/" title="Fup"></iframe>  -->
 
 
-        
+
         <mat-expansion-panel class="new_item" style="margin: 12px;">
           <mat-expansion-panel-header>
             <mat-panel-title style="font-size:14px">
               <mat-icon class="new_item_icon">add</mat-icon>
-              Več podrobnosti . . . 
+              Več podrobnosti . . .
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -158,7 +158,8 @@
 
 
         <div class="buttons">
-          <button mat-flat-button color="primary" (click)="add();" style="float: right;   padding: 4px 12px 4px 12px; margin-left: 0;">
+          <button mat-flat-button color="primary" (click)="add();"
+            style="float: right;   padding: 4px 12px 4px 12px; margin-left: 0;">
             <span>+ Dodaj predmet</span>
           </button>
           <button mat-stroked-button color="warn" (click)="accordion.closeAll()" style="float: right;">Skrij</button>
@@ -177,11 +178,12 @@
   </mat-accordion>
   <!-- << ADD NEW ITEM -->
 
-  <br style="margin-bottom: 16px;">
-  <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked" class="head1">Razvrsti po prioriteti
-  </mat-slide-toggle>
+  <span style="padding-bottom: -8px;">
+    <br style="margin-bottom: 8px;">
+    <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked" class="head1">Razvrsti po prioriteti
+    </mat-slide-toggle>
 
-  <span>
+
     <mat-form-field appearance="outline" class="head1" style="width: 200px;">
       <mat-label>Kategorija</mat-label>
       <mat-select>
