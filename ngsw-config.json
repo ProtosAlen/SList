@@ -25,6 +25,26 @@
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
       }
+    },
+    {
+      "name": "img",
+      "installMode": "lazy",
+      "resources": {
+          "urls": ["https://api.infofix.eu/list/file/uploads/items/**"]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-performance",
+      "urls": [
+        "https://api.infofix.eu/list/projects/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 200,
+        "maxAge": "30d2h"
+      }
     }
   ]
 }

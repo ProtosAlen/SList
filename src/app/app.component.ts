@@ -204,13 +204,15 @@ export class AppComponent {
   loginDev() {
     this.role = parseInt(this.role + "");
 
-    if (this.role === 52112 || this.role === 27695 || this.role === 90091
-      || this.role === 60316 || this.role === 21554 || this.role === 21551 || this.role === 52313
-      || this.role === 187 || this.role === 424 || this.role === 221) {
+    if (this.role === 52112 || this.role === 27695 || this.role === 60316 
+      || this.role === 90091 || this.role === 21554 || this.role === 21551 
+      || this.role === 187 || this.role === 424 || this.role === 221
+      || this.role === 552 || this.role === 52313 || this.role === 112) {
 
-      if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
+      if (this.uName === "Alen" || this.uName === "Dev" || this.uName === "Ata" 
         || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
-        || this.uName === "Luna" || this.uName === "Jaš") {
+        || this.uName === "Luna" || this.uName === "Jaš" || this.uName === "Gregor"
+        || this.uName === "Primož" ) {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();

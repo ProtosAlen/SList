@@ -315,7 +315,7 @@
     <!-- EMPTY VIEW >> -->
     <div *ngIf="list.length === 0 && !loading">
       <br>
-      <h1 class="h-red">BREZ PREDMETOV NA SEZNAMU!</h1>
+      <h1 class="h-red">BREZ PREDMETOV NA SEZNAMU</h1>
       <button title="Dodaj" mat-stroked-button class="toolbarBtn" (click)="accordion.openAll(); scrollToTop();">Dodaj
         nov predmet
         <mat-icon>add</mat-icon>
@@ -392,7 +392,7 @@
           <!-- Item Desc -->
           <div class="item-desc">
             <textarea matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis" placeholder="Opis..."
-              maxlength="255" style="max-height: 300px"></textarea>
+              maxlength="255" style="max-height: 300px;"></textarea>
           </div>
 
           <!-- Item Footer -->
@@ -509,8 +509,8 @@
               VRNI
             </div>
 
-            <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
-              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
+            <button mat-icon-button (click)="select(i); scrollToTop();" class="edit_btn">
+              <mat-icon style="font-size: 19px; margin-bottom: 8px">edit</mat-icon>
             </button>
 
             <!-- <button mat-icon-button (click)="select(i); scrollToTop();" class="ri" style="margin-bottom: 24px; margin-left: -8px;">
@@ -550,9 +550,7 @@
 <footer>
 
 
-  <div style="margin-top: 10em;">
-
-
+  <div style="padding: 64px 4px 46px 4px;">
 
     <div *ngIf="access">
       <button title="Trash Item" mat-icon-button (click)="setPage(2)">
@@ -561,9 +559,10 @@
     </div>
     <br>
 
-    <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">SList © Intercell Labs - Made with ❤️</a>
+    <a href="https://itc.infofix.eu/" class="footer-made">SList© Ꮢv-2022-{{appVersion}}</a>
     <br>
-    <a href="https://itc.infofix.eu/" class="footer-made">Ꮢ2022v{{appVersion}}</a>
+    <a href="https://itc.infofix.eu/" target="_blank" class="footer-made">Designed with ❤️ @Intercell_Labs</a>
+
   </div>
 </footer>
 
