@@ -36,7 +36,7 @@ export class ListService {
   addItem(item: any): Observable<any> {
     //console.log(item);
     return this.http.post<any>(this.baseUrl + "create.php", item, this.httpOptions).pipe(
-      tap((newItem: any) => console.log(`Service Created Item ${newItem.name}, ID: ${newItem.id}`))
+      tap((_) => console.log(`Service Created Item ${item.name}`))
     );
   }
 

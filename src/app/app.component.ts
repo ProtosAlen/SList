@@ -210,7 +210,7 @@ export class AppComponent {
 
       if (this.uName === "Alen" || this.uName === "Ata" || this.uName === "Primož"
         || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
-        || this.uName === "Luna"|| this.uName === "Jaš") {
+        || this.uName === "Luna" || this.uName === "Jaš") {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
@@ -263,7 +263,7 @@ export class AppComponent {
           tempP = v.projects
           this.list = [];
           this.list = tempP; // TODO ?
-          console.log('Get List:', v.projects[0].name, tempP);
+          //console.log('Get List:', v.projects[0].name, tempP);
         },
         error: (error) => {
           this.listErrTxt = this.errMsg;
@@ -275,7 +275,7 @@ export class AppComponent {
 
           var tempList = this.list
 
-          console.log('t', tempList[0].user_id);
+          //console.log('t', tempList[0].user_id);
 
           const userFilter = tempList.filter(p => p.user_id === this.sService.getUser() + "");
 
@@ -293,7 +293,7 @@ export class AppComponent {
             tempList = tempList.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
             //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
           }
-          console.log('List:', tempList);
+          //console.log('List:', tempList);
           this.list = tempList;
 
           this.loading = false;
@@ -505,12 +505,12 @@ export class AppComponent {
               }
             });
 
+          this.newItemTxt = 'Predmet "' + this.pName + '" dodan za nabavo!';
 
           // Clear inputs
           this.pName = "";
           this.pDesc = "";
 
-          this.newItemTxt = 'Predmet dodan za nabavo!';
           //console.log('Predmet uspešno dodan!');
           //this.getList();
         }

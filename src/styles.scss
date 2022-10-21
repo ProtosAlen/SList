@@ -1,7 +1,112 @@
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+
+
+$md-slist: (
+    50 : #e6e4f2,
+    100 : #c1bbde,
+    200 : #988dc9,
+    300 : #6f5fb3,
+    400 : #503da2,
+    500 : #311b92,
+    600 : #2c188a,
+    700 : #25147f,
+    800 : #1f1075,
+    900 : #130863,
+    A100 : #9e95ff,
+    A200 : #6f62ff,
+    A400 : #412fff,
+    A700 : #2915ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$md-warn: (
+    50 : #f9e0e0,
+    100 : #f0b3b3,
+    200 : #e68080,
+    300 : #db4d4d,
+    400 : #d42626,
+    500 : #cc0000,
+    600 : #c70000,
+    700 : #c00000,
+    800 : #b90000,
+    900 : #ad0000,
+    A100 : #ffd7d7,
+    A200 : #ffa4a4,
+    A400 : #ff7171,
+    A700 : #ff5858,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-acc: (
+    50 : #eff2e4,
+    100 : #d8debb,
+    200 : #bec98d,
+    300 : #a3b35f,
+    400 : #90a23d,
+    500 : #7c921b,
+    600 : #748a18,
+    700 : #697f14,
+    800 : #5f7510,
+    900 : #4c6308,
+    A100 : #e1ff95,
+    A200 : #d2ff62,
+    A400 : #c4ff2f,
+    A700 : #bdff15,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
 @use '@angular/material' as mat;
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -12,11 +117,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$S-List-primary: mat.define-palette(mat.$indigo-palette);
-$S-List-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$S-List-primary: mat.define-palette($md-slist);
+$S-List-accent: mat.define-palette($md-acc, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$S-List-warn: mat.define-palette(mat.$red-palette);
+$S-List-warn: mat.define-palette($md-warn);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".

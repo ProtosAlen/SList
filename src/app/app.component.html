@@ -129,19 +129,13 @@
         {{pUserId}}
         <iframe src="https://api.infofix.eu/list/file/" title="Fup"></iframe>  -->
 
-        <div class="buttons">
-          <button mat-stroked-button color="warn" (click)="accordion.closeAll()">Prekliči</button>
-          <button mat-flat-button color="primary" (click)="add();">
-            <span>Dodaj predmet</span>
-          </button>
 
-        </div>
-
-        <mat-expansion-panel class="mat-elevation-z0 new_item" style="margin: 12px">
+        
+        <mat-expansion-panel class="new_item" style="margin: 12px;">
           <mat-expansion-panel-header>
             <mat-panel-title style="font-size:14px">
               <mat-icon class="new_item_icon">add</mat-icon>
-              Več...
+              Več podrobnosti . . . 
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -161,6 +155,16 @@
             </div>
           </span>
         </mat-expansion-panel>
+
+
+        <div class="buttons">
+          <button mat-flat-button color="primary" (click)="add();" style="float: right;   padding: 4px 12px 4px 12px; margin-left: 0;">
+            <span>+ Dodaj predmet</span>
+          </button>
+          <button mat-stroked-button color="warn" (click)="accordion.closeAll()" style="float: right;">Skrij</button>
+        </div>
+
+        <br style="margin: 16px;">
 
         <h2 class="status-txt">{{newItemTxt}}</h2>
       </div>
