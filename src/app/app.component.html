@@ -23,7 +23,7 @@
 <!-- << TOOLBAR -->
 
 <!-- LOGIN PAGE >> -->
-<div *ngIf="!access" style="margin-top: 5em;">
+<div *ngIf="!access" style="margin-top:64px;">
 
 
   <div>
@@ -61,7 +61,7 @@
 
   <div class="sect-0">
     <button mat-raised-button class="btn-a" (click)="loginDev();">
-      VSTOP -_>
+      >_ VSTOP
     </button>
   </div>
 
@@ -156,19 +156,20 @@
           </span>
         </mat-expansion-panel>
 
+        <h2 class="status-txt">{{newItemTxt}}</h2>
 
         <div class="buttons">
           <button mat-flat-button color="primary" (click)="add();"
-            style="float: right;   padding: 4px 12px 4px 12px; margin-left: 0;">
-            <span>+ Dodaj predmet</span>
+            style="float: right; padding: 4px 12px 4px 12px; margin-left: 0; margin-right: 0;">
+            + Dodaj predmet
           </button>
           <button mat-stroked-button color="warn" (click)="accordion.closeAll()" style="float: right;">Skrij</button>
         </div>
 
-        <br style="margin: 16px;">
 
-        <h2 class="status-txt">{{newItemTxt}}</h2>
       </div>
+
+
 
 
 
@@ -180,7 +181,7 @@
 
   <span style="padding-bottom: -8px;">
     <br style="margin-bottom: 8px;">
-    <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="isChecked" class="head1">Razvrsti po prioriteti
+    <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="sortOn" class="head1">Razvrsti po prioriteti
     </mat-slide-toggle>
 
 
@@ -528,6 +529,11 @@
   </ol>
   <!-- << ITEM LIST -->
 
+  <div class="mat-body">
+    Št. predmetov: {{list.length}}
+  </div>
+  
+
   <!-- LOADING INFO >> -->
   <div *ngIf="loading">. . .</div>
 
@@ -542,9 +548,6 @@
 
 </div>
 
-<div class="mat-body">
-  Št. predmetov: {{list.length}}
-</div>
 
 <!-- FOOTER & MISC -->
 <footer>

@@ -45,3 +45,4 @@ Thumbs.db
 /_old/*
 *.log
 src/app/_mock/data.json
+package-lock.json

@@ -109,19 +109,24 @@ mat-form-field {
 }
 
 .text3 {
+  padding-top: 16px;
+
   // Headline 4
-  font-family: 'Lato', sans-serif;
-  font-size: 35px;
-  margin: 0.5em;
-  letter-spacing: 0px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 29px;
+  margin: 4px 16px 24px 16px;
+  font-weight: 400;
+  letter-spacing: 1;
   line-height: 1.2;
 }
 
 .login-txt {
+
+
   // Headline 6
   font-family: 'Raleway', sans-serif;
   font-size: 20px;
-  letter-spacing: 0px;
+  letter-spacing: 2px;
   width: 150px;
 }
 
@@ -141,8 +146,8 @@ mat-form-field {
 
   line-height: 24px;
 
-  margin-top: 16px;
-  margin-right: 12px;
+  margin-top: 8px;
+  margin-right: 8px;
 
   padding: 4px 8px 4px 8px;
   border-radius: 20px;
@@ -168,21 +173,20 @@ mat-form-field {
 }
 
 .btn-a {
-  // Headline 5
   font-family: 'Raleway', sans-serif;
-  font-size: 24px;
-  letter-spacing: 0.25px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 300;
 
-  background-color: #311b92;
-  margin: 0.3em;
   color: #f8f8ff;
-  padding: 5px;
-  padding-left: 2em;
-  padding-right: 2em;
+  background-color: #311b92;
   border-style: solid;
   border-color: #f8f8ff;
   border-width: 2px;
-  border-radius: 50px;
+  border-radius: 24px;
+
+
+  padding: 4px 24px 4px 24px;
 }
 
 .btn-a:hover {
@@ -234,7 +238,7 @@ input[type=number].login-input {
 
 
 .logoImgAuth {
-  height: 96px;
+  height: 104px;
   width: auto;
 }
 
@@ -410,9 +414,9 @@ input[type=number].login-input {
   letter-spacing: 0px;
   font-weight: 400;
 
-  color: black;
+  color: rgb(9, 9, 9);
 
-  margin: 0.5em;
+  padding-top: 16px;
 }
 
 .item-title {
@@ -769,11 +773,11 @@ hr {
   }
 
   .logo {
-    height: 32px;
+    height: 40px;
   }
 
   .logo-img {
-    width: 32px;
+    width: 40px;
   }
 }
 

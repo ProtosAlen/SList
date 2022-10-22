@@ -57,7 +57,7 @@ interface Select {
 export class AppComponent {
 
 
-  isChecked = true; // Sort by Priority
+  sortOn = true; // Sort by Priority
 
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
@@ -67,7 +67,7 @@ export class AppComponent {
 
   // LOGIN
   access = false;
-  accessMsg = 'Vnesite ime in geslo:';
+  accessMsg = 'Vnesite \nime in geslo';
   hidePass: any;
   role: number = 0;
   uName = "";
@@ -198,7 +198,7 @@ export class AppComponent {
   logout(): void {
     localStorage.clear();
     this.access = false;
-    this.accessMsg = 'Ponovno se prijavite:';
+    this.accessMsg = 'Ponovno se prijavite';
   }
 
   loginDev() {
@@ -290,7 +290,7 @@ export class AppComponent {
             tempList = tempList.filter(p => p.for_id === this.tagsSel);
           }
 
-          if (this.isChecked) {
+          if (this.sortOn) {
             tempList = tempList.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
             tempList = tempList.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
             //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
@@ -496,7 +496,7 @@ export class AppComponent {
                 const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
                 this.list = doneFilter;
 
-                if (this.isChecked) {
+                if (this.sortOn) {
                   this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
                   this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
                   //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
