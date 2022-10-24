@@ -207,12 +207,14 @@ export class AppComponent {
     if (this.role === 52112 || this.role === 27695 || this.role === 60316 
       || this.role === 90091 || this.role === 21554 || this.role === 21551 
       || this.role === 187 || this.role === 424 || this.role === 221
-      || this.role === 552 || this.role === 52313 || this.role === 112) {
+      || this.role === 552 || this.role === 52313 || this.role === 112
+      || this.role === 312) {
 
       if (this.uName === "Alen" || this.uName === "Dev" || this.uName === "Ata" 
         || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
         || this.uName === "Luna" || this.uName === "Jaš" || this.uName === "Gregor"
-        || this.uName === "Primož" ) {
+        || this.uName === "Primož"
+        || this.uName === "Marino" ) {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
@@ -264,7 +266,7 @@ export class AppComponent {
         next: (v) => {
           tempP = v.projects
           this.list = [];
-          this.list = tempP; // TODO ?
+
           //console.log('Get List:', v.projects[0].name, tempP);
         },
         error: (error) => {
@@ -273,7 +275,7 @@ export class AppComponent {
           console.error('Error Loading Items!', error);
         },
         complete: () => {
-
+          this.list = tempP; // TODO ?
 
           var tempList = this.list
 
@@ -464,54 +466,15 @@ export class AppComponent {
         },
         complete: () => {
           //this.list.push(customObj);
-
-
-          this.loading = true;
-          this.listErrTxt = '';
-
-          this.listService.getAll()
-            .pipe(
-              catchError(() => {
-                return throwError(() => new Error('Error!'));
-              }),
-              take(1),
-              timeout(2500),
-              catchError(this.handleError<List>('getAll'))
-            )
-            .subscribe({
-              next: (v) => {
-                this.tp = v.projects
-                //console.log('Get List:', v);
-              },
-              error: (error) => {
-                this.listErrTxt = this.errMsg;
-                this.loading = false;
-                console.error('Error Loading Items!', error);
-              },
-              complete: () => {
-                this.list = this.tp;
-                const userFilter = this.list.filter(p => p.user_id === this.sService.getUser() + "");
-                this.list = userFilter;
-
-                const doneFilter = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
-                this.list = doneFilter;
-
-                if (this.sortOn) {
-                  this.list.sort((b, a) => a.id.toString().localeCompare(b.id.toString()));
-                  this.list.sort((b, a) => a.pri.toString().localeCompare(b.pri.toString()));
-                  //this.list.sort((b, a) => a.ord.toString().localeCompare(b.ord.toString())); TODO: Sort by order number, not priority
-                }
-
-                this.loading = false;
-                //console.log('Get All Items Complete!');
-              }
-            });
+          this.getList();
 
           this.newItemTxt = 'Predmet "' + this.pName + '" dodan za nabavo!';
 
           // Clear inputs
           this.pName = "";
           this.pDesc = "";
+
+          this.listErrTxt = '';
 
           //console.log('Predmet uspešno dodan!');
           //this.getList();
