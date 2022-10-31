@@ -87,8 +87,7 @@ export class AppComponent {
 
   loading = false;
   listErrTxt!: string;
-
-
+  
   errMsg = "";
   tp: List[] = []; // TODO const
 
@@ -327,6 +326,8 @@ export class AppComponent {
     this.tmpEditItem = tmpItemClone;
 
     this.updateOn = true;
+
+    this.scrollToTop();
   }
 
   cancelEdit() {

@@ -73,7 +73,7 @@
 <div *ngIf="access" class="bodyMain">
 
   <!-- ADD NEW ITEM >> -->
-  <mat-accordion multi>
+  <mat-accordion multi *ngIf="!updateOn">
     <mat-expansion-panel class="mat-elevation-z0 new_item">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -112,10 +112,10 @@
             <mat-label>Kategorija</mat-label>
             <mat-select [(value)]="pCatId">
               <mat-option value="100">-- Brez --</mat-option>
-              <mat-option value="1">Hrana</mat-option>
-              <mat-option value="2">Oblačila</mat-option>
-              <mat-option value="3">Pohištvo</mat-option>
-              <mat-option value="4">Orodje</mat-option>
+              <mat-option value="1"><mat-icon style="font-size: 20px;">local_dining</mat-icon>Hrana</mat-option>
+              <mat-option value="2"><mat-icon style="font-size: 20px;">checkroom</mat-icon>Oblačila</mat-option>
+              <mat-option value="3"><mat-icon style="font-size: 20px;">chair</mat-icon>Pohištvo</mat-option>
+              <mat-option value="4"><mat-icon style="font-size: 20px;">build</mat-icon>Orodje</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -179,7 +179,9 @@
   </mat-accordion>
   <!-- << ADD NEW ITEM -->
 
-  <span style="padding-bottom: -8px;">
+  <br style="margin-bottom: 144px;" *ngIf="updateOn">
+
+  <span style="padding-bottom: -8px;" *ngIf="!updateOn">
     <br style="margin-bottom: 8px;">
     <mat-slide-toggle (toggleChange)="getList()" [(ngModel)]="sortOn" class="head1">Razvrsti po prioriteti
     </mat-slide-toggle>
@@ -292,8 +294,8 @@
             </span>
 
 
-            <button mat-icon-button (click)="select(i); scrollToTop();" class="ri">
-              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit</mat-icon>
+            <button mat-icon-button (click)="select(i);" class="ri">
+              <mat-icon style="font-size: 20px; margin-bottom: 24px; margin-left: -8px;">edit_note</mat-icon>
             </button>
 
 
@@ -404,7 +406,7 @@
                 <mat-label>Kategorija</mat-label>
                 <mat-select [(value)]="updatedItem.category_id">
                   <mat-option value="100">-- Brez --</mat-option>
-                  <mat-option value="1">Hrana</mat-option>
+                  <mat-option value="1">Hrana <mat-icon style="font-size: 20px;">local_dining</mat-icon></mat-option>
                   <mat-option value="2">Oblačila</mat-option>
                   <mat-option value="3">Pohištvo</mat-option>
                   <mat-option value="4">Orodje</mat-option>
@@ -518,8 +520,8 @@
               VRNI
             </div>
 
-            <button mat-icon-button (click)="select(i); scrollToTop();" class="edit_btn">
-              <mat-icon style="font-size: 19px; margin-bottom: 8px">edit</mat-icon>
+            <button mat-icon-button (click)="select(i);" class="edit_btn">
+              <mat-icon style="font-size:19px; margin-bottom:12px">edit</mat-icon>
             </button>
 
             <!-- <button mat-icon-button (click)="select(i); scrollToTop();" class="ri" style="margin-bottom: 24px; margin-left: -8px;">
@@ -564,7 +566,7 @@
   <div style="padding: 64px 4px 46px 4px;">
 
     <div *ngIf="access">
-      <button title="Trash Item" mat-icon-button (click)="setPage(2)">
+      <button title="Seznam smeti" mat-icon-button (click)="setPage(2)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
