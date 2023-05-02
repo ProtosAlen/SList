@@ -6,12 +6,13 @@ import { ListService } from './_services/list.service';
 import { SharedService } from './_services/shared.service';
 
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
-import { timeout, take, catchError, Observable, concat, first, interval, throwError } from 'rxjs';
+import { timeout, take, catchError, Observable, concat, first, interval, throwError, retry } from 'rxjs';
 
 import packageJson from '../../package.json';
 import { SwUpdate } from '@angular/service-worker';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { GlobalErrorHandler } from './_services/handle-error/global-error-handler';
 
 const listAnimation = trigger('listAnimation', [
   transition('* => *', [
@@ -210,7 +211,8 @@ export class AppComponent {
       || this.role === 312) {
 
       if (this.uName === "Alen" || this.uName === "Dev" || this.uName === "Ata" 
-        || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
+      || this.uName === "Mama"   
+      || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
         || this.uName === "Luna" || this.uName === "Jaš" || this.uName === "Gregor"
         || this.uName === "Primož"
         || this.uName === "Marino" ) {
@@ -335,16 +337,13 @@ export class AppComponent {
     this.updateOn = false;
   }
 
+  throwError(){
+    throw new Error('My Pretty Error');
+  }
+
   update(): void { // UPDATE ITEM   
     this.listService.updateItem(this.updatedItem) // TODO: Retry
-      .pipe(
-        catchError(() => {
-          return throwError(() => new Error('Error!'));
-        }),
-        take(1),
-        timeout(2500),
-        catchError(this.handleError<List>('updateItem'))
-      )
+    .pipe(retry(1), throwError)
       .subscribe({
         error: (error) => {
           console.error('Error updating item!', error);
@@ -510,6 +509,7 @@ export class AppComponent {
         console.error('Handling error 401 or 403...', error);
       }
       this.errMsg = "Error!"
+      throwError;
       // TODO: better handling
       console.error(`Error: ${error.message}`,
         '...handling...', error, operation, error.statusText);

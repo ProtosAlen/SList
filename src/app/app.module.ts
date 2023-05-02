@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +25,8 @@ import { environment } from '../environments/environment';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import { GlobalErrorHandler } from './_services/handle-error/global-error-handler';
+import { ServerErrorInterceptor } from './_services/handle-error/server-error-interceptor';
 
 
 @NgModule({
@@ -58,7 +60,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
