@@ -41,8 +41,8 @@ export class ListService {
   }
 
   /** POST: UPDATE Item */
-  updateItem(itm: any): Observable<any> {
-    //console.log(itm);
+  updateItem(itm: List): Observable<any> {
+    console.log(itm);
     return this.http.post(this.baseUrl + "update.php", itm, this.httpOptions).pipe(
       tap(_ => console.log(`Service Updated Item ID: ${itm.id}`)),
     );

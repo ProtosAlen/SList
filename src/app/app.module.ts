@@ -9,13 +9,13 @@ import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSelectModule } from '@angular/material/select';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,9 +24,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
-import { GlobalErrorHandler } from './_services/handle-error/global-error-handler';
-import { ServerErrorInterceptor } from './_services/handle-error/server-error-interceptor';
+import {MatLegacySlideToggleModule as MatSlideToggleModule} from '@angular/material/legacy-slide-toggle'; 
 
 
 @NgModule({
@@ -61,8 +59,6 @@ import { ServerErrorInterceptor } from './_services/handle-error/server-error-in
     })
   ],
   providers: [
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

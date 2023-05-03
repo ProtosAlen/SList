@@ -12,7 +12,6 @@ import packageJson from '../../package.json';
 import { SwUpdate } from '@angular/service-worker';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { GlobalErrorHandler } from './_services/handle-error/global-error-handler';
 
 const listAnimation = trigger('listAnimation', [
   transition('* => *', [
@@ -84,11 +83,11 @@ export class AppComponent {
   @Input() selItem!: List;
   done: number = 0;
 
-  @Input() updatedItem!: List;
+  @Input() updatedItem: List = new List;
 
   loading = false;
   listErrTxt!: string;
-  
+
   errMsg = "";
   tp: List[] = []; // TODO const
 
@@ -138,7 +137,8 @@ export class AppComponent {
     const everySixHours$ = interval(22 * 60 * 60 * 10000); //22h -- ?
     const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
 
-    everySixHoursOnceAppIsStable$.subscribe(() => updates.checkForUpdate());
+    if (updates.isEnabled)
+      everySixHoursOnceAppIsStable$.subscribe(() => updates.checkForUpdate());
 
 
     var a = this.sService.userID;
@@ -204,18 +204,18 @@ export class AppComponent {
   loginDev() {
     this.role = parseInt(this.role + "");
 
-    if (this.role === 52112 || this.role === 27695 || this.role === 60316 
-      || this.role === 90091 || this.role === 21554 || this.role === 21551 
+    if (this.role === 52112 || this.role === 27695 || this.role === 60316
+      || this.role === 90091 || this.role === 21554 || this.role === 21551
       || this.role === 187 || this.role === 424 || this.role === 221
       || this.role === 552 || this.role === 52313 || this.role === 112
       || this.role === 312) {
 
-      if (this.uName === "Alen" || this.uName === "Dev" || this.uName === "Ata" 
-      || this.uName === "Mama"   
-      || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
+      if (this.uName === "Alen" || this.uName === "Dev" || this.uName === "Ata"
+        || this.uName === "Mama"
+        || this.uName === "Tjaša" || this.uName === "Teo" || this.uName === "Rene"
         || this.uName === "Luna" || this.uName === "Jaš" || this.uName === "Gregor"
         || this.uName === "Primož"
-        || this.uName === "Marino" ) {
+        || this.uName === "Marino") {
 
         this.accessMsg = 'Dobrodošli, ' + this.uName + '! . . .';
         this.setUser();
@@ -313,9 +313,9 @@ export class AppComponent {
   select(i: number) {
     this.editItemId = i;
 
-    const tmpItemClone = JSON.parse(JSON.stringify(this.list[i]));
+    const tmpItemClone: List = JSON.parse(JSON.stringify(this.list[i]));
 
-    const tmpEditClone = JSON.parse(JSON.stringify(this.list[i]));
+    const tmpEditClone: List = JSON.parse(JSON.stringify(this.list[i]));
 
 
     //const tmpItemClone: List;
@@ -337,13 +337,16 @@ export class AppComponent {
     this.updateOn = false;
   }
 
-  throwError(){
-    throw new Error('My Pretty Error');
-  }
-
   update(): void { // UPDATE ITEM   
     this.listService.updateItem(this.updatedItem) // TODO: Retry
-    .pipe(retry(1), throwError)
+      .pipe(retry(1)).pipe(
+        catchError(() => {
+          return throwError(() => new Error('Error!'));
+        }),
+        take(1),
+        timeout(2500),
+        catchError(this.handleError<any>('add'))
+      )
       .subscribe({
         error: (error) => {
           console.error('Error updating item!', error);

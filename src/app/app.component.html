@@ -87,17 +87,17 @@
         <div class="">
           <!-- TODO class add-item-footer -->
 
-          <mat-form-field class="new-inp">
+          <mat-form-field class="new-inp" appearance="outline">
             <mat-label>Ime</mat-label>
             <input matInput [(ngModel)]="pName">
           </mat-form-field>
 
-          <mat-form-field class="new-inp">
+          <mat-form-field class="new-inp" appearance="outline">
             <mat-label>Opis</mat-label>
             <input matInput [(ngModel)]="pDesc">
           </mat-form-field>
 
-          <mat-form-field class="new-inp">
+          <mat-form-field class="new-inp" appearance="outline">
             <mat-label>Prioriteta</mat-label>
             <mat-select [(value)]="pPri">
               <mat-option value="4">Visoka - 4</mat-option>
@@ -108,7 +108,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="new-inp">
+          <mat-form-field class="new-inp" appearance="outline">
             <mat-label>Kategorija</mat-label>
             <mat-select [(value)]="pCatId">
               <mat-option value="100">-- Brez --</mat-option>
@@ -140,7 +140,7 @@
           </mat-expansion-panel-header>
 
           <span>
-            <mat-form-field class="new-inp">
+            <mat-form-field class="new-inp" appearance="outline">
               <mat-label>Oznaka</mat-label>
               <input matInput [(ngModel)]="pFor">
             </mat-form-field>
@@ -311,7 +311,13 @@
 
 
 
-
+    <div *ngIf="listErrTxt" class="alert alert-warning">
+      <strong>Napaka pri nalaganju.</strong> {{listErrTxt}}
+      <br>
+      <button mat-flat-button color="primary" (click)="getList();">
+        Poskusi znova +
+      </button>
+    </div>
 
 
     <!-- EMPTY VIEW >> -->
@@ -397,7 +403,7 @@
 
           <!-- Item Footer -->
           <div class="item-footer">
-            
+
             <div class="item-footer-pill tag_icon" style="background-color: #f8f8ff;"
               [ngClass]="{'gr' :updatedItem.done == 0, 'fr' :updatedItem.done == 1}">
               <mat-icon>category</mat-icon>
@@ -406,7 +412,8 @@
                 <mat-label>Kategorija</mat-label>
                 <mat-select [(value)]="updatedItem.category_id">
                   <mat-option value="100">-- Brez --</mat-option>
-                  <mat-option value="1">Hrana <mat-icon style="font-size: 20px;">local_dining</mat-icon></mat-option>
+                  <mat-option value="1">Hrana </mat-option>
+                  <!-- <mat-icon style="font-size: 20px;">local_dining</mat-icon>-->
                   <mat-option value="2">Oblačila</mat-option>
                   <mat-option value="3">Pohištvo</mat-option>
                   <mat-option value="4">Orodje</mat-option>
@@ -542,16 +549,14 @@
   <div class="total_items">
     Št. predmetov: {{list.length}}
   </div>
-  
+
 
   <!-- LOADING INFO >> -->
   <div *ngIf="loading">. . .</div>
 
   <br>
 
-  <div *ngIf="listErrTxt" class="alert alert-warning">
-    <strong>Warning!</strong> {{listErrTxt}}
-  </div>
+
   <!-- << LOADING INFO -->
 
 
