@@ -18,7 +18,7 @@ export class SharedService {
 
     localStorage.setItem('role', this.userID);
     localStorage.setItem('uName', this.userName);
-    console.log('ID: ' + this.userID + " UN: " + this.userName);
+    //console.log('ID: ' + this.userID + " UN: " + this.userName);
   }
 
   getUser(): string {
