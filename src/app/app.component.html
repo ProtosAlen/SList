@@ -7,7 +7,7 @@
     </div>
 
     <div *ngIf="access">
-      <button title="Nabava" mat-stroked-button class="toolbarBtn" (click)="setPage(1)">NABAVA</button>
+      <button title="Nabava" mat-stroked-button class="toolbarBtn" (click)="setPage(1);">NABAVA</button>
 
       <span class="vlT">|</span>
 
@@ -96,7 +96,7 @@
             <mat-label>Opis</mat-label>
             <input matInput [(ngModel)]="pDesc">
           </mat-form-field>
-
+          <br>
           <mat-form-field class="new-inp" appearance="outline">
             <mat-label>Prioriteta</mat-label>
             <mat-select [(value)]="pPri">
@@ -399,6 +399,11 @@
           <div class="item-desc">
             <textarea matInput type="text" [(ngModel)]="updatedItem.description" aria-label="Opis" placeholder="Opis..."
               maxlength="255" style="max-height: 300px;"></textarea>
+
+            <mat-form-field style="font-size: 10px; margin: 4px;">
+              <mat-label>Slika</mat-label>
+              <input matInput #projectName [(ngModel)]="updatedItem.img">
+            </mat-form-field>
           </div>
 
           <!-- Item Footer -->
@@ -421,7 +426,6 @@
               </mat-form-field>
 
             </div>
-
 
             <button mat-icon-button (click)="update()" class="ri">
               <mat-icon style="font-size: 20px; margin-bottom: -26px;">done</mat-icon>

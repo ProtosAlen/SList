@@ -173,11 +173,14 @@ export class AppComponent {
   }
 
   setPage(i: number) {
+    this.updateOn = false;
     this.selPage = i;
     if (this.list) {
       this.list = this.list.filter(p => (p.done.toString() === this.selPage.toString()));
     }
     this.getList();
+
+
 
     switch (this.selPage) {
       case 0: {
