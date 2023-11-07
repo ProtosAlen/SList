@@ -344,13 +344,6 @@
     </div>
     <!-- << EMPTY VIEW -->
 
-
-
-
-
-
-
-
     <!-- EDIT ITEM VIEW  >> -->
     <div class="item-list">
 
@@ -458,9 +451,7 @@
       <!--  cdkDrag TODO  -->
       <li class="item-box" *ngFor="let p of list; let i = index; trackBy: trackByFn;" [@taskState]="list.length">
 
-
         <div *ngIf="!updateOn">
-
 
           <!-- Item Header -->
           <div class="item-head">
@@ -472,8 +463,6 @@
                 X
               </button>
             </div>
-
-
 
             <div class="item-infobox" [ngClass]="{'pri0' :p.pri == '0', 'pri1' :p.pri == '1', 'pri2' :p.pri == '2', 
             'pri3' :p.pri == '3', 'pri4' :p.pri == '4', 'pri5' :p.pri == '5', 'p6' :p.pri == '6' }">

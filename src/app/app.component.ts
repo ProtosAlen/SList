@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, Input, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, Input, ViewChild, signal } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { List } from './_interfaces/list';
@@ -48,6 +48,8 @@ interface Select {
   viewValue: string;
 }
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -79,6 +81,7 @@ export class AppComponent {
   small: boolean = false;
 
   // LIST
+  private _list = signal<List[]>([]);
   list: List[] = [];
   @Input() selItem!: List;
   done: number = 0;
@@ -280,6 +283,10 @@ export class AppComponent {
         },
         complete: () => {
           this.list = tempP; // TODO ?
+
+          //this._list = tempP; // TODO ?
+ 
+          //this._list.mutate(l => l.push(tempP));
 
           var tempList = this.list
 
