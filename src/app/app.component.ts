@@ -274,7 +274,7 @@ export class AppComponent {
           tempP = v.projects
           this.list = [];
 
-          //console.log('Get List:', v.projects[0].name, tempP);
+          console.log('Get List:', v.projects[0].name, tempP);
         },
         error: (error) => {
           this.listErrTxt = this.errMsg;
@@ -283,16 +283,18 @@ export class AppComponent {
         },
         complete: () => {
           this.list = tempP; // TODO ?
-
+          console.log(this.list);
           //this._list = tempP; // TODO ?
  
           //this._list.mutate(l => l.push(tempP));
 
           var tempList = this.list
 
-          //console.log('t', tempList[0].user_id);
+          console.log('t', tempList[0].user_id);
 
-          const userFilter = tempList.filter(p => p.user_id === this.sService.getUser() + "");
+          //const userFilter = tempList.filter(p => p.user_id === '52112');
+
+          const userFilter =  tempList.filter(p => (p.user_id.toString() === '52112'));
 
           tempList = userFilter.filter(p => (p.done.toString() === this.selPage.toString()));
 
